@@ -1,0 +1,21 @@
+gamemodes:
+  hardcore:
+    hunters: 1
+    hunted: 4
+    max:
+      generators: 5
+      chests: 5
+      hooks: 20
+    allow:
+      perks: false
+      items: false
+      offerings: false
+      bleeding: true
+      stage2: false
+      stage3: true
+      instantSacrifice: true
+      trapdoor: false
+    disallow:
+      perks:
+      items:
+      offerings:

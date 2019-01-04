@@ -1,0 +1,14 @@
+arenas:
+  test:
+    gamemodes:
+    locations:
+      generators:
+      hatch:
+      hunted:
+      hunter:
+      chests:
+      exitGates: 'NoData'
+      hooks:
+      traps:
+      cabinets:
+      lobby:
