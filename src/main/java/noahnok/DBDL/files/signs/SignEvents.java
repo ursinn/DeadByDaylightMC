@@ -1,6 +1,5 @@
 package noahnok.DBDL.files.signs;
 
-;
 import noahnok.DBDL.files.DeadByDaylight;
 import noahnok.DBDL.files.game.DGame;
 import noahnok.DBDL.files.utils.ClickAction;
@@ -19,20 +18,21 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+;
+
 public class SignEvents implements Listener {
 
     private DeadByDaylight main;
+    private String signLine = ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8]");
 
     public SignEvents(DeadByDaylight main) {
         this.main = main;
     }
 
-    private String signLine = ChatColor.translateAlternateColorCodes('&',"&8[&7DBDL&8]");
-
     @EventHandler
-    public void onSignCreate(SignChangeEvent e){
-        if (e.getLine(0).equalsIgnoreCase("[dbdl]")){
-            if (e.getLine(1).equalsIgnoreCase("join")){
+    public void onSignCreate(SignChangeEvent e) {
+        if (e.getLine(0).equalsIgnoreCase("[dbdl]")) {
+            if (e.getLine(1).equalsIgnoreCase("join")) {
                 e.getPlayer().sendMessage("Created game join sign!");
 
                 e.setLine(0, signLine);
@@ -43,19 +43,18 @@ public class SignEvents implements Listener {
                 sign.firstPlace();
 
 
-
             }
         }
     }
 
     @EventHandler
-    public void signBreakEvent(BlockBreakEvent e){
-        if (e.getBlock().getType().equals(Material.SIGN) || e.getBlock().getType().equals(Material.WALL_SIGN)){
-            if (((Sign) e.getBlock().getState()).getLine(0).equals(signLine)){
-                if (e.getPlayer().hasPermission("dbdl.sign.break")){
+    public void signBreakEvent(BlockBreakEvent e) {
+        if (e.getBlock().getType().equals(Material.SIGN) || e.getBlock().getType().equals(Material.WALL_SIGN)) {
+            if (((Sign) e.getBlock().getState()).getLine(0).equals(signLine)) {
+                if (e.getPlayer().hasPermission("dbdl.sign.break")) {
 
 
-                }else{
+                } else {
                     e.getPlayer().sendMessage("You cannot break this sign!");
                     e.setCancelled(true);
                 }
@@ -65,14 +64,14 @@ public class SignEvents implements Listener {
     }
 
     @EventHandler
-    public void signInteract(PlayerInteractEvent e){
+    public void signInteract(PlayerInteractEvent e) {
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if (e.getClickedBlock().getType().equals(Material.SIGN) || e.getClickedBlock().getType().equals(Material.WALL_SIGN)) {
-                if (main.getSignManager().getSign(e.getClickedBlock()) != null){
+                if (main.getSignManager().getSign(e.getClickedBlock()) != null) {
                     Sign sign = main.getSignManager().getSign(e.getClickedBlock()).getSign();
-                    if (sign.getLine(0).equals(signLine)){
-                        if (main.getSignManager().getSign(e.getClickedBlock()).getGame() != null){
-                            if (main.getSignManager().getSign(e.getClickedBlock()).getGame().equals(main.getGameManager().getGamePlayerIsIn(e.getPlayer()))){
+                    if (sign.getLine(0).equals(signLine)) {
+                        if (main.getSignManager().getSign(e.getClickedBlock()).getGame() != null) {
+                            if (main.getSignManager().getSign(e.getClickedBlock()).getGame().equals(main.getGameManager().getGamePlayerIsIn(e.getPlayer()))) {
                                 e.getPlayer().sendMessage("You are already in a game!");
                                 return;
                             }
@@ -84,39 +83,37 @@ public class SignEvents implements Listener {
         }
 
 
-
-
     }
 
-    private Inventory joinGameInvFromSign(final DGame game){
+    private Inventory joinGameInvFromSign(final DGame game) {
 
         CustomHolder newInv = new CustomHolder(27, "Join game: " + game.getArena().getID());
 
-            Icon hunted = new Icon(new ItemStack(Material.BONE_BLOCK, 1), "Play as a survivor!");
+        Icon hunted = new Icon(new ItemStack(Material.BONE_BLOCK, 1), "Play as a survivor!");
 
-            Icon hunter = new Icon(new ItemStack(Material.COAL_BLOCK, 1), "Play as a hunter!");
+        Icon hunter = new Icon(new ItemStack(Material.COAL_BLOCK, 1), "Play as a hunter!");
 
 
-            hunted.addClickAction(new ClickAction() {
-                public void execute(Player p) {
-                    p.closeInventory();
-                    main.getGameManager().joinPlayerToGame(p, game, "HUNTED");
+        hunted.addClickAction(new ClickAction() {
+            public void execute(Player p) {
+                p.closeInventory();
+                main.getGameManager().joinPlayerToGame(p, game, "HUNTED");
 
-                }
-            });
+            }
+        });
 
-            hunter.addClickAction(new ClickAction() {
-                public void execute(Player p) {
-                    p.closeInventory();
-                    main.getGameManager().joinPlayerToGame(p, game, "HUNTER");
+        hunter.addClickAction(new ClickAction() {
+            public void execute(Player p) {
+                p.closeInventory();
+                main.getGameManager().joinPlayerToGame(p, game, "HUNTER");
 
-                }
-            });
+            }
+        });
 
-            newInv.setIcon(11, hunted);
-            newInv.setIcon(15, hunter);
+        newInv.setIcon(11, hunted);
+        newInv.setIcon(15, hunter);
 
-            return newInv.getInventory();
+        return newInv.getInventory();
 
     }
 }

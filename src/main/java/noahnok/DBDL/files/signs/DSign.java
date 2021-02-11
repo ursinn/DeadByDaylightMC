@@ -13,21 +13,14 @@ public class DSign {
     private SignStatus status;
 
 
-
-    public DSign(Block block){
+    public DSign(Block block) {
         this.signBlock = block;
         this.sign = (Sign) block.getState();
         this.status = SignStatus.IDLE;
 
     }
 
-    public void setGame(DGame game) {
-        this.game = game;
-        this.status = SignStatus.INUSE;
-        update();
-    }
-
-    public void removeGame(){
+    public void removeGame() {
         this.game = null;
         this.status = SignStatus.IDLE;
         update();
@@ -35,6 +28,12 @@ public class DSign {
 
     public DGame getGame() {
         return game;
+    }
+
+    public void setGame(DGame game) {
+        this.game = game;
+        this.status = SignStatus.INUSE;
+        update();
     }
 
     public SignStatus getStatus() {
@@ -49,9 +48,9 @@ public class DSign {
         return signBlock;
     }
 
-    public void firstPlace(){
-        sign.setLine(0, ChatColor.translateAlternateColorCodes('&',"&8[&7DBDL&8]"));
-        sign.setLine(1,ChatColor.RED + "Searching");
+    public void firstPlace() {
+        sign.setLine(0, ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8]"));
+        sign.setLine(1, ChatColor.RED + "Searching");
         sign.setLine(2, "");
         sign.setLine(3, "");
         sign.update();
@@ -61,21 +60,19 @@ public class DSign {
         return sign;
     }
 
-    public void update(){
+    public void update() {
 
         if (status == SignStatus.INUSE) {
-            sign.setLine(0, ChatColor.translateAlternateColorCodes('&',"&8[&7DBDL&8]"));
+            sign.setLine(0, ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8]"));
             sign.setLine(1, game.getStatus().text());
             sign.setLine(2, game.getArena().getID());
-            sign.setLine(3,game.totalCurrentPlayers() +"/"+game.totalPossiblePlayers()+"");
-        }
-        else if (status == SignStatus.IDLE){
-            sign.setLine(0, ChatColor.translateAlternateColorCodes('&',"&8[&7DBDL&8]"));
-            sign.setLine(1,ChatColor.RED + "Searching");
+            sign.setLine(3, game.totalCurrentPlayers() + "/" + game.totalPossiblePlayers() + "");
+        } else if (status == SignStatus.IDLE) {
+            sign.setLine(0, ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8]"));
+            sign.setLine(1, ChatColor.RED + "Searching");
             sign.setLine(2, "");
             sign.setLine(3, "");
         }
-
 
 
         sign.update();

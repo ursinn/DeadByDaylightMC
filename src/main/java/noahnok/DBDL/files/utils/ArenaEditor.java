@@ -1,21 +1,17 @@
 package noahnok.DBDL.files.utils;
 
-;
-
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import noahnok.DBDL.files.DeadByDaylight;
 import noahnok.DBDL.files.game.DArena;
 import noahnok.DBDL.files.game.ExitGate;
 import noahnok.DBDL.files.utils.EditorItem.EditorItem;
-import noahnok.DBDL.files.utils.EditorItem.ItemDeExecutor;
 import noahnok.DBDL.files.utils.EditorItem.ItemExecutor;
 import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.entity.*;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Shulker;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -23,33 +19,33 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
+;
 
 
 public class ArenaEditor {
 
 
-    private DeadByDaylight main;
     public Map<UUID, DArena> editing = new HashMap<UUID, DArena>();
+    public List<EditorItem> editorItems = new ArrayList<EditorItem>();
+    private DeadByDaylight main;
     private Map<UUID, ItemStack[]> pInv = new HashMap<UUID, ItemStack[]>();
     private Map<UUID, ItemStack[]> pArmour = new HashMap<UUID, ItemStack[]>();
-    public List<EditorItem> editorItems = new ArrayList<EditorItem>();
-
     private Map<UUID, BukkitTask> tasks = new HashMap<UUID, BukkitTask>();
 
     private Set<Shulker> shulkers = new HashSet<Shulker>();
 
 
-    private EditorItem generator,hook,chest,cabinet,hunter,hunted,exit,trap,hatch,exitArea;
+    private EditorItem generator, hook, chest, cabinet, hunter, hunted, exit, trap, hatch, exitArea;
 
     public ArenaEditor(DeadByDaylight main) {
         this.main = main;
     }
 
-    public void addShulker(Location loc, String COLOR, Material m, DArena a){
+    public void addShulker(Location loc, String COLOR, Material m, DArena a) {
         Shulker shulker = loc.getWorld().spawn(loc, Shulker.class);
         shulker.setAI(false);
         shulker.setCollidable(false);
-        shulker.setCustomName("DBDL-SHULKER-"+a.getID());
+        shulker.setCustomName("DBDL-SHULKER-" + a.getID());
         shulker.setCustomNameVisible(false);
         shulker.setGravity(false);
         assignTeam(shulker, COLOR);
@@ -59,18 +55,18 @@ public class ArenaEditor {
         shulker.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1));
         shulkers.add(shulker);
         loc.getBlock().setType(m);
-        if (COLOR == "BLACK"){
+        if (COLOR == "BLACK") {
             loc.getBlock().setData((byte) 15);
         }
     }
 
-    public void removeShulker(Location loc, DArena a){
+    public void removeShulker(Location loc, DArena a) {
 
 
-        Collection<Entity> entities = loc.clone().add(0.5,0,0.5).getWorld().getNearbyEntities(loc, 1,1,1);
+        Collection<Entity> entities = loc.clone().add(0.5, 0, 0.5).getWorld().getNearbyEntities(loc, 1, 1, 1);
         Shulker shulker = null;
-        for (Entity entity : entities){
-            if (entity.getCustomName() != null && entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-"+a.getID())){
+        for (Entity entity : entities) {
+            if (entity.getCustomName() != null && entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-" + a.getID())) {
                 shulker = (Shulker) entity;
                 break;
             }
@@ -86,9 +82,9 @@ public class ArenaEditor {
 
     }
 
-    public void toggleEditing(Player p, String arena){
+    public void toggleEditing(Player p, String arena) {
         DArena a = main.getArenaManager().isArena(arena);
-        if (a == null){
+        if (a == null) {
             p.sendMessage("Not a valid arena!");
             return;
 
@@ -108,21 +104,21 @@ public class ArenaEditor {
             }
         }
 
-        if(editing.containsKey(p.getUniqueId())){
+        if (editing.containsKey(p.getUniqueId())) {
             stopEditing(p);
             p.sendMessage("You have stopped editing!");
-        }else{
+        } else {
             startEditing(p, a);
             p.sendMessage("You have started editing");
         }
     }
 
-    private void startEditing(final Player p, DArena arena){
+    private void startEditing(final Player p, DArena arena) {
         editing.put(p.getUniqueId(), arena);
         pInv.put(p.getUniqueId(), p.getInventory().getContents());
         pArmour.put(p.getUniqueId(), p.getInventory().getArmorContents());
         p.getInventory().clear();
-        for (EditorItem item : editorItems){
+        for (EditorItem item : editorItems) {
             p.getInventory().addItem(item.getItem());
         }
 
@@ -137,12 +133,9 @@ public class ArenaEditor {
         showArenaBlocks(arena);
 
 
-
-
-
     }
 
-    public void stopEditing(Player p){
+    public void stopEditing(Player p) {
         hideArenaBlocks(editing.get(p.getUniqueId()));
         main.getArenaManager().setUsableGamemodes(editing.get(p.getUniqueId()));
         tasks.get(p.getUniqueId()).cancel();
@@ -153,59 +146,57 @@ public class ArenaEditor {
         pArmour.remove(p.getUniqueId());
 
 
-
-
     }
 
-    private void hideArenaBlocks(final DArena a){
+    private void hideArenaBlocks(final DArena a) {
 
 
-        for (Location loc : a.getPossibleGeneratorLocations()){
+        for (Location loc : a.getPossibleGeneratorLocations()) {
             removeShulker(loc, a);
         }
 
-        for (Location loc : a.getPossibleHookLocations()){
+        for (Location loc : a.getPossibleHookLocations()) {
             removeShulker(loc, a);
         }
 
-        for (Location loc : a.getPossilbeChestSpawns()){
+        for (Location loc : a.getPossilbeChestSpawns()) {
             removeShulker(loc, a);
         }
 
-        for (Location loc : a.getCabinetLocations()){
+        for (Location loc : a.getCabinetLocations()) {
             removeShulker(loc, a);
         }
 
-        for (Location loc : a.getPossibleHuntedSpawns()){
+        for (Location loc : a.getPossibleHuntedSpawns()) {
             removeShulker(loc, a);
         }
 
-        for (Location loc : a.getPossibleHunterSpawns()){
+        for (Location loc : a.getPossibleHunterSpawns()) {
             removeShulker(loc, a);
         }
 
-        for (ExitGate gate : a.getExitGateLocations()){
-            for (Location loc : gate.getLocs()){
+        for (ExitGate gate : a.getExitGateLocations()) {
+            for (Location loc : gate.getLocs()) {
                 removeShulker(loc, a);
             }
         }
 
-        for (Location loc : a.getExitArea()){
+        for (Location loc : a.getExitArea()) {
             removeShulker(loc, a);
         }
 
-        for (Location loc : a.getPossibleHatchLocations()){
+        for (Location loc : a.getPossibleHatchLocations()) {
             removeShulker(loc, a);
         }
 
-        for (Location loc : a.getTrapLocations()){
+        for (Location loc : a.getTrapLocations()) {
             removeShulker(loc, a);
         }
 
 
-        for (World world : main.getServer().getWorlds()){
-            for (Entity entity : world.getEntitiesByClass(Shulker.class)){
-                if (entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-"+a.getID())){
+        for (World world : main.getServer().getWorlds()) {
+            for (Entity entity : world.getEntitiesByClass(Shulker.class)) {
+                if (entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-" + a.getID())) {
                     entity.remove();
                 }
 
@@ -214,54 +205,54 @@ public class ArenaEditor {
 
     }
 
-    private void showArenaBlocks(final DArena a){
-        for (Location loc : a.getPossibleGeneratorLocations()){
+    private void showArenaBlocks(final DArena a) {
+        for (Location loc : a.getPossibleGeneratorLocations()) {
             addShulker(loc, "BLUE", Material.FURNACE, a);
         }
 
-        for (Location loc : a.getPossibleHookLocations()){
+        for (Location loc : a.getPossibleHookLocations()) {
             addShulker(loc, "RED", Material.IRON_BLOCK, a);
         }
 
-        for (Location loc : a.getPossilbeChestSpawns()){
+        for (Location loc : a.getPossilbeChestSpawns()) {
             addShulker(loc, "D-BLUE", Material.CHEST, a);
         }
 
-        for (Location loc : a.getCabinetLocations()){
+        for (Location loc : a.getCabinetLocations()) {
             addShulker(loc, "L-RED", Material.BOOKSHELF, a);
         }
 
-        for (Location loc : a.getPossibleHuntedSpawns()){
+        for (Location loc : a.getPossibleHuntedSpawns()) {
             addShulker(loc, "WHITE", Material.WOOL, a);
         }
 
-        for (Location loc : a.getPossibleHunterSpawns()){
+        for (Location loc : a.getPossibleHunterSpawns()) {
             addShulker(loc, "BLACK", Material.WOOL, a);
         }
 
-        for (ExitGate gate : a.getExitGateLocations()){
-            for (Location loc : gate.getLocs()){
+        for (ExitGate gate : a.getExitGateLocations()) {
+            for (Location loc : gate.getLocs()) {
                 addShulker(loc, "GRAY", Material.IRON_FENCE, a);
             }
         }
 
-        for (Location loc : a.getExitArea()){
+        for (Location loc : a.getExitArea()) {
             addShulker(loc, "GRAY", Material.BARRIER, a);
         }
 
-        for (Location loc : a.getPossibleHatchLocations()){
+        for (Location loc : a.getPossibleHatchLocations()) {
             addShulker(loc, "PURPLE", Material.TRAP_DOOR, a);
         }
 
-        for (Location loc : a.getTrapLocations()){
+        for (Location loc : a.getTrapLocations()) {
             addShulker(loc, "PINK", Material.PISTON_BASE, a);
         }
 
 
     }
 
-    public void setUpItems(){
-        generator = new EditorItem(new ItemStack(Material.FURNACE,1), "&bGenerator").addExecutor(new ItemExecutor() {
+    public void setUpItems() {
+        generator = new EditorItem(new ItemStack(Material.FURNACE, 1), "&bGenerator").addExecutor(new ItemExecutor() {
             public void execute(Player p, Location bloc) {
                 p.sendMessage("Generator placed!");
                 editing.get(p.getUniqueId()).getPossibleGeneratorLocations().add(bloc);
@@ -271,7 +262,7 @@ public class ArenaEditor {
         editorItems.add(generator);
 
         //Hook item
-        hook = new EditorItem(new ItemStack(Material.IRON_BLOCK,1), "&4Hook").addExecutor(new ItemExecutor() {
+        hook = new EditorItem(new ItemStack(Material.IRON_BLOCK, 1), "&4Hook").addExecutor(new ItemExecutor() {
 
             public void execute(Player p, Location bloc) {
                 p.sendMessage("Hook placed!");
@@ -328,24 +319,19 @@ public class ArenaEditor {
                 String dir = "";
 
 
-                double rotation = (p.getLocation().getYaw()-90) % 360;
-                if ((rotation > -45 && rotation < 45) || (rotation > 135 && rotation < 180)){
+                double rotation = (p.getLocation().getYaw() - 90) % 360;
+                if ((rotation > -45 && rotation < 45) || (rotation > 135 && rotation < 180)) {
                     dir = "EAST";
-                }else{
+                } else {
                     dir = "NORTH";
                 }
 
-                ExitGate gate = new ExitGate(dir, bloc.clone().add(0,1,0), main);
+                ExitGate gate = new ExitGate(dir, bloc.clone().add(0, 1, 0), main);
                 gate.setLocs(getExitGateLocation(bloc, dir));
                 editing.get(p.getUniqueId()).getExitGateLocations().add(gate);
-                for (Location loc : gate.getLocs()){
+                for (Location loc : gate.getLocs()) {
                     addShulker(loc, "GRAY", Material.IRON_FENCE, editing.get(p.getUniqueId()));
                 }
-
-
-
-
-
 
 
             }
@@ -386,19 +372,19 @@ public class ArenaEditor {
 
     }
 
-    private List<Location> getExitGateLocation(Location loc, String dir){
+    private List<Location> getExitGateLocation(Location loc, String dir) {
 
         List<Location> locs = new ArrayList<Location>();
-        if (dir.equalsIgnoreCase("EAST")){
-            for (int i = -1; i < 2; i++){
-                for (int y = 0; y < 3; y++){
-                    locs.add(loc.clone().add(0,y,i));
+        if (dir.equalsIgnoreCase("EAST")) {
+            for (int i = -1; i < 2; i++) {
+                for (int y = 0; y < 3; y++) {
+                    locs.add(loc.clone().add(0, y, i));
                 }
             }
-        }else{
-            for (int i = -1; i < 2; i++){
-                for (int y = 0; y < 3; y++){
-                    locs.add(loc.clone().add(i,y,0));
+        } else {
+            for (int i = -1; i < 2; i++) {
+                for (int y = 0; y < 3; y++) {
+                    locs.add(loc.clone().add(i, y, 0));
                 }
             }
         }
@@ -407,7 +393,7 @@ public class ArenaEditor {
 
     }
 
-    public void setupShulkerTeams(){
+    public void setupShulkerTeams() {
         try {
             unregisterTeam("BLUE");
             unregisterTeam("RED");
@@ -418,7 +404,7 @@ public class ArenaEditor {
             unregisterTeam("GRAY");
             unregisterTeam("PURPLE");
             unregisterTeam("PINK");
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             main.getLogger().info("Didn't need to unregister teams (Due to restart) <- This is not an error!");
         }
         registerTeam("BLUE", ChatColor.AQUA);
@@ -432,32 +418,30 @@ public class ArenaEditor {
         registerTeam("PINK", ChatColor.LIGHT_PURPLE);
     }
 
-    private void registerTeam(String color, ChatColor col){
-        main.sbrd.registerNewTeam("DBDL-SH-"+color);
-        main.sbrd.getTeam("DBDL-SH-"+color).setPrefix(col + "");
+    private void registerTeam(String color, ChatColor col) {
+        main.sbrd.registerNewTeam("DBDL-SH-" + color);
+        main.sbrd.getTeam("DBDL-SH-" + color).setPrefix(col + "");
 
     }
 
-    private void unregisterTeam(String color){
-        main.sbrd.getTeam("DBDL-SH-"+color).unregister();
+    private void unregisterTeam(String color) {
+        main.sbrd.getTeam("DBDL-SH-" + color).unregister();
     }
 
-    private void assignTeam(Shulker shulker, String color){
-        main.sbrd.getTeam("DBDL-SH-"+color).addEntry(shulker.getUniqueId().toString());
+    private void assignTeam(Shulker shulker, String color) {
+        main.sbrd.getTeam("DBDL-SH-" + color).addEntry(shulker.getUniqueId().toString());
     }
 
-    private void unassignTeam(Shulker shulker){
-        try{
+    private void unassignTeam(Shulker shulker) {
+        try {
             main.sbrd.getTeam("DBDL-SH-BLUE").removeEntry(shulker.getUniqueId().toString());
             main.sbrd.getTeam("DBDL-SH-D-BLUE").removeEntry(shulker.getUniqueId().toString());
             main.sbrd.getTeam("DBDL-SH-RED").removeEntry(shulker.getUniqueId().toString());
             main.sbrd.getTeam("DBDL-SH-L-RED").removeEntry(shulker.getUniqueId().toString());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
 
         }
     }
-
-
 
 
 }

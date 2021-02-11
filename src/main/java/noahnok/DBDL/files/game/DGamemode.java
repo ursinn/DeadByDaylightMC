@@ -3,7 +3,6 @@ package noahnok.DBDL.files.game;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class DGamemode {
@@ -14,7 +13,6 @@ public class DGamemode {
     private int maxgenerators;
     private int maxchests;
     private int maxhooks;
-
 
 
     private int gameTime; //In seconds
@@ -72,7 +70,7 @@ public class DGamemode {
 
     }
 
-    public DGamemode (String ID){
+    public DGamemode(String ID) {
         this.ID = ID;
     }
 

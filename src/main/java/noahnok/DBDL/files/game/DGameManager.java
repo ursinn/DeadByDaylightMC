@@ -24,28 +24,21 @@ public class DGameManager {
     private DeadByDaylight main;
 
     private int gamesRun = 0;
-
-
-
+    private Set<DGame> games = new HashSet<DGame>();
 
     public DGameManager(DeadByDaylight main) {
         this.main = main;
     }
 
-    private Set<DGame> games = new HashSet<DGame>();
-
-
-
-
     public Set<DGame> getGames() {
         return games;
     }
 
-    public DGame getGamePlayerIsIn(Player p){
+    public DGame getGamePlayerIsIn(Player p) {
 
-        for (DGame game : games){
+        for (DGame game : games) {
 
-            if (game.getPlayers().contains(main.getdPlayerManager().getPlayer(p.getUniqueId()))){
+            if (game.getPlayers().contains(main.getdPlayerManager().getPlayer(p.getUniqueId()))) {
 
                 return game;
             }
@@ -54,13 +47,13 @@ public class DGameManager {
         return null;
     }
 
-    public void joinPlayerToGame(Player p ,DGame game, String playType){
+    public void joinPlayerToGame(Player p, DGame game, String playType) {
         DPlayer dPlayer = main.getdPlayerManager().getPlayer(p.getUniqueId());
-        if (playType.equalsIgnoreCase("HUNTER")){
+        if (playType.equalsIgnoreCase("HUNTER")) {
             game.getPlayers().add(dPlayer);
             dPlayer.setStatus(PlayerStatus.HUNTER);
 
-        }else{
+        } else {
             game.getPlayers().add(dPlayer);
             dPlayer.setStatus(PlayerStatus.HUNTED);
 
@@ -73,12 +66,12 @@ public class DGameManager {
         dPlayer.resetPlayerState();
     }
 
-    public String generateGameID(DGame game){
+    public String generateGameID(DGame game) {
         gamesRun++;
-            return game.getArena().getID()+"_"+game.getGamemode().getID()+"_"+gamesRun;
+        return game.getArena().getID() + "_" + game.getGamemode().getID() + "_" + gamesRun;
     }
 
-    public void removePlayerFromGame(Player p, DGame game){
+    public void removePlayerFromGame(Player p, DGame game) {
         DPlayer dPlayer = game.getPlayer(p.getUniqueId());
         game.getPlayers().remove(dPlayer);
         dPlayer.setStatus(PlayerStatus.OUT_OF_GAME);
@@ -101,13 +94,12 @@ public class DGameManager {
                 }
             }
             destroyGame(game);
-            }
-
+        }
 
 
     }
 
-    public void destroyGame(DGame game){
+    public void destroyGame(DGame game) {
 
         main.getMatchMaking().removeGame(game);
         game.getArena().setInUse(false);
@@ -115,36 +107,34 @@ public class DGameManager {
         game = null;
     }
 
-    public void forceStartGame(DGame game){
+    public void forceStartGame(DGame game) {
         canGameStart(game, true);
     }
 
-    public void endGame(final DGame game){
+    public void endGame(final DGame game) {
         game.endGameSound();
         game.announce("The game has ended!");
         game.setStatus(STATUS.ENDING);
 
 
-
         game.sendPlayersStats();
 
 
-        new BukkitRunnable(){
+        new BukkitRunnable() {
             public void run() {
                 game.endGame();
                 removeMatchBlocks(game);
                 destroyGame(game);
             }
-        }.runTaskLater(main, 20*10);
+        }.runTaskLater(main, 20 * 10);
     }
 
 
-
-    private void canGameStart(DGame game, boolean force){
-        int totalReqPlayers = game.getGamemode().getHunted()+game.getGamemode().getHunters();
+    private void canGameStart(DGame game, boolean force) {
+        int totalReqPlayers = game.getGamemode().getHunted() + game.getGamemode().getHunters();
         int currentPlayers = game.getPlayers().size();
 
-        if (currentPlayers >= totalReqPlayers || force){
+        if (currentPlayers >= totalReqPlayers || force) {
             //Game can start countdown
 
             main.getMatchMaking().removeGameFromMatchmaking(game);
@@ -158,17 +148,15 @@ public class DGameManager {
         }
     }
 
-    public void canGameEnd(DGame game){
+    public void canGameEnd(DGame game) {
 
-        for (DPlayer player : game.getHunted()){
+        for (DPlayer player : game.getHunted()) {
             if (player.isHunter()) continue;
             if (!player.isDead()) return;
         }
 
 
-
-
-        for (DPlayer player : game.getPlayers()){
+        for (DPlayer player : game.getPlayers()) {
             Player actual = player.getPlayer();
             player.stopSpectating();
             actual.setGameMode(GameMode.CREATIVE);
@@ -183,16 +171,14 @@ public class DGameManager {
         endGame(game);
     }
 
-    public DGame createNewGame(){
+    public DGame createNewGame() {
         DArena arena = main.getArenaManager().getRandomArena();
-        if (arena == null){
+        if (arena == null) {
             return null;
         }
         arena.setInUse(true);
         DGamemode mode = main.getGamemodeManager().getMode("default");
-        DGame game = new DGame(arena, mode, STATUS.WAITING ,main);
-
-
+        DGame game = new DGame(arena, mode, STATUS.WAITING, main);
 
 
         return game;
@@ -200,17 +186,16 @@ public class DGameManager {
     }
 
 
+    private Location getRandomLocation(Set<Location> locations) {
 
-    private Location getRandomLocation(Set<Location> locations){
 
-
-        if (locations.size() == 1){
+        if (locations.size() == 1) {
             return locations.iterator().next();
         }
-        int rand = ThreadLocalRandom.current().nextInt(1, locations.size())-1;
+        int rand = ThreadLocalRandom.current().nextInt(1, locations.size()) - 1;
         int i = 0;
-        for (Location loc : locations){
-            if (i == rand){
+        for (Location loc : locations) {
+            if (i == rand) {
 
                 return loc;
             }
@@ -219,11 +204,11 @@ public class DGameManager {
         return null;
     }
 
-    private void spawnGenerators(DGame game, Set<Location> locs, DGamemode mode){
+    private void spawnGenerators(DGame game, Set<Location> locs, DGamemode mode) {
 
         Set<Location> temp = new HashSet<Location>();
         temp.addAll(locs);
-        for (int i = 0; i < mode.getMaxgenerators(); i++){
+        for (int i = 0; i < mode.getMaxgenerators(); i++) {
             Location loc = getRandomLocation(temp);
             temp.remove(loc);
             Generator gen = new Generator(game, loc, main);
@@ -235,22 +220,23 @@ public class DGameManager {
 
     }
 
-    private void spawnExitGates(DGame game){
-        for (ExitGate gate : game.getArena().getExitGateLocations()){
+    private void spawnExitGates(DGame game) {
+        for (ExitGate gate : game.getArena().getExitGateLocations()) {
             for (Location loc : gate.getLocs()) {
                 loc.getBlock().setType(Material.IRON_FENCE);
             }
             gate.getCenter().getBlock().setType(Material.IRON_BLOCK);
             Location leverFowardLoc = null;
             Location leverBackwardLoc = null;
-            if (gate.getFacing().equalsIgnoreCase("EAST")){
-                leverFowardLoc = gate.getCenter().clone().add(1,0,0);
-                leverBackwardLoc = gate.getCenter().clone().subtract(1,0,0);
-            }if (gate.getFacing().equalsIgnoreCase("NORTH")){
-                leverFowardLoc = gate.getCenter().clone().add(0,0,1);
-                leverBackwardLoc = gate.getCenter().clone().subtract(0,0,1);
+            if (gate.getFacing().equalsIgnoreCase("EAST")) {
+                leverFowardLoc = gate.getCenter().clone().add(1, 0, 0);
+                leverBackwardLoc = gate.getCenter().clone().subtract(1, 0, 0);
             }
-            if (leverFowardLoc == null || leverBackwardLoc == null){
+            if (gate.getFacing().equalsIgnoreCase("NORTH")) {
+                leverFowardLoc = gate.getCenter().clone().add(0, 0, 1);
+                leverBackwardLoc = gate.getCenter().clone().subtract(0, 0, 1);
+            }
+            if (leverFowardLoc == null || leverBackwardLoc == null) {
                 main.getLogger().severe("Woah! Somethings not quite right with your exit gates LEVERS! Their facing tag is wrong! So we haven't spawned them!");
                 continue;
             }
@@ -266,8 +252,7 @@ public class DGameManager {
     }
 
 
-
-    public void prepareMatchBlocks(DGame game){
+    public void prepareMatchBlocks(DGame game) {
 
         DArena arena = game.getArena();
         spawnGenerators(game, arena.getPossibleGeneratorLocations(), game.getGamemode());
@@ -275,8 +260,8 @@ public class DGameManager {
     }
 
 
-    public void removeMatchBlocks(DGame game){
-        for (Generator gen : game.getGenerators()){
+    public void removeMatchBlocks(DGame game) {
+        for (Generator gen : game.getGenerators()) {
             gen.setGame(null);
             gen.despawn();
         }

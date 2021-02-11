@@ -16,14 +16,11 @@ public class InGameCountdown {
     protected int timeInSeconds;
     protected int interval;
     protected int tempTime;
-
+    protected DGame ref;
     boolean contAlert;
 
-    protected DGame ref;
 
-
-
-    public InGameCountdown(int timeInSeconds, boolean contAlert, int interval, DGame ref, DeadByDaylight main){
+    public InGameCountdown(int timeInSeconds, boolean contAlert, int interval, DGame ref, DeadByDaylight main) {
         this.timeInSeconds = timeInSeconds;
         this.contAlert = contAlert;
         this.interval = interval;
@@ -32,21 +29,21 @@ public class InGameCountdown {
 
     }
 
-    public void start(){
+    public void start() {
         tempTime = timeInSeconds;
-        this.task = new BukkitRunnable(){
+        this.task = new BukkitRunnable() {
             public void run() {
-                if (tempTime % interval == 0 && !(tempTime < interval) && tempTime >= 11 && tempTime != timeInSeconds){
+                if (tempTime % interval == 0 && !(tempTime < interval) && tempTime >= 11 && tempTime != timeInSeconds) {
                     if (contAlert) {
                         ref.announce("Game ends in " + getTimeAsString(tempTime));
                     }
                 }
-                if (tempTime < 11){
+                if (tempTime < 11) {
                     ref.announce("Game ends in " + tempTime + "s");
 
                 }
 
-                if (tempTime <= 0){
+                if (tempTime <= 0) {
                     endCountdown();
                 }
                 tempTime--;
@@ -55,7 +52,7 @@ public class InGameCountdown {
         }.runTaskTimer(main, 0, 20);
     }
 
-    public void endCountdown(){
+    public void endCountdown() {
 
         task.cancel();
 
@@ -64,14 +61,13 @@ public class InGameCountdown {
         task = null;
 
 
-
     }
 
-    private String getTimeAsString(int time){
+    private String getTimeAsString(int time) {
         return (Math.floorDiv(time, 60) + "m" + (time % 60) + "s") + " ";
     }
 
-    public void cancel(){
+    public void cancel() {
         task.cancel();
         ref.announce("Countdown canceled");
     }

@@ -24,42 +24,41 @@ public class PagedInventory {
         return pages;
     }
 
-    public Page getPage(int index){
+    public Page getPage(int index) {
         return pages.get(index);
     }
 
-    public boolean addPage(Page page){
+    public boolean addPage(Page page) {
         page.setSwapItem(swapItem);
         return pages.add(page);
     }
 
-    public void addPage(Page page, int index){
+    public void addPage(Page page, int index) {
         pages.add(index, page);
     }
 
-    public boolean removePage(Page page){
+    public boolean removePage(Page page) {
         return pages.remove(page);
     }
 
-    public void removePage(int index){
+    public void removePage(int index) {
         pages.remove(index);
     }
 
-    public boolean addPages(List<Page> pages){
+    public boolean addPages(List<Page> pages) {
         return pages.addAll(pages);
     }
 
-    public boolean removePages(List<Page> pages){
+    public boolean removePages(List<Page> pages) {
         return pages.removeAll(pages);
     }
 
-    public int getPageIndex(Page page){
+    public int getPageIndex(Page page) {
         return pages.indexOf(page);
     }
 
 
-
-    public Inventory showPage(int index){
+    public Inventory showPage(int index) {
         Page page = pages.get(index);
 
         return page.getInventory();
@@ -67,18 +66,18 @@ public class PagedInventory {
 
     }
 
-    public boolean hasNextPage(Page page){
-        if ((pages.indexOf(page)+1) != pages.size()){
+    public boolean hasNextPage(Page page) {
+        if ((pages.indexOf(page) + 1) != pages.size()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public boolean hasPreviousPage(Page page){
-        if (pages.indexOf(page) == 0){
+    public boolean hasPreviousPage(Page page) {
+        if (pages.indexOf(page) == 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -87,8 +86,6 @@ public class PagedInventory {
     public void setSwapItem(PageItem swapItem) {
         this.swapItem = swapItem;
     }
-
-
 
 
 }

@@ -22,12 +22,11 @@ public class joinGameCommand implements CommandExecutor {
 
 
     private Builders itemBuilder = new Builders();
+    private CustomHolder joinGameInv;
 
     public joinGameCommand(DeadByDaylight main) {
         this.main = main;
     }
-
-    private CustomHolder joinGameInv;
 
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (!(commandSender instanceof Player)) {
@@ -37,7 +36,7 @@ public class joinGameCommand implements CommandExecutor {
         }
         Player player = (Player) commandSender;
         if (args.length == 0) {
-            if (main.getGameManager().getGamePlayerIsIn(player) != null){
+            if (main.getGameManager().getGamePlayerIsIn(player) != null) {
                 player.sendMessage(main.prefix + "You are already in a game!");
                 return true;
             }
@@ -45,7 +44,7 @@ public class joinGameCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 1){
+        if (args.length == 1) {
             return true;
 
         }
@@ -54,7 +53,7 @@ public class joinGameCommand implements CommandExecutor {
         return true;
     }
 
-    public void setUpjoinGameInv(){
+    public void setUpjoinGameInv() {
         joinGameInv = inventoryBuilder.createNew("Join Game", 27);
         Icon hunted = inventoryBuilder.createIcon(itemBuilder.getNewBuilder(Material.BONE_BLOCK).build(), "Play as a survivor!");
         hunted.addLore("May have longer waiting times!");
@@ -63,7 +62,7 @@ public class joinGameCommand implements CommandExecutor {
 
         hunted.addClickAction(p -> {
             p.closeInventory();
-            if(!main.getMatchMaking().addToMatchmaking(p, "HUNTED")){
+            if (!main.getMatchMaking().addToMatchmaking(p, "HUNTED")) {
                 main.getMatchMaking().addPlayerToMatchMakingLoop(p, "HUNTED");
             }
 
@@ -71,7 +70,7 @@ public class joinGameCommand implements CommandExecutor {
 
         hunter.addClickAction(p -> {
             p.closeInventory();
-            if(!main.getMatchMaking().addToMatchmaking(p, "HUNTER")){
+            if (!main.getMatchMaking().addToMatchmaking(p, "HUNTER")) {
                 main.getMatchMaking().addPlayerToMatchMakingLoop(p, "HUNTER");
             }
 
@@ -81,8 +80,6 @@ public class joinGameCommand implements CommandExecutor {
         joinGameInv.setIcon(15, hunter);
 
     }
-
-
 
 
 }

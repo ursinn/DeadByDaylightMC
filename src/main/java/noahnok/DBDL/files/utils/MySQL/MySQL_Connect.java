@@ -15,12 +15,11 @@ import java.util.UUID;
 public class MySQL_Connect {
 
     private Connection connection;
-    private String host,database,username,password;
+    private String host, database, username, password;
     private int port;
 
 
     private DeadByDaylight main;
-
 
 
     private DEBUG debug;
@@ -33,10 +32,10 @@ public class MySQL_Connect {
 
     public void initConnection() {
         loadValues();
-        if (!main.getToggles().usingSQL){
+        if (!main.getToggles().usingSQL) {
             return;
         }
-        try{
+        try {
             if (connection != null && !connection.isClosed()) {
                 return;
             }
@@ -49,16 +48,16 @@ public class MySQL_Connect {
                 connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database, this.username, this.password);
 
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             debug.debug("Failed to connect to MySQL, NO PLAYER RELATED DATA WILL BE SAVED UNTIL YOU CONNECT! Please edit the config.yml and then run /dbdl mysql connect");
             main.getToggles().usingSQL = false;
             return;
-        } catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             debug.debug("Failed to find MySQL Driver, falling back onto FlatFile!");
             main.getToggles().usingSQL = false;
             return;
         }
-        if (connection == null){
+        if (connection == null) {
             main.getToggles().usingSQL = false;
             return;
         }
@@ -69,7 +68,7 @@ public class MySQL_Connect {
     public boolean reInitConnection() {
         loadValues();
 
-        try{
+        try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
                 connection = null;
@@ -85,16 +84,16 @@ public class MySQL_Connect {
                 checkTableExists();
                 main.getToggles().usingSQL = true;
                 //Save all player data that may of accumulated!
-                for (Player p : main.getServer().getOnlinePlayers()){
+                for (Player p : main.getServer().getOnlinePlayers()) {
                     main.getdPlayerManager().savePlayer(p.getUniqueId());
                 }
                 return true;
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             debug.debug("Failed to connect to MySQL, falling back onto FlatFile! Please edit the config.yml and then run /dbdl mysql connect");
             main.getToggles().usingSQL = false;
             return false;
-        } catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             debug.debug("Failed to find MySQL Driver, falling back onto FlatFile!");
             main.getToggles().usingSQL = false;
             return false;
@@ -103,7 +102,7 @@ public class MySQL_Connect {
 
     }
 
-    public void loadValues(){
+    public void loadValues() {
         main.reloadConfig();
         this.host = main.getConfig().getString("mysql.host");
         this.port = main.getConfig().getInt("mysql.port");
@@ -113,8 +112,8 @@ public class MySQL_Connect {
 
     }
 
-    public void checkTableExists(){
-        new BukkitRunnable(){
+    public void checkTableExists() {
+        new BukkitRunnable() {
             @Override
             public void run() {
 
@@ -149,7 +148,7 @@ public class MySQL_Connect {
 
     }
 
-    public void closeConnection(){
+    public void closeConnection() {
 
         try {
             connection.close();
@@ -158,17 +157,17 @@ public class MySQL_Connect {
         }
     }
 
-    public void modifyUserStats(final Player p, final String stat, final int amount){
-        if (!main.getToggles().usingSQL){
+    public void modifyUserStats(final Player p, final String stat, final int amount) {
+        if (!main.getToggles().usingSQL) {
             return;
         }
-        new BukkitRunnable(){
+        new BukkitRunnable() {
 
             public void run() {
 
                 try {
                     Statement statement = connection.createStatement();
-                    statement.executeUpdate("UPDATE dbdl_user_stats SET "+stat+"="+amount+" WHERE uuid='"+p.getUniqueId().toString()+"'");
+                    statement.executeUpdate("UPDATE dbdl_user_stats SET " + stat + "=" + amount + " WHERE uuid='" + p.getUniqueId().toString() + "'");
                     statement.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -177,20 +176,19 @@ public class MySQL_Connect {
         }.runTaskAsynchronously(main);
     }
 
-    public void uploadUserStats(final DPlayer p){
-        if (!main.getToggles().usingSQL){
+    public void uploadUserStats(final DPlayer p) {
+        if (!main.getToggles().usingSQL) {
             return;
         }
 
 
-
-        new BukkitRunnable(){
+        new BukkitRunnable() {
 
             public void run() {
 
                 try {
                     PreparedStatement ps = connection.prepareStatement("UPDATE dbdl_user_stats SET bloodPoints=?,escapes=?,sacrificed=?,deaths=?,wins=?,generators_fixed=?,generators_failed=?,times_hooked=?,hook_escapes=?,heals=?,score=? WHERE uuid=?");
-                    ps.setInt(1,p.getBloodPoints());
+                    ps.setInt(1, p.getBloodPoints());
                     ps.setInt(2, p.getEscapes());
                     ps.setInt(3, p.getTimesSacrificed());
                     ps.setInt(4, p.getDeaths());
@@ -212,15 +210,15 @@ public class MySQL_Connect {
         }.runTaskAsynchronously(main);
     }
 
-    public void checkPlayerDataExists(final Player p){
-        if (!main.getToggles().usingSQL){
+    public void checkPlayerDataExists(final Player p) {
+        if (!main.getToggles().usingSQL) {
             return;
         }
-        new BukkitRunnable(){
+        new BukkitRunnable() {
             public void run() {
                 try {
                     Statement statement = connection.createStatement();
-                    statement.executeUpdate("INSERT INTO dbdl_user_stats (uuid,name) VALUES ('"+p.getUniqueId().toString()+"','"+p.getName()+"')");
+                    statement.executeUpdate("INSERT INTO dbdl_user_stats (uuid,name) VALUES ('" + p.getUniqueId().toString() + "','" + p.getName() + "')");
                     statement.close();
                 } catch (SQLException e) {
 
@@ -229,12 +227,12 @@ public class MySQL_Connect {
         }.runTaskAsynchronously(main);
     }
 
-    public void loadPlayerData(final Player p){
-        if (!main.getToggles().usingSQL || connection == null){
+    public void loadPlayerData(final Player p) {
+        if (!main.getToggles().usingSQL || connection == null) {
             DPlayer player = new DPlayer(p.getUniqueId(), null, main);
             main.getdPlayerManager().getDPlayers().add(player);
         }
-        new BukkitRunnable(){
+        new BukkitRunnable() {
             public void run() {
                 try {
                     Statement statement = connection.createStatement();
@@ -244,12 +242,12 @@ public class MySQL_Connect {
                     rs.close();
                     statement.close();
                     return;
-                } catch (SQLException e){
+                } catch (SQLException e) {
 
                     DPlayer player = new DPlayer(p.getUniqueId(), null, main);
                     main.getdPlayerManager().getDPlayers().add(player);
                     return;
-                } catch (NullPointerException e){
+                } catch (NullPointerException e) {
                     DPlayer player = new DPlayer(p.getUniqueId(), null, main);
                     main.getdPlayerManager().getDPlayers().add(player);
                     return;
@@ -258,8 +256,8 @@ public class MySQL_Connect {
         }.runTaskAsynchronously(main);
     }
 
-    public void setPlayerData(UUID id, ResultSet rs){
-        if (!main.getToggles().usingSQL){
+    public void setPlayerData(UUID id, ResultSet rs) {
+        if (!main.getToggles().usingSQL) {
             return;
         }
         DPlayer player = new DPlayer(id, null, main);
@@ -278,12 +276,11 @@ public class MySQL_Connect {
                 player.setScore(rs.getInt("score"));
                 main.getdPlayerManager().getDPlayers().add(player);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
-
 
 
 }

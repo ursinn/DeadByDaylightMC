@@ -1,6 +1,5 @@
 package noahnok.DBDL.files.utils;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,29 +19,27 @@ public class Icon extends ItemStack {
         this.itemStack = itemStack;
     }
 
+    private Icon(Icon ico) {
+        this.itemStack = ico.getItemStack();
+    }
+
     public Icon addClickAction(ClickAction clickAction) {
         this.clickActions.add(clickAction);
         return this;
     }
 
-    private Icon(Icon ico){
-        this.itemStack = ico.getItemStack();
-    }
-
-
-
     public List<ClickAction> getClickActions() {
         return this.clickActions;
     }
 
-    public ItemStack getItemStack(){
+    public ItemStack getItemStack() {
         return this.itemStack;
     }
 
-    public Icon addLore(String lore){
+    public Icon addLore(String lore) {
         ItemMeta meta = itemStack.getItemMeta();
         List<String> lorelist = meta.getLore();
-        if (lorelist == null){
+        if (lorelist == null) {
             lorelist = new ArrayList<String>();
         }
 
@@ -52,11 +49,11 @@ public class Icon extends ItemStack {
         return this;
     }
 
-    public Icon getCopy(){
+    public Icon getCopy() {
         return new Icon(this);
     }
 
-    public Icon clearLore(){
+    public Icon clearLore() {
         ItemMeta meta = itemStack.getItemMeta();
         meta.setLore(null);
         itemStack.setItemMeta(meta);

@@ -18,16 +18,16 @@ public class leaveCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (commandSender instanceof Player){
+        if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            if (main.getMatchMaking().matchMakingLoop.containsKey(player.getUniqueId())){
+            if (main.getMatchMaking().matchMakingLoop.containsKey(player.getUniqueId())) {
                 main.getMatchMaking().removePlayerFromMatchMakingLoop(player);
                 player.sendMessage(main.prefix + "You have left the queue!");
                 return true;
             }
 
             DGame game = main.getGameManager().getGamePlayerIsIn(player);
-            if (game != null){
+            if (game != null) {
                 main.getGameManager().removePlayerFromGame(player, game);
 
                 //Remove player
@@ -37,7 +37,7 @@ public class leaveCommand implements CommandExecutor {
             return true;
 
 
-        }else{
+        } else {
             commandSender.sendMessage(main.prefix + "This command can only be executed by a player!");
             return true;
         }

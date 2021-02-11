@@ -11,7 +11,7 @@ public enum STATUS {
         this.text = s;
     }
 
-    public String text(){
+    public String text() {
         return ChatColor.translateAlternateColorCodes('&', text);
     }
 }

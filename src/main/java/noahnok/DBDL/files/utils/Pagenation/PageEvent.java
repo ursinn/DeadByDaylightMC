@@ -12,11 +12,11 @@ import org.bukkit.inventory.ItemStack;
 public class PageEvent implements Listener {
 
     @EventHandler
-    public void onClick(InventoryClickEvent e){
-        if (e.getView().getTopInventory().getHolder() instanceof Page){
+    public void onClick(InventoryClickEvent e) {
+        if (e.getView().getTopInventory().getHolder() instanceof Page) {
             e.setCancelled(true);
 
-            if (e.getWhoClicked() instanceof Player){
+            if (e.getWhoClicked() instanceof Player) {
                 Player player = (Player) e.getWhoClicked();
 
                 ItemStack itemStack = e.getCurrentItem();
@@ -29,7 +29,7 @@ public class PageEvent implements Listener {
 
                 if (pageItem == null) return;
 
-                for (GeneralClick click : pageItem.getClickActions()){
+                for (GeneralClick click : pageItem.getClickActions()) {
                     click.click(player);
                 }
             }

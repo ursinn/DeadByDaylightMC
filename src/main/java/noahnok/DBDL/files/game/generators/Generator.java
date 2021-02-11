@@ -26,35 +26,35 @@ public class Generator {
 
     private boolean finished;
 
-    public Generator(DGame game, Location loc, DeadByDaylight main){
+    public Generator(DGame game, Location loc, DeadByDaylight main) {
         this.game = game;
         this.loc = loc;
         this.main = main;
     }
 
-    public void spawn(){
+    public void spawn() {
         loc.getBlock().setType(Material.FURNACE);
 
     }
 
-    public void increment(DPlayer p){
+    public void increment(DPlayer p) {
         percentDone = percentDone + 1;
-        if (percentDone >= 100){
+        if (percentDone >= 100) {
             finished = true;
             spawnFireworks();
             game.incrementGens();
 
-            p.setGeneratorsFixed(p.getGeneratorsFixed()+1);
+            p.setGeneratorsFixed(p.getGeneratorsFixed() + 1);
         }
         p.addToScore((int) (5 * game.getMultiplier()));
     }
 
-    public void complete(){
+    public void complete() {
         finished = true;
     }
 
-    private void spawnFireworks(){
-        Firework fw = (Firework) this.loc.getWorld().spawnEntity(loc.clone().add(0,1,0), EntityType.FIREWORK);
+    private void spawnFireworks() {
+        Firework fw = (Firework) this.loc.getWorld().spawnEntity(loc.clone().add(0, 1, 0), EntityType.FIREWORK);
         final FireworkMeta fwm = fw.getFireworkMeta();
 
         fwm.addEffect(FireworkEffect.builder().flicker(true).trail(true).with(FireworkEffect.Type.BALL_LARGE).withColor(Color.RED).withFade(Color.BLACK).build());
@@ -67,13 +67,14 @@ public class Generator {
         fw.detonate();
 
 
-        new BukkitRunnable(){
+        new BukkitRunnable() {
             int i = 3;
+
             public void run() {
-                if (i == 0){
+                if (i == 0) {
                     cancel();
                 }
-                Firework fw2 = (Firework) loc.getWorld().spawnEntity(loc.clone().add(0,1,0), EntityType.FIREWORK);
+                Firework fw2 = (Firework) loc.getWorld().spawnEntity(loc.clone().add(0, 1, 0), EntityType.FIREWORK);
                 fw2.setCustomName("DBDL-FIREWORK");
                 fw2.setCustomNameVisible(false);
 
@@ -94,7 +95,7 @@ public class Generator {
         this.finished = finished;
     }
 
-    public void increment(double value){
+    public void increment(double value) {
         percentDone += value;
     }
 
@@ -102,7 +103,7 @@ public class Generator {
         this.game = game;
     }
 
-    public void despawn(){
+    public void despawn() {
         loc.getBlock().setType(Material.AIR);
     }
 

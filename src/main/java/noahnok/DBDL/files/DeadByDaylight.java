@@ -32,11 +32,6 @@ public class DeadByDaylight extends JavaPlugin {
     public String prefix = ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8] &7");
 
 
-
-
-
-
-
     private DArenaManager arenaManager;
 
     private DGameManager gameManager;
@@ -80,8 +75,6 @@ public class DeadByDaylight extends JavaPlugin {
     private InventoryEvents ie;
 
 
-
-
     private readyConfigs readyConfigs;
 
     private MainCommands mainCommands;
@@ -117,8 +110,6 @@ public class DeadByDaylight extends JavaPlugin {
         saveDefaultConfig();
 
 
-
-
         this.getCommand("dbdl").setExecutor(mainCommands);
 
         this.getCommand("stats").setExecutor(statsCommand);
@@ -129,20 +120,13 @@ public class DeadByDaylight extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(ie, this);
         this.getServer().getPluginManager().registerEvents(ee, this);
         this.getServer().getPluginManager().registerEvents(se, this);
-        this.getServer().getPluginManager().registerEvents(me,this);
+        this.getServer().getPluginManager().registerEvents(me, this);
         this.getServer().getPluginManager().registerEvents(ge, this);
-
 
 
         readyConfigs.createConfigs();
 
         toggles.setUpToggles();
-
-
-
-
-
-
 
 
         sqlManager.initConnection();
@@ -153,11 +137,7 @@ public class DeadByDaylight extends JavaPlugin {
         signManager.loadSignsFromFile();
 
 
-
-
-
-
-        for (Player player : this.getServer().getOnlinePlayers()){
+        for (Player player : this.getServer().getOnlinePlayers()) {
             dPlayerManager.loadDPlayer(player.getUniqueId());
         }
 
@@ -165,12 +145,7 @@ public class DeadByDaylight extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PageEvent(), this);
 
 
-
-        noJump = new NoJump(this).runTaskTimer(this, 0, (20*8));
-
-
-
-
+        noJump = new NoJump(this).runTaskTimer(this, 0, (20 * 8));
 
 
     }
@@ -181,7 +156,7 @@ public class DeadByDaylight extends JavaPlugin {
         noJump.cancel();
 
 
-        for (UUID id : arenaEditor.editing.keySet()){
+        for (UUID id : arenaEditor.editing.keySet()) {
             arenaEditor.stopEditing(getServer().getPlayer(id));
             getServer().getPlayer(id).sendMessage("You were forcefully removed from editing due to a reload!");
 
@@ -190,10 +165,10 @@ public class DeadByDaylight extends JavaPlugin {
 
 
         // Take players out of running games!
-        for (DGame game : gameManager.getGames()){
-            for (DPlayer dplayer : game.getPlayers()){
+        for (DGame game : gameManager.getGames()) {
+            for (DPlayer dplayer : game.getPlayers()) {
 
-                if (dplayer != null || dplayer.getCurrentGame() != null){
+                if (dplayer != null || dplayer.getCurrentGame() != null) {
                     getGameManager().removePlayerFromGame(dplayer.getPlayer(), dplayer.getCurrentGame());
                 }
             }
@@ -207,12 +182,9 @@ public class DeadByDaylight extends JavaPlugin {
         sqlManager.closeConnection();
 
 
-
-
-
     }
 
-    private void setAccess(){
+    private void setAccess() {
         arenaManager = new DArenaManager(this);
         gameManager = new DGameManager(this);
         gamemodeManager = new DGamemodeManager(this);
@@ -283,9 +255,21 @@ public class DeadByDaylight extends JavaPlugin {
         return gamemodesConfig;
     }
 
+    public void setGamemodesConfig(Config gamemodesConfig) {
+        this.gamemodesConfig = gamemodesConfig;
+    }
+
     public Config getArenasConfig() {
         return arenasConfig;
     }
+
+    public void setArenasConfig(Config arenasConfig) {
+        this.arenasConfig = arenasConfig;
+    }
+
+    //public Config getMessagesConfig() {
+    //return messagesConfig;
+    //}
 
     public Config getMessagesConfig() {
         return messagesConfig;
@@ -295,20 +279,8 @@ public class DeadByDaylight extends JavaPlugin {
         this.messagesConfig = messagesConfig;
     }
 
-    //public Config getMessagesConfig() {
-        //return messagesConfig;
-    //}
-
     public Config getSignConfig() {
         return signConfig;
-    }
-
-    public void setGamemodesConfig(Config gamemodesConfig) {
-        this.gamemodesConfig = gamemodesConfig;
-    }
-
-    public void setArenasConfig(Config arenasConfig) {
-        this.arenasConfig = arenasConfig;
     }
 
     public void setSignConfig(Config signConfig) {

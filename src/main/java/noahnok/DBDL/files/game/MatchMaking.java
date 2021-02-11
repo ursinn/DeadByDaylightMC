@@ -1,7 +1,5 @@
 package noahnok.DBDL.files.game;
 
-;
-
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import noahnok.DBDL.files.DeadByDaylight;
@@ -13,31 +11,32 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
+;
+
 
 public class MatchMaking {
 
+    public Map<UUID, BukkitTask> matchMakingLoop = new HashMap<UUID, BukkitTask>();
     private DeadByDaylight main;
-
     private List<DGame> waitingGames = new ArrayList<DGame>();
-    public Map<UUID,BukkitTask> matchMakingLoop = new HashMap<UUID,BukkitTask>();
 
     public MatchMaking(DeadByDaylight main) {
         this.main = main;
     }
 
-    public void removeGame(DGame game){
+    public void removeGame(DGame game) {
         waitingGames.remove(game);
     }
 
 
     //Determine here if the player needs to wait for a game or can join to a current one.
-    public boolean addToMatchmaking(Player p, String playType){
+    public boolean addToMatchmaking(Player p, String playType) {
 
         //Check if there are any available games
-        if (waitingGames.isEmpty()){
+        if (waitingGames.isEmpty()) {
             //Try and create a new game
             DGame game = main.getGameManager().createNewGame();
-            if (game == null){
+            if (game == null) {
                 // No games available (Most likely none were setup
                 return false;
             }
@@ -51,27 +50,27 @@ public class MatchMaking {
             //Transfer new game so it is taken care of by the game manager
             transferGame(game);
             return true;
-        }else{
+        } else {
 
             //A game was found
-            for (DGame game : waitingGames){
+            for (DGame game : waitingGames) {
 
                 //Check playtype //TODO swap out set values for gamemode value
-                if (playType.equalsIgnoreCase("HUNTER")){
-                    if (game.getHunters().size() < 1){
+                if (playType.equalsIgnoreCase("HUNTER")) {
+                    if (game.getHunters().size() < 1) {
 
 
                         main.getGameManager().joinPlayerToGame(p, game, playType);
                         return true;
-                    }else{
+                    } else {
                         continue;
                     }
-                }else{
-                    if (game.getHunted().size() < 4){
+                } else {
+                    if (game.getHunted().size() < 4) {
 
                         main.getGameManager().joinPlayerToGame(p, game, playType);
                         return true;
-                    }else{
+                    } else {
                         continue;
                     }
                 }
@@ -79,7 +78,7 @@ public class MatchMaking {
 
             //No game could be joined. Try and make a new game to prevent players from waiting
             DGame game = main.getGameManager().createNewGame();
-            if (game != null){
+            if (game != null) {
 
 
                 //Join player
@@ -89,7 +88,7 @@ public class MatchMaking {
                 transferGame(game);
                 waitingGames.add(game);
                 return true;
-            }else {
+            } else {
                 return false;
             }
         }
@@ -98,11 +97,11 @@ public class MatchMaking {
 
 
     //Dispatches game over to its proper manager. It only stays here temporarily! It should never stay here forever!
-    private void transferGame(DGame game){
+    private void transferGame(DGame game) {
         main.getGameManager().getGames().add(game);
         DSign signn = null;
-        for (DSign sign : main.getSignManager().getSigns()){
-            if (sign.getStatus() == SignStatus.IDLE){
+        for (DSign sign : main.getSignManager().getSigns()) {
+            if (sign.getStatus() == SignStatus.IDLE) {
                 signn = sign;
                 break;
             }
@@ -114,47 +113,47 @@ public class MatchMaking {
     }
 
     //Keep players notified with a visual.
-    public void addPlayerToMatchMakingLoop(final Player p, final String playType){
-        BukkitTask tryMatchMake = new BukkitRunnable(){
+    public void addPlayerToMatchMakingLoop(final Player p, final String playType) {
+        BukkitTask tryMatchMake = new BukkitRunnable() {
             public void run() {
-                if (addToMatchmaking(p, playType)){
+                if (addToMatchmaking(p, playType)) {
                     removePlayerFromMatchMakingLoop(p);
                 }
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     public void run() {
                         p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Searching for game"));
                     }
                 }.runTaskLater(main, 0);
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     public void run() {
                         p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Searching for game."));
                     }
                 }.runTaskLater(main, 5);
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     public void run() {
                         p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Searching for game.."));
                     }
                 }.runTaskLater(main, 10);
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     public void run() {
                         p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Searching for game..."));
                     }
                 }.runTaskLater(main, 15);
             }
-        }.runTaskTimer(main, 0 ,20);
+        }.runTaskTimer(main, 0, 20);
 
         matchMakingLoop.put(p.getUniqueId(), tryMatchMake);
 
     }
 
     //Remove player. They either left or queued for too long.
-    public void  removePlayerFromMatchMakingLoop(Player p){
+    public void removePlayerFromMatchMakingLoop(Player p) {
         matchMakingLoop.get(p.getUniqueId()).cancel();
         matchMakingLoop.remove(p.getUniqueId());
 
     }
 
-    public void removeGameFromMatchmaking(DGame game){
+    public void removeGameFromMatchmaking(DGame game) {
         waitingGames.remove(game);
     }
 }

@@ -7,7 +7,7 @@ import org.bukkit.Location;
 
 public class DLeverBuilder {
 
-    public DLever newLever(Location leverFowardLoc, DGame game, ExitGate gate){
+    public DLever newLever(Location leverFowardLoc, DGame game, ExitGate gate) {
         return new DLever(leverFowardLoc, game, gate);
     }
 }

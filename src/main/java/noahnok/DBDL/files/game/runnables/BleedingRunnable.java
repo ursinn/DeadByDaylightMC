@@ -13,7 +13,7 @@ public class BleedingRunnable extends BukkitRunnable {
     private Player player;
     private DeadByDaylight main;
 
-    public BleedingRunnable(Player player , DeadByDaylight main) {
+    public BleedingRunnable(Player player, DeadByDaylight main) {
         this.player = player;
         this.main = main;
     }
@@ -23,15 +23,14 @@ public class BleedingRunnable extends BukkitRunnable {
         //Red particle
         new BukkitRunnable() {
 
+            int count = 0;
             private Location current = player.getLocation().clone();
 
-            private Location randomOffset(Location loc){
-                int rand = ThreadLocalRandom.current().nextInt(0,1);
+            private Location randomOffset(Location loc) {
+                int rand = ThreadLocalRandom.current().nextInt(0, 1);
                 Location newloc = loc.clone().add(rand, 0.2, rand);
                 return newloc;
             }
-
-            int count = 0;
 
             @Override
             public void run() {
@@ -42,13 +41,12 @@ public class BleedingRunnable extends BukkitRunnable {
                         thisIt.getWorld().spawnParticle(Particle.REDSTONE, thisIt, 0, 1.0, 0.0, 0.0, 1.0);
                     }
                     count++;
-                }else {
+                } else {
 
                     cancel();
                 }
             }
         }.runTaskTimer(main, 0, 4);
-
 
 
     }

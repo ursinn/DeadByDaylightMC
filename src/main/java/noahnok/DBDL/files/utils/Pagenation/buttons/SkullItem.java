@@ -15,7 +15,6 @@ public class SkullItem extends PageItem {
     }
 
 
-
     public SkullItem setSkull(UUID id) {
         ItemStack item = super.getItem();
         item.setItemMeta(super.meta);

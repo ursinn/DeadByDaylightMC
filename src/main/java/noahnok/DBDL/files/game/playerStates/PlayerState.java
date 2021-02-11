@@ -6,11 +6,11 @@ import org.bukkit.scheduler.BukkitTask;
 public class PlayerState {
 
     // Ingame playable states
-    private boolean bleeding,crawling,injured,hooked,carried,beingHealed;
+    private boolean bleeding, crawling, injured, hooked, carried, beingHealed;
 
 
     // Only applicable for the HUNTER/KILLER
-    private boolean carrying,stunned,blind,fatigued;
+    private boolean carrying, stunned, blind, fatigued;
 
     // Game end states
     private EndGameStates endGameState;
@@ -43,11 +43,17 @@ public class PlayerState {
         return bleeding;
     }
 
+    public void setBleeding(boolean bleeding) {
+        this.bleeding = bleeding;
+    }
+
     public boolean isBeingHealed() {
         return beingHealed;
     }
 
-
+    public void setBeingHealed(boolean beingHealed) {
+        this.beingHealed = beingHealed;
+    }
 
     public boolean isCarrying() {
         return carrying;
@@ -81,20 +87,12 @@ public class PlayerState {
         this.fatigued = fatigued;
     }
 
-    public void setBeingHealed(boolean beingHealed) {
-        this.beingHealed = beingHealed;
-    }
-
     public HookedStages getHookedStage() {
         return hookedStage;
     }
 
     public void setHookedStage(HookedStages hookedStage) {
         this.hookedStage = hookedStage;
-    }
-
-    public void setBleeding(boolean bleeding) {
-        this.bleeding = bleeding;
     }
 
     public boolean isCrawling() {

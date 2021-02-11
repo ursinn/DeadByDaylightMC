@@ -1,29 +1,27 @@
 package noahnok.DBDL.files.game;
 
-;
 import noahnok.DBDL.files.DeadByDaylight;
 import noahnok.DBDL.files.signs.DSign;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+;
+
 public class Countdown {
 
 
-     protected DeadByDaylight main;
+    protected DeadByDaylight main;
 
     protected BukkitTask task;
 
     protected int timeInSeconds;
     protected int interval;
     protected int tempTime;
-
+    protected DGame ref;
     boolean contAlert;
 
-    protected DGame ref;
 
-
-
-    public Countdown(int timeInSeconds, boolean contAlert, int interval, DGame ref, DeadByDaylight main){
+    public Countdown(int timeInSeconds, boolean contAlert, int interval, DGame ref, DeadByDaylight main) {
         this.timeInSeconds = timeInSeconds;
         this.contAlert = contAlert;
         this.interval = interval;
@@ -32,17 +30,17 @@ public class Countdown {
 
     }
 
-    public void start(){
+    public void start() {
         tempTime = timeInSeconds;
-        this.task = new BukkitRunnable(){
+        this.task = new BukkitRunnable() {
             public void run() {
 
-                if (tempTime < 11 && tempTime > 0){
+                if (tempTime < 11 && tempTime > 0) {
                     ref.countDownBleep(tempTime);
 
                 }
 
-                if (tempTime <= 0){
+                if (tempTime <= 0) {
 
                     endCountdown(true);
                 }
@@ -52,7 +50,7 @@ public class Countdown {
         }.runTaskTimer(main, 0, 20);
     }
 
-    public void endCountdown(boolean toPlay){
+    public void endCountdown(boolean toPlay) {
         DSign sign = main.getSignManager().getSign(ref);
         if (sign != null) sign.removeGame();
         task.cancel();
@@ -67,12 +65,13 @@ public class Countdown {
             ref.disallowAllMove();
 
 
-            new BukkitRunnable(){
+            new BukkitRunnable() {
                 int count = 5;
+
                 public void run() {
 
                     ref.gameStartBleep(count);
-                    if (count <= 0){
+                    if (count <= 0) {
                         ref.startGameSound();
                         cancel();
                     }
@@ -81,16 +80,14 @@ public class Countdown {
                 }
             }.runTaskTimer(main, 0, 20);
 
-            new BukkitRunnable(){
+            new BukkitRunnable() {
                 public void run() {
                     ref.setStatus(STATUS.INGAME);
                     iGCD.start();
                     ref.allowAllMove();
                     ref = null;
                 }
-            }.runTaskLater(main, 20*5);
-
-
+            }.runTaskLater(main, 20 * 5);
 
 
         }
@@ -98,10 +95,9 @@ public class Countdown {
         task = null;
 
 
-
     }
 
-    public void cancel(){
+    public void cancel() {
         task.cancel();
         ref.announce("Countdown canceled");
     }

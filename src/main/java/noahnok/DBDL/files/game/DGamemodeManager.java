@@ -1,61 +1,53 @@
 package noahnok.DBDL.files.game;
 
-;
-
-
 import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.utils.Config;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
-
 
 import java.util.HashSet;
 import java.util.Set;
+
+;
 
 
 public class DGamemodeManager {
 
 
     private DeadByDaylight main;
-
+    private Set<DGamemode> gamemodes = new HashSet<DGamemode>();
 
     public DGamemodeManager(DeadByDaylight main) {
         this.main = main;
     }
 
-    private Set<DGamemode> gamemodes = new HashSet<DGamemode>();
-
-
-    public Set<DGamemode> getGamemodes(){
+    public Set<DGamemode> getGamemodes() {
         return this.gamemodes;
     }
 
 
-
-    public DGamemode getMode(String mode){
-        for (DGamemode gmode : gamemodes){
-            if (gmode.getID().equalsIgnoreCase( mode)) {
+    public DGamemode getMode(String mode) {
+        for (DGamemode gmode : gamemodes) {
+            if (gmode.getID().equalsIgnoreCase(mode)) {
                 return gmode;
             }
         }
         return null;
     }
 
-    public boolean createGamemode(String mode){
+    public boolean createGamemode(String mode) {
         DGamemode gmode = new DGamemode(mode);
         boolean value = gamemodes.add(gmode);
         Bukkit.getLogger().info(gamemodes.size() + "");
         return value;
     }
 
-    public void addGamemode(DGamemode mode){
+    public void addGamemode(DGamemode mode) {
         gamemodes.add(mode);
     }
 
-    public DGamemode getGamemodeFromString(String mode){
-        for (DGamemode gamemode : gamemodes){
-            if (gamemode.getID().equals(mode)){
+    public DGamemode getGamemodeFromString(String mode) {
+        for (DGamemode gamemode : gamemodes) {
+            if (gamemode.getID().equals(mode)) {
                 return gamemode;
             }
         }
@@ -63,13 +55,13 @@ public class DGamemodeManager {
     }
 
 
-    public void loadGamemodesFromFile(){
+    public void loadGamemodesFromFile() {
         int count = 0;
 
-        for (String key : main.getGamemodesConfig().getConfig().getConfigurationSection("gamemodes").getKeys(false)){
-            String path = "gamemodes."+key+".";
-            int hunters,hunted,generators,chests,hooks = 0;
-            boolean perks,items,offerings,bleeding,stage2,stage3,trapdoor = true;
+        for (String key : main.getGamemodesConfig().getConfig().getConfigurationSection("gamemodes").getKeys(false)) {
+            String path = "gamemodes." + key + ".";
+            int hunters, hunted, generators, chests, hooks = 0;
+            boolean perks, items, offerings, bleeding, stage2, stage3, trapdoor = true;
             boolean instantSacrifice = false;
             try {
                 hunters = (Integer) getItem(path + "hunters");
@@ -88,9 +80,7 @@ public class DGamemodeManager {
                 trapdoor = (Boolean) getItem(path + "allow.trapdoor");
 
 
-
-
-            } catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 main.getLogger().severe("Hmm... seems the gamemode: " + key + " failed to load! Something wasn't set or is broken! Please check you gamemodes.yml");
                 continue;
             }
@@ -100,7 +90,7 @@ public class DGamemodeManager {
             Set<String> disOfferings = (Set<String>) getItem(path + "disallow.offerings");
 
 
-            DGamemode newmode = new DGamemode(key, hunters, hunted, generators, chests, hooks, 3600, perks, items, offerings, bleeding, stage3, stage2, instantSacrifice,trapdoor, disItems,disPerks,disOfferings);
+            DGamemode newmode = new DGamemode(key, hunters, hunted, generators, chests, hooks, 3600, perks, items, offerings, bleeding, stage3, stage2, instantSacrifice, trapdoor, disItems, disPerks, disOfferings);
 
             main.getGamemodeManager().addGamemode(newmode);
 
@@ -111,10 +101,7 @@ public class DGamemodeManager {
     }
 
 
-
-
-
-    private Object getItem(String path){
+    private Object getItem(String path) {
         return main.getGamemodesConfig().getConfig().get(path);
     }
 }

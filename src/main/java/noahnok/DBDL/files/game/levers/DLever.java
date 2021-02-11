@@ -21,7 +21,7 @@ public class DLever {
     private boolean finished = false;
 
 
-    public DLever(Location loc, DGame game, ExitGate gate){
+    public DLever(Location loc, DGame game, ExitGate gate) {
         this.game = game;
         this.loc = loc;
         this.gate = gate;
@@ -30,7 +30,7 @@ public class DLever {
         block.setType(Material.LEVER);
 
         BlockState blockState = block.getState();
-        Lever lever = (Lever)blockState.getData();
+        Lever lever = (Lever) blockState.getData();
 
         BlockFace[] blockFaces = {BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST, BlockFace.SOUTH};
         for (BlockFace bf : blockFaces) {
@@ -45,10 +45,6 @@ public class DLever {
         blockState.update();
 
 
-
-
-
-
     }
 
     public boolean isFinished() {
@@ -59,30 +55,29 @@ public class DLever {
         this.finished = finished;
     }
 
-    public void kill(){
+    public void kill() {
         this.game = null;
         this.gate = null;
     }
 
-    public void increment(DPlayer p){
+    public void increment(DPlayer p) {
         percentDone++;
-        if (percentDone >= 100){
+        if (percentDone >= 100) {
             this.finished = true;
             BlockState blockState = block.getState();
-            Lever lever = (Lever)blockState.getData();
+            Lever lever = (Lever) blockState.getData();
             lever.setPowered(true);
             blockState.update();
             gate.openGate();
             game.announce("A gate has been opened!");
             game.setCanEscape(true);
-            p.setGatesOpened(p.getGatesOpened()+1);
+            p.setGatesOpened(p.getGatesOpened() + 1);
 
             return;
         }
         p.addToScore((int) (10 * game.getMultiplier()));
 
     }
-
 
 
     public int getPercentDone() {

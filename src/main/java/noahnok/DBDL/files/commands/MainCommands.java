@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 ;
 
-public class MainCommands implements CommandExecutor{
+public class MainCommands implements CommandExecutor {
 
     private DeadByDaylight main;
 
@@ -29,21 +29,21 @@ public class MainCommands implements CommandExecutor{
                 p.sendMessage(main.prefix + main.getMessageUtils().color("&6mysql [connect] &8>&7> Shows the current MySQL status (Typing 'connect' will allow you to try and reconnect if your MySQL details in the config are invalid!"));
 
                 return true;
-            }else{
+            } else {
 
-                switch (args[0]){
+                switch (args[0]) {
                     case "forcestart":
                         DGame game = main.getGameManager().getGamePlayerIsIn(p);
-                        if (game == null || !game.getStatus().equals(STATUS.WAITING)){
+                        if (game == null || !game.getStatus().equals(STATUS.WAITING)) {
                             p.sendMessage("You must be in a game to do this!");
 
-                        }else{
-                            if (game.getHunted().size() == 0){
+                        } else {
+                            if (game.getHunted().size() == 0) {
                                 p.sendMessage("Your game must have at least one survivor to start!");
                                 return true;
                             }
 
-                            if (game.getHunters().size() == 0){
+                            if (game.getHunters().size() == 0) {
                                 p.sendMessage("Your game must have at least one hunter to start!");
                                 return true;
                             }
@@ -54,10 +54,10 @@ public class MainCommands implements CommandExecutor{
 
                     case "forceend":
                         DGame gameend = main.getGameManager().getGamePlayerIsIn(p);
-                        if (gameend == null || gameend.getStatus().equals(STATUS.WAITING)){
+                        if (gameend == null || gameend.getStatus().equals(STATUS.WAITING)) {
                             p.sendMessage("You must be in a game to do this!");
 
-                        }else{
+                        } else {
                             main.getGameManager().endGame(gameend);
                         }
                         break;
@@ -67,17 +67,16 @@ public class MainCommands implements CommandExecutor{
                         if (args.length > 1) {
                             mySQLSwitch(p, args[1]);
 
-                        }else{
+                        } else {
                             mySQLSwitch(p, "");
                         }
                         break;
 
                     case "running":
-                        for (DGame runningGame : main.getGameManager().getGames()){
+                        for (DGame runningGame : main.getGameManager().getGames()) {
                             p.sendMessage("Arena: " + runningGame.getArena().getID() + " Players: " + runningGame.getPlayers().size() + " GameID: " + runningGame.getId());
                         }
                         break;
-
 
 
                     default:
@@ -85,7 +84,7 @@ public class MainCommands implements CommandExecutor{
                 }
 
             }
-        }else{
+        } else {
             commandSender.sendMessage("This command can only be executed by a player! reee");
             return true;
         }
@@ -93,13 +92,13 @@ public class MainCommands implements CommandExecutor{
         return true;
     }
 
-    public void mySQLSwitch(Player p, String arg){
-        switch (arg){
+    public void mySQLSwitch(Player p, String arg) {
+        switch (arg) {
             case "connect":
                 p.sendMessage("Checking connection to MySQL!");
-                if(main.getSqlManager().reInitConnection()){
+                if (main.getSqlManager().reInitConnection()) {
                     p.sendMessage("Connected to MySQL");
-                }else{
+                } else {
                     p.sendMessage("Failed to connect! Check console!");
                 }
                 break;

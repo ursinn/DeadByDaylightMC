@@ -21,7 +21,7 @@ public class StatsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (commandSender instanceof Player){
+        if (commandSender instanceof Player) {
             showPlayerStats(((Player) commandSender));
             return true;
         }
@@ -30,14 +30,14 @@ public class StatsCommand implements CommandExecutor {
     }
 
 
-    private void showPlayerStats(Player player){
+    private void showPlayerStats(Player player) {
         DPlayer dplayer = main.getdPlayerManager().getPlayer(player.getUniqueId());
         Page statsPage = new Page("Your Stats", null);
         statsPage.setPageSize(3);
 
-        PageItem wins = new PageItem().setMaterial(Material.NETHER_STAR).setDisplayName("&f&lWins:").addLore("&f"+dplayer.getWins());
-        PageItem losses = new PageItem().setMaterial(Material.COAL).setDisplayName("&0&lLosses (Hunter):").addLore("&0"+dplayer.getLosses());
-        PageItem generators = new PageItem().setMaterial(Material.FURNACE).setDisplayName("&8&lGenerators").addLore("&7Fixed: "+dplayer.getGeneratorsFixed()).addLore("&7Blown: "+dplayer.getGeneratorsMessedup());
+        PageItem wins = new PageItem().setMaterial(Material.NETHER_STAR).setDisplayName("&f&lWins:").addLore("&f" + dplayer.getWins());
+        PageItem losses = new PageItem().setMaterial(Material.COAL).setDisplayName("&0&lLosses (Hunter):").addLore("&0" + dplayer.getLosses());
+        PageItem generators = new PageItem().setMaterial(Material.FURNACE).setDisplayName("&8&lGenerators").addLore("&7Fixed: " + dplayer.getGeneratorsFixed()).addLore("&7Blown: " + dplayer.getGeneratorsMessedup());
 
 
         statsPage.addPageItem(wins, 11);

@@ -18,7 +18,7 @@ public class PageItem {
     private Collection<GeneralClick> clickActions = new ArrayList<>();
 
 
-    public PageItem(){
+    public PageItem() {
         this.item = new ItemStack(Material.BARRIER, 1);
         this.meta = this.item.getItemMeta();
 
@@ -35,66 +35,65 @@ public class PageItem {
         this.meta.setLore(lore);
     }
 
-    public PageItem setMaterial(Material m){
-        this.item.setType(m);
-        return this;
-    }
-
-    public PageItem(ItemStack item){
+    public PageItem(ItemStack item) {
         this.item = item;
-        this.meta = item .getItemMeta();
+        this.meta = item.getItemMeta();
 
         List<String> lore = new ArrayList<>();
         this.meta.setLore(lore);
     }
 
-    public PageItem setDisplayName(String name){
+    public PageItem setMaterial(Material m) {
+        this.item.setType(m);
+        return this;
+    }
+
+    public String getDisplayName() {
+        return meta.getDisplayName();
+    }
+
+    public PageItem setDisplayName(String name) {
         meta.setDisplayName(PageUtils.color(name));
         return this;
     }
 
-    public String getDisplayName(){
-        return meta.getDisplayName();
-    }
-
-    public PageItem addLore(String loreline){
+    public PageItem addLore(String loreline) {
         List<String> lore = new ArrayList<>(meta.getLore());
         lore.add(PageUtils.color(loreline));
         meta.setLore(lore);
         return this;
     }
 
-    public PageItem setLore(String loreline, int index){
+    public PageItem setLore(String loreline, int index) {
         List<String> lore = new ArrayList<>(meta.getLore());
         lore.set(index, PageUtils.color(loreline));
         meta.setLore(lore);
         return this;
     }
 
-    public PageItem removeLore(int index){
+    public PageItem removeLore(int index) {
         List<String> lore = new ArrayList<>(meta.getLore());
         lore.remove(index);
         meta.setLore(lore);
         return this;
     }
 
-    public ItemStack getItem(){
+    public ItemStack getItem() {
         this.item.setItemMeta(this.meta);
         return this.item;
     }
 
-    public PageItem addClickAction(GeneralClick click){
+    public PageItem addClickAction(GeneralClick click) {
         clickActions.add(click);
         return this;
 
     }
 
-    public PageItem copy(){
+    public PageItem copy() {
         this.item.setItemMeta(this.meta);
         return new PageItem(this.item);
 
     }
-
 
 
     public Collection<GeneralClick> getClickActions() {

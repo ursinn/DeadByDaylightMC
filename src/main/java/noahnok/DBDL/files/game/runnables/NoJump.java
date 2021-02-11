@@ -12,7 +12,6 @@ public class NoJump extends BukkitRunnable {
     private DeadByDaylight main;
 
 
-
     public NoJump(DeadByDaylight main) {
         this.main = main;
 
@@ -20,9 +19,9 @@ public class NoJump extends BukkitRunnable {
 
     @Override
     public void run() {
-        for (DGame game : main.getGameManager().getGames()){
-            for (DPlayer player : game.getPlayers()){
-                player.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, (20*8), 250));
+        for (DGame game : main.getGameManager().getGames()) {
+            for (DPlayer player : game.getPlayers()) {
+                player.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, (20 * 8), 250));
             }
         }
     }

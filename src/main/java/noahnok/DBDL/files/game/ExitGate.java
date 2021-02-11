@@ -1,15 +1,15 @@
 package noahnok.DBDL.files.game;
 
-;
 import noahnok.DBDL.files.DeadByDaylight;
 import noahnok.DBDL.files.game.levers.DLever;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+;
 
 public class ExitGate {
     private DeadByDaylight main;
@@ -20,6 +20,13 @@ public class ExitGate {
 
     private DLever lever1;
     private DLever lever2;
+
+    public ExitGate(String facing, Location center, DeadByDaylight main) {
+        this.facing = facing;
+        this.center = center;
+        this.main = main;
+
+    }
 
     public DLever getLever1() {
         return lever1;
@@ -37,30 +44,23 @@ public class ExitGate {
         this.lever2 = lever2;
     }
 
-    public ExitGate(String facing, Location center, DeadByDaylight main){
-        this.facing = facing;
-        this.center = center;
-        this.main = main;
-
-    }
-
-    public void openGate(){
+    public void openGate() {
         int timeDelay = 0;
-        for (final List<Location> locs : getRows()){
-            new BukkitRunnable(){
+        for (final List<Location> locs : getRows()) {
+            new BukkitRunnable() {
                 public void run() {
-                    for (Location loc : locs){
+                    for (Location loc : locs) {
                         loc.getBlock().getDrops().clear();
                         loc.getBlock().breakNaturally();
 
                         loc.getWorld().playSound(loc, Sound.BLOCK_ANVIL_BREAK, 1.0F, 1.0F);
                     }
                 }
-            }.runTaskLater(main, (20*timeDelay));
+            }.runTaskLater(main, (20 * timeDelay));
             timeDelay++;
 
         }
-        new BukkitRunnable(){
+        new BukkitRunnable() {
             public void run() {
                 Location loc = getCenter();
                 loc.getWorld().playSound(loc, Sound.ENTITY_ENDERDRAGON_DEATH, 10F, 1.5F);
@@ -69,23 +69,21 @@ public class ExitGate {
         }.runTaskLater(main, 90);
 
 
-
-
     }
 
-    private List<List<Location>> getRows(){
+    private List<List<Location>> getRows() {
         int lowestY = 400;
-        for (Location loc : this.locs){
-            if (loc.getY() <= lowestY){
+        for (Location loc : this.locs) {
+            if (loc.getY() <= lowestY) {
                 lowestY = loc.getBlockY();
             }
         }
 
         List<List<Location>> rows = new ArrayList<List<Location>>();
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             List<Location> row = new ArrayList<Location>();
-            for (Location loc : this.locs){
-                if (loc.getY() == (lowestY+i)){
+            for (Location loc : this.locs) {
+                if (loc.getY() == (lowestY + i)) {
                     row.add(loc);
                 }
             }
@@ -103,11 +101,11 @@ public class ExitGate {
         return locs;
     }
 
-    public Location getCenter() {
-        return center;
-    }
-
     public void setLocs(List<Location> locs) {
         this.locs = locs;
+    }
+
+    public Location getCenter() {
+        return center;
     }
 }

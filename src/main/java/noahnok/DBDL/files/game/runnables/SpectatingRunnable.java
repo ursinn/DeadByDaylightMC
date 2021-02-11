@@ -19,7 +19,6 @@ public class SpectatingRunnable extends BukkitRunnable {
         spectator.sendAB("&7You are spectating &6&l" + spectating);
 
 
-
     }
 
 

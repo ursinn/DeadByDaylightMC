@@ -8,16 +8,15 @@ public class ItemBuilder {
     private ItemStack item;
 
 
-
-    public ItemBuilder(Material m){
+    public ItemBuilder(Material m) {
         this.item = new ItemStack(m, 1);
     }
 
-    public ItemStack build(){
+    public ItemStack build() {
         return this.item;
     }
 
-    public ItemBuilder setByte(short by){
+    public ItemBuilder setByte(short by) {
         item.setDurability(by);
         return this;
     }

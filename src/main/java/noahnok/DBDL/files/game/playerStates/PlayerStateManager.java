@@ -15,30 +15,30 @@ public class PlayerStateManager {
     }
 
 
-    public void survivorHit(DPlayer survivor){
-        if (survivor.getPlayerState().isCrawling()){
+    public void survivorHit(DPlayer survivor) {
+        if (survivor.getPlayerState().isCrawling()) {
             survivor.setStatus(PlayerStatus.DEAD);
             survivor.startSpectating(survivor.getCurrentGame());
             main.getGameManager().canGameEnd(survivor.getCurrentGame());
             return;
         }
-        if (!survivor.getPlayerState().isInjured()){
+        if (!survivor.getPlayerState().isInjured()) {
             survivorHitToInjured(survivor);
-        }else{
+        } else {
             survivorHitToCrawling(survivor);
         }
 
 
     }
 
-    private void survivorHitToInjured(DPlayer survivor){
+    private void survivorHitToInjured(DPlayer survivor) {
 
         setBleeding(survivor);
         survivor.getPlayerState().setInjured(true);
         injureSpeed(survivor);
     }
 
-    private void survivorHitToCrawling(DPlayer survivor){
+    private void survivorHitToCrawling(DPlayer survivor) {
 
         setBleeding(survivor);
         survivor.getPlayerState().setInjured(false);
@@ -51,7 +51,7 @@ public class PlayerStateManager {
     }
 
 
-    public void survivorPickedUpByHunter(DPlayer survivor){
+    public void survivorPickedUpByHunter(DPlayer survivor) {
         survivor.getPlayerState().setCrawling(false);
         survivor.getPlayerState().setInjured(false);
         survivor.getPlayerState().setCarried(true);
@@ -62,23 +62,23 @@ public class PlayerStateManager {
     }
 
     // atWill mean the survivor escaped them selves and wasn't dropped by the killer purposely
-    public void survivorEscapeHunterPickup(DPlayer survivor, boolean atWill){
+    public void survivorEscapeHunterPickup(DPlayer survivor, boolean atWill) {
         survivor.getPlayerState().setCarried(false);
-        if (atWill){
+        if (atWill) {
             survivorHitToInjured(survivor);
 
-        }else{
+        } else {
             survivorHitToCrawling(survivor);
         }
     }
 
-    public void survivorHooked(DPlayer survivor){
+    public void survivorHooked(DPlayer survivor) {
         survivor.getPlayerState().setHooked(true);
         survivor.getPlayerState().setCarried(false);
 
         stopBleeding(survivor);
 
-        switch (survivor.getPlayerState().getHookedStage()){
+        switch (survivor.getPlayerState().getHookedStage()) {
             case NOT_HOOKED:
                 survivor.getPlayerState().setHookedStage(HookedStages.STAGE_1);
                 break;
@@ -97,28 +97,28 @@ public class PlayerStateManager {
         }
     }
 
-    public void survivorUnhooked(DPlayer survivor){
+    public void survivorUnhooked(DPlayer survivor) {
         survivor.getPlayerState().setHooked(false);
         survivor.getPlayerState().setInjured(true);
 
         setBleeding(survivor);
     }
 
-    public void survivorHealingStart(DPlayer survivor){
+    public void survivorHealingStart(DPlayer survivor) {
         survivor.getPlayerState().setBeingHealed(true);
     }
 
-    public void survivorHealingStop(DPlayer survivor){
+    public void survivorHealingStop(DPlayer survivor) {
         survivor.getPlayerState().setBeingHealed(false);
     }
 
-    public void survivorHealed(DPlayer survivor, boolean fullHealth){
-        if (fullHealth){
+    public void survivorHealed(DPlayer survivor, boolean fullHealth) {
+        if (fullHealth) {
 
             stopBleeding(survivor);
             survivor.getPlayerState().setInjured(false);
             normalSpeed(survivor);
-        }else{
+        } else {
 
             survivor.getPlayerState().setCrawling(false);
             survivor.getPlayerState().setInjured(true);
@@ -127,33 +127,33 @@ public class PlayerStateManager {
 
     }
 
-    public void survivorKilledByHuntersHand(DPlayer survivor){
+    public void survivorKilledByHuntersHand(DPlayer survivor) {
         survivor.getPlayerState().setCrawling(false);
         stopBleeding(survivor);
         survivor.getPlayerState().setEndGameState(EndGameStates.DEAD);
     }
 
-    public void survivorEscapes(DPlayer survivor){
+    public void survivorEscapes(DPlayer survivor) {
         survivor.getPlayerState().setEndGameState(EndGameStates.ESCAPED);
         stopBleeding(survivor);
 
     }
 
-    public boolean isSurvivorDead(DPlayer survivor){
+    public boolean isSurvivorDead(DPlayer survivor) {
         if (survivor.getPlayerState().getEndGameState() == EndGameStates.DEAD) return true;
         return false;
     }
 
-    public boolean isSurvivorHooked(DPlayer survivor){
+    public boolean isSurvivorHooked(DPlayer survivor) {
         return survivor.getPlayerState().isHooked();
     }
 
-    public boolean hasSurvivorEscape(DPlayer survivor){
+    public boolean hasSurvivorEscape(DPlayer survivor) {
         if (survivor.getPlayerState().getEndGameState() == EndGameStates.ESCAPED) return true;
         return false;
     }
 
-    public boolean isSurvivorSacrificed(DPlayer survivor){
+    public boolean isSurvivorSacrificed(DPlayer survivor) {
         if (survivor.getPlayerState().getEndGameState() == EndGameStates.SACRIFICED) return true;
         return false;
     }
@@ -161,69 +161,69 @@ public class PlayerStateManager {
 
     // The following are only available to the HUNTER/KILLER
 
-    public void hunterStartCarrying(DPlayer hunter){
+    public void hunterStartCarrying(DPlayer hunter) {
         hunter.getPlayerState().setCarrying(true);
     }
 
 
     // atWill means if the Hunter decided to put the survivor down themselves or if they escaped
-    public void hunterStopCarrying(DPlayer hunter, boolean atWill){
+    public void hunterStopCarrying(DPlayer hunter, boolean atWill) {
         hunter.getPlayerState().setCarrying(false);
 
-        if (!atWill){
+        if (!atWill) {
             hunterStunned(hunter);
         }
     }
 
-    public void hunterStunned(DPlayer hunter){
+    public void hunterStunned(DPlayer hunter) {
         hunter.getPlayerState().setStunned(true);
     }
 
-    public void hunterUnStunned(DPlayer hunter){
+    public void hunterUnStunned(DPlayer hunter) {
         hunter.getPlayerState().setStunned(false);
     }
 
-    public void hunterBlinded(DPlayer hunter){
+    public void hunterBlinded(DPlayer hunter) {
         hunter.getPlayerState().setBlind(true);
     }
 
-    public void hunterUnBlinded(DPlayer hunter){
+    public void hunterUnBlinded(DPlayer hunter) {
         hunter.getPlayerState().setBlind(false);
     }
 
-    public void hunterFatigued(DPlayer hunter){
+    public void hunterFatigued(DPlayer hunter) {
         hunter.getPlayerState().setFatigued(true);
     }
 
-    public void hunterUnFatigued(DPlayer hunter){
+    public void hunterUnFatigued(DPlayer hunter) {
         hunter.getPlayerState().setFatigued(false);
     }
 
 
-    private void crawlSpeed(DPlayer survivor){
+    private void crawlSpeed(DPlayer survivor) {
         survivor.getPlayer().setWalkSpeed((float) 0.1);
     }
 
-    private void injureSpeed(DPlayer survivor){
+    private void injureSpeed(DPlayer survivor) {
         survivor.getPlayer().setWalkSpeed((float) 0.15);
     }
 
-    private void normalSpeed(DPlayer survivor){
+    private void normalSpeed(DPlayer survivor) {
         survivor.getPlayer().setWalkSpeed((float) 0.2);
     }
 
-    private void noSpeed(DPlayer survivor){
+    private void noSpeed(DPlayer survivor) {
         survivor.getPlayer().setWalkSpeed(0);
     }
 
-    private void setBleeding(DPlayer player){
-        if (player.getPlayerState().getBleedingRunnable() == null){
+    private void setBleeding(DPlayer player) {
+        if (player.getPlayerState().getBleedingRunnable() == null) {
             player.getPlayerState().setBleedingRunnable(new BleedingRunnable(player.getPlayer(), main).runTaskTimer(main, 0, 30));
         }
     }
 
-    private void stopBleeding(DPlayer player){
-        if (player.getPlayerState().getBleedingRunnable() != null){
+    private void stopBleeding(DPlayer player) {
+        if (player.getPlayerState().getBleedingRunnable() != null) {
             player.getPlayerState().getBleedingRunnable().cancel();
             player.getPlayerState().setBleedingRunnable(null);
         }

@@ -1,13 +1,8 @@
 package noahnok.DBDL.files.game;
 
-;
 import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.commands.joinGameCommand;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.inventory.ItemStack;
 
-import java.util.Set;
+;
 
 public class setUpDefaults {
 
@@ -17,7 +12,7 @@ public class setUpDefaults {
         this.main = main;
     }
 
-    public void initialiseBasics(){
+    public void initialiseBasics() {
         createDefaultGamemode();
         setUpInvIcons();
         main.getGamemodeManager().loadGamemodesFromFile();
@@ -31,18 +26,17 @@ public class setUpDefaults {
 
     }
 
-    private void createDefaultGamemode(){
-        DGamemode def = new DGamemode("default",1,4,10,10,10,600,true,true,true,true,true,false,false,true);
+    private void createDefaultGamemode() {
+        DGamemode def = new DGamemode("default", 1, 4, 10, 10, 10, 600, true, true, true, true, true, false, false, true);
         main.getGamemodeManager().addGamemode(def);
     }
 
-    private void addDebugValues(){
-
+    private void addDebugValues() {
 
 
     }
 
-    private void setUpInvIcons(){
+    private void setUpInvIcons() {
         main.getArenaInvManager().prepareIcons();
     }
 

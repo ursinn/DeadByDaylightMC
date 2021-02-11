@@ -3,17 +3,17 @@ version: 0.0.2
 author: NoahNok
 
 main: noahnok.DBDL.files.DeadByDaylight
-softdepend: [Multiverse-Core]
+softdepend: [ Multiverse-Core ]
 
 commands:
   dbdl:
-    aliases: [dbd, db, deadbydaylight]
+    aliases: [ dbd, db, deadbydaylight ]
     usage: /dbdl
   arena:
-    aliases: [a, da, darena]
+    aliases: [ a, da, darena ]
     usage: /arena
   join:
-    aliases: [j]
+    aliases: [ j ]
     usage: /join
   leave:
     usage: /leave

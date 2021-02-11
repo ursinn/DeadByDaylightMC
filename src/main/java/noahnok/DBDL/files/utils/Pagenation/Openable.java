@@ -2,7 +2,7 @@ package noahnok.DBDL.files.utils.Pagenation;
 
 import org.bukkit.entity.Player;
 
-public interface Openable{
+public interface Openable {
 
     void openInventory(Player p);
 

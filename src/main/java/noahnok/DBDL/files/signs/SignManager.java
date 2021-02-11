@@ -1,17 +1,14 @@
 package noahnok.DBDL.files.signs;
 
-;
-
-
 import noahnok.DBDL.files.DeadByDaylight;
 import noahnok.DBDL.files.game.DGame;
-import noahnok.DBDL.files.utils.Config;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import java.util.ArrayList;
 import java.util.List;
+
+;
 
 
 public class SignManager {
@@ -34,14 +31,13 @@ public class SignManager {
         this.signs = signs;
     }
 
-    public void saveSignsToFile(){
+    public void saveSignsToFile() {
         int count = 1;
-        for (DSign sign : signs){
-            String path = "signs."+count+".";
-            main.getSignConfig().getConfig().set(path+"loc", sign.getSignBlock().getLocation());
+        for (DSign sign : signs) {
+            String path = "signs." + count + ".";
+            main.getSignConfig().getConfig().set(path + "loc", sign.getSignBlock().getLocation());
             count++;
         }
-
 
 
         main.getSignConfig().saveConfig();
@@ -60,32 +56,32 @@ public class SignManager {
 
             }
 
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             main.getLogger().warning("No signs were found!");
         }
     }
 
-    public DSign getSign(DGame game){
-        for (DSign sign : signs){
-            if (sign.getGame().equals(game)){
+    public DSign getSign(DGame game) {
+        for (DSign sign : signs) {
+            if (sign.getGame().equals(game)) {
                 return sign;
             }
         }
         return null;
     }
 
-    public DSign getSign(Block b){
-        for (DSign sign : signs){
-            if (sign.getSignBlock().equals(b)){
+    public DSign getSign(Block b) {
+        for (DSign sign : signs) {
+            if (sign.getSignBlock().equals(b)) {
                 return sign;
             }
         }
         return null;
     }
 
-    public void removeSign(Block b){
-        for (DSign sign : signs){
-            if (sign.getSignBlock().equals(b)){
+    public void removeSign(Block b) {
+        for (DSign sign : signs) {
+            if (sign.getSignBlock().equals(b)) {
                 sign.setGame(null);
                 signs.remove(sign);
                 sign = null;

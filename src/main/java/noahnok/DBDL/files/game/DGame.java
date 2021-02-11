@@ -16,7 +16,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-
 public class DGame {
 
 
@@ -46,17 +45,6 @@ public class DGame {
     private List<Generator> generators = new ArrayList<Generator>();
     private List<ExitGate> exitGates = new ArrayList<ExitGate>();
 
-    public List<ExitGate> getExitGates() {
-        return exitGates;
-    }
-
-    public List<Generator> getGenerators() {
-        return generators;
-    }
-
-
-
-
     public DGame(DArena arena, DGamemode gamemode, STATUS status, DeadByDaylight main) {
         this.arena = arena;
         this.gamemode = gamemode;
@@ -66,25 +54,33 @@ public class DGame {
 
     }
 
+    public List<ExitGate> getExitGates() {
+        return exitGates;
+    }
+
+    public List<Generator> getGenerators() {
+        return generators;
+    }
+
     public String getId() {
         return id;
     }
 
-    public void moveToDead(UUID id){
+    public void moveToDead(UUID id) {
         main.getdPlayerManager().getPlayer(id).setStatus(PlayerStatus.DEAD);
     }
 
-    public void moveToEscaped(UUID id){
+    public void moveToEscaped(UUID id) {
         main.getdPlayerManager().getPlayer(id).setStatus(PlayerStatus.ESCAPED);
         main.getGameManager().canGameEnd(this);
     }
 
-    public DLever getLeverAtBlock(Block block){
-        for (ExitGate gate : exitGates){
-            if (gate.getLever1().getBlock().equals(block)){
+    public DLever getLeverAtBlock(Block block) {
+        for (ExitGate gate : exitGates) {
+            if (gate.getLever1().getBlock().equals(block)) {
                 return gate.getLever1();
             }
-            if (gate.getLever2().getBlock().equals(block)){
+            if (gate.getLever2().getBlock().equals(block)) {
                 return gate.getLever2();
             }
         }
@@ -107,27 +103,28 @@ public class DGame {
         this.canEscape = canEscape;
     }
 
-    public void incrementGens(){
+    public void incrementGens() {
         finishedGens++;
-        if (finishedGens >= 5){
+        if (finishedGens >= 5) {
             announce("The exit gates have been powered! Go open them!");
-            for (Generator gen : generators){
+            for (Generator gen : generators) {
                 gen.complete();
             }
             canOpenGates = true;
         }
     }
 
-    private void allowPlayerMove(UUID id){
+    private void allowPlayerMove(UUID id) {
         allowMove.put(id, true);
     }
-    private void disallowPlayerMove(UUID id){
+
+    private void disallowPlayerMove(UUID id) {
         allowMove.put(id, false);
     }
 
-    public DPlayer getPlayer(UUID id){
-        for (DPlayer player : players){
-            if (player.getId().equals(id)){
+    public DPlayer getPlayer(UUID id) {
+        for (DPlayer player : players) {
+            if (player.getId().equals(id)) {
                 return player;
             }
         }
@@ -135,21 +132,21 @@ public class DGame {
     }
 
 
-    public boolean canPlayerMove(UUID id){
-        if (allowMove.get(id) == null){
+    public boolean canPlayerMove(UUID id) {
+        if (allowMove.get(id) == null) {
             return true;
         }
         return allowMove.get(id);
     }
 
-    public void allowAllMove(){
-        for (DPlayer player : players){
+    public void allowAllMove() {
+        for (DPlayer player : players) {
             allowPlayerMove(player.getId());
         }
     }
 
-    public void disallowAllMove(){
-        for (DPlayer player : players){
+    public void disallowAllMove() {
+        for (DPlayer player : players) {
             disallowPlayerMove(player.getId());
         }
     }
@@ -158,12 +155,12 @@ public class DGame {
         return players;
     }
 
-    public int totalCurrentPlayers(){
+    public int totalCurrentPlayers() {
         return players.size();
     }
 
-    public int totalPossiblePlayers(){
-        return gamemode.getHunters()+gamemode.getHunted();
+    public int totalPossiblePlayers() {
+        return gamemode.getHunters() + gamemode.getHunted();
     }
 
     public InGameCountdown getIgCD() {
@@ -174,15 +171,15 @@ public class DGame {
         this.igCD = igCD;
     }
 
-    public void teleportPlayers(){
+    public void teleportPlayers() {
         Set<Location> huntedspawns = new HashSet<>(arena.getPossibleHuntedSpawns());
         Set<Location> hunterspawns = new HashSet<>(arena.getPossibleHunterSpawns());
-        for (DPlayer player : players){
-            if (player.getStatus().equals(PlayerStatus.HUNTED)){
+        for (DPlayer player : players) {
+            if (player.getStatus().equals(PlayerStatus.HUNTED)) {
                 Location loc = getRandomLocation(huntedspawns);
                 huntedspawns.remove(loc);
                 main.getServer().getPlayer(player.getId()).teleport(loc);
-            }else{
+            } else {
                 Location loc = getRandomLocation(hunterspawns);
                 hunterspawns.remove(loc);
                 main.getServer().getPlayer(player.getId()).teleport(loc);
@@ -191,18 +188,18 @@ public class DGame {
 
     }
 
-    private Location getRandomLocation(Set<Location> locations){
+    private Location getRandomLocation(Set<Location> locations) {
 
-        if (locations.size() == 1){
+        if (locations.size() == 1) {
             return locations.iterator().next();
         }
 
         main.getLogger().info("size: " + locations.size());
-        int rand = ThreadLocalRandom.current().nextInt(1, locations.size())-1;
+        int rand = ThreadLocalRandom.current().nextInt(1, locations.size()) - 1;
         main.getLogger().info("rand: " + rand);
         int i = 0;
-        for (Location loc : locations){
-            if (i == rand){
+        for (Location loc : locations) {
+            if (i == rand) {
 
                 return loc;
             }
@@ -211,8 +208,8 @@ public class DGame {
         return locations.iterator().next();
     }
 
-    public void endGame(){
-        for (DPlayer player : players){
+    public void endGame() {
+        for (DPlayer player : players) {
             Player actual = player.getPlayer();
             actual.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
             player.setSpectating(false);
@@ -235,10 +232,10 @@ public class DGame {
 
     }
 
-    public boolean isHunter(UUID id){
-        for (DPlayer player : players){
-            if (player.getId().equals(id)){
-                if (player.getStatus().equals(PlayerStatus.HUNTER) || player.getStatus().equals(PlayerStatus.CARRYING)){
+    public boolean isHunter(UUID id) {
+        for (DPlayer player : players) {
+            if (player.getId().equals(id)) {
+                if (player.getStatus().equals(PlayerStatus.HUNTER) || player.getStatus().equals(PlayerStatus.CARRYING)) {
                     return true;
                 }
             }
@@ -246,16 +243,16 @@ public class DGame {
         return false;
     }
 
-    public Generator isGenerator(Block block){
-        for (Generator gen : generators){
-            if (gen.getBlock().equals(block)){
+    public Generator isGenerator(Block block) {
+        for (Generator gen : generators) {
+            if (gen.getBlock().equals(block)) {
                 return gen;
             }
         }
         return null;
     }
 
-    public void kill(){
+    public void kill() {
         this.arena.setInUse(false);
         this.arena = null;
         this.cd = null;
@@ -290,15 +287,13 @@ public class DGame {
     }
 
 
-
     public Set<DPlayer> getHunters() {
         return players.stream().filter(player -> player.getStatus().equals(PlayerStatus.HUNTER) || player.getStatus().equals(PlayerStatus.CARRYING)).collect(Collectors.toCollection(HashSet::new));
     }
 
 
-
-    public void announceJoin(Player p){
-        for (DPlayer player: players){
+    public void announceJoin(Player p) {
+        for (DPlayer player : players) {
             Player reciever = main.getServer().getPlayer(player.getId());
             reciever.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GOLD + p.getName() + ChatColor.GRAY + " joined the game!"));
             reciever.sendMessage(main.prefix + ChatColor.GOLD + p.getName() + ChatColor.GRAY + " joined the game!");
@@ -308,8 +303,8 @@ public class DGame {
         p.sendMessage(main.prefix + "You joined the game!");
     }
 
-    public void announceLeave(Player p){
-        for (DPlayer player : players){
+    public void announceLeave(Player p) {
+        for (DPlayer player : players) {
             Player reciever = main.getServer().getPlayer(player.getId());
             reciever.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GOLD + p.getName() + ChatColor.GRAY + " left the game!"));
             reciever.sendMessage(main.prefix + ChatColor.GOLD + p.getName() + ChatColor.GRAY + " left the game!");
@@ -319,21 +314,21 @@ public class DGame {
         p.sendMessage(main.prefix + "You left the game!");
     }
 
-    public void announce(String message){
-        for (DPlayer player : players){
+    public void announce(String message) {
+        for (DPlayer player : players) {
             sendAB(message, player.getId());
             main.getServer().getPlayer(player.getId()).sendMessage(main.prefix + message);
         }
 
     }
 
-    private void sendAB(String message, UUID id){
+    private void sendAB(String message, UUID id) {
         Bukkit.getServer().getPlayer(id).spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', message)));
     }
 
-    public double getMultiplier(){
-        int playercount = players.size()-1;
-        switch (playercount){
+    public double getMultiplier() {
+        int playercount = players.size() - 1;
+        switch (playercount) {
             case 4:
                 return 1.0;
             case 3:
@@ -347,30 +342,30 @@ public class DGame {
         }
     }
 
-    public void sendPlayersStats(){
+    public void sendPlayersStats() {
 
         for (DPlayer dplayer : players) {
-           String message = "";
-           switch (dplayer.getPlayerState().getEndGameState()){
-               case ESCAPED:
-                   message = "You escaped the " + ChatColor.BLACK + "Hunter";
-                   break;
+            String message = "";
+            switch (dplayer.getPlayerState().getEndGameState()) {
+                case ESCAPED:
+                    message = "You escaped the " + ChatColor.BLACK + "Hunter";
+                    break;
 
-               case DEAD:
-                   message = "You " + ChatColor.BLACK + "Died";
-                   break;
+                case DEAD:
+                    message = "You " + ChatColor.BLACK + "Died";
+                    break;
 
-               case SACRIFICED:
-                   message = "You were " + ChatColor.DARK_RED + "Sacrificed to the " + ChatColor.BLACK + "Entity";
-                   break;
+                case SACRIFICED:
+                    message = "You were " + ChatColor.DARK_RED + "Sacrificed to the " + ChatColor.BLACK + "Entity";
+                    break;
 
-               // Always the hunter,, if not used as a fail safe!
-               case NONE:
-                   message = "You have displeased the " + ChatColor.BLACK + "Entity";
-                   break;
+                // Always the hunter,, if not used as a fail safe!
+                case NONE:
+                    message = "You have displeased the " + ChatColor.BLACK + "Entity";
+                    break;
 
 
-           }
+            }
 
 
             Player player = dplayer.getPlayer();
@@ -390,8 +385,8 @@ public class DGame {
 
     }
 
-    public void countDownBleep(int timeLeft){
-        for (DPlayer player : players){
+    public void countDownBleep(int timeLeft) {
+        for (DPlayer player : players) {
             Player actual = player.getPlayer();
             actual.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', "&7Summoned in " + timeLeft + "s")));
             actual.setLevel(timeLeft);
@@ -399,8 +394,8 @@ public class DGame {
         }
     }
 
-    public void gameStartBleep(int timeLeft){
-        for (DPlayer player : players){
+    public void gameStartBleep(int timeLeft) {
+        for (DPlayer player : players) {
             Player actual = player.getPlayer();
             actual.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', "&7Game starts in " + timeLeft + "s")));
             actual.setLevel(timeLeft);
@@ -409,15 +404,15 @@ public class DGame {
         }
     }
 
-    public void startGameSound(){
-        for (DPlayer player : players){
+    public void startGameSound() {
+        for (DPlayer player : players) {
             Player actual = player.getPlayer();
             actual.playSound(actual.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1.0F, 1.0F);
         }
     }
 
-    public void endGameSound(){
-        for (DPlayer player : players){
+    public void endGameSound() {
+        for (DPlayer player : players) {
             Player actual = player.getPlayer();
             actual.playSound(actual.getLocation(), Sound.ENTITY_WITHER_DEATH, 1.0F, 1.0F);
         }

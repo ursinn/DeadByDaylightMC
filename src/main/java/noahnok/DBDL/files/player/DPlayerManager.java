@@ -10,7 +10,6 @@ import java.util.UUID;
 ;
 
 
-
 public class DPlayerManager {
 
 
@@ -27,19 +26,16 @@ public class DPlayerManager {
     }
 
 
+    public void loadDPlayer(UUID id) {
 
-
-
-    public void loadDPlayer(UUID id){
-
-            main.getSqlManager().checkPlayerDataExists(main.getServer().getPlayer(id));
-            main.getSqlManager().loadPlayerData(main.getServer().getPlayer(id));
+        main.getSqlManager().checkPlayerDataExists(main.getServer().getPlayer(id));
+        main.getSqlManager().loadPlayerData(main.getServer().getPlayer(id));
 
 
     }
 
-    public void savePlayerData(){
-        for (DPlayer player : DPlayers){
+    public void savePlayerData() {
+        for (DPlayer player : DPlayers) {
 
 
             player.kill();
@@ -50,10 +46,10 @@ public class DPlayerManager {
     }
 
 
-    public boolean hasSpectators(DPlayer player){
+    public boolean hasSpectators(DPlayer player) {
         DGame game = player.getCurrentGame();
-        for (DPlayer hunted : game.getHunted()){
-            if (hunted.getSpectate() == player){
+        for (DPlayer hunted : game.getHunted()) {
+            if (hunted.getSpectate() == player) {
                 return true;
             }
         }
@@ -62,11 +58,11 @@ public class DPlayerManager {
 
     }
 
-    public List<DPlayer> getSpectators(DPlayer player){
+    public List<DPlayer> getSpectators(DPlayer player) {
         List<DPlayer> spectators = new ArrayList<>();
         DGame game = player.getCurrentGame();
-        for (DPlayer hunted : game.getHunted()){
-            if (hunted.getSpectate() == player){
+        for (DPlayer hunted : game.getHunted()) {
+            if (hunted.getSpectate() == player) {
                 spectators.add(hunted);
             }
         }
@@ -75,24 +71,20 @@ public class DPlayerManager {
     }
 
 
-
-    public DPlayer getPlayer(UUID id){
-        for (DPlayer player : DPlayers){
-            if (player.getId().equals(id)){
+    public DPlayer getPlayer(UUID id) {
+        for (DPlayer player : DPlayers) {
+            if (player.getId().equals(id)) {
                 return player;
             }
         }
         return null;
     }
 
-    public void savePlayer(UUID id){
+    public void savePlayer(UUID id) {
         DPlayer player = getPlayer(id);
 
 
         main.getSqlManager().uploadUserStats(player);
-
-
-
 
 
     }
