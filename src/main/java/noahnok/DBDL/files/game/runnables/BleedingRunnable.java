@@ -10,8 +10,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class BleedingRunnable extends BukkitRunnable {
 
-    private Player player;
-    private DeadByDaylight main;
+    private final Player player;
+    private final DeadByDaylight main;
 
     public BleedingRunnable(Player player, DeadByDaylight main) {
         this.player = player;
@@ -23,8 +23,8 @@ public class BleedingRunnable extends BukkitRunnable {
         //Red particle
         new BukkitRunnable() {
 
+            private final Location current = player.getLocation().clone();
             int count = 0;
-            private Location current = player.getLocation().clone();
 
             private Location randomOffset(Location loc) {
                 int rand = ThreadLocalRandom.current().nextInt(0, 1);

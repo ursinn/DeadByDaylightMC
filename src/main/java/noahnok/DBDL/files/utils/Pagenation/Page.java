@@ -10,14 +10,10 @@ import java.util.Map;
 
 public class Page implements InventoryHolder {
 
+    private final String pageName;
+    private final PagedInventory pagedInventory;
     Map<Integer, PageItem> pageItems = new HashMap<>();
-
-    private String pageName;
-
     private PageItem swapItemLeft, swapItemRight;
-
-    private PagedInventory pagedInventory;
-
     private int pageSize = -1;
 
 

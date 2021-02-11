@@ -4,8 +4,6 @@ import noahnok.DBDL.files.DeadByDaylight;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-;
-
 public class InGameCountdown {
 
 

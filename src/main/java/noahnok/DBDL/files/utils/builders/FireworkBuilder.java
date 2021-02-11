@@ -8,8 +8,8 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 public class FireworkBuilder {
 
-    private Firework fw;
-    private FireworkMeta fwm;
+    private final Firework fw;
+    private final FireworkMeta fwm;
 
     public FireworkBuilder(Location loc) {
         fw = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);

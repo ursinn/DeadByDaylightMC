@@ -5,8 +5,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class SpectatingRunnable extends BukkitRunnable {
 
+    private final DPlayer spectator;
     private String spectating;
-    private DPlayer spectator;
 
 
     public SpectatingRunnable(String spectating, DPlayer spectator) {

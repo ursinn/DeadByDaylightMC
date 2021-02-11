@@ -14,11 +14,9 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.meta.ItemMeta;
 
-;
-
 public class EditorEvents implements Listener {
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public EditorEvents(DeadByDaylight main) {
         this.main = main;
@@ -145,8 +143,7 @@ public class EditorEvents implements Listener {
         if (a.getCabinetLocations().contains(bloc)) return true;
         if (a.getExitGateLocations().contains(bloc)) return true;
         if (a.getTrapLocations().contains(bloc)) return true;
-        if (a.getLobbyLocation() == bloc) return true;
-        return false;
+        return a.getLobbyLocation() == bloc;
 
     }
 

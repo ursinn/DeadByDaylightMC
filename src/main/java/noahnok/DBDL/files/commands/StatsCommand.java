@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 public class StatsCommand implements CommandExecutor {
 
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public StatsCommand(DeadByDaylight main) {
         this.main = main;

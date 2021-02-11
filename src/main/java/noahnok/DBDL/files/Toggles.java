@@ -3,14 +3,12 @@ package noahnok.DBDL.files;
 
 import noahnok.DBDL.files.utils.DEBUG;
 
-;
-
 public class Toggles {
 
 
+    private final DeadByDaylight main;
+    private final DEBUG debug;
     public boolean usingSQL;
-    private DeadByDaylight main;
-    private DEBUG debug;
 
     public Toggles(DeadByDaylight main) {
         this.main = main;

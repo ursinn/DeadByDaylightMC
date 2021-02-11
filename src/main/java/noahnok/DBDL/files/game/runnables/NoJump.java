@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class NoJump extends BukkitRunnable {
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
 
     public NoJump(DeadByDaylight main) {

@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 public enum STATUS {
     WAITING("&6Waiting"), STARTING("&2Starting"), INGAME("&aIn-game"), ENDING("&cEnding"), RESTARTING("&4Restarting");
 
-    private String text;
+    private final String text;
 
     STATUS(String s) {
         this.text = s;

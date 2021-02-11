@@ -2,11 +2,9 @@ package noahnok.DBDL.files.game;
 
 import noahnok.DBDL.files.DeadByDaylight;
 
-;
-
 public class setUpDefaults {
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public setUpDefaults(DeadByDaylight main) {
         this.main = main;

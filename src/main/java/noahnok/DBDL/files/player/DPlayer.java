@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public class DPlayer {
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     private UUID id;
     private String name;

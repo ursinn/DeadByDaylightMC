@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class GenericEvents implements Listener {
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public GenericEvents(DeadByDaylight main) {
         this.main = main;

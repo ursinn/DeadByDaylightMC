@@ -8,11 +8,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-;
-
 public class MainCommands implements CommandExecutor {
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public MainCommands(DeadByDaylight main) {
         this.main = main;

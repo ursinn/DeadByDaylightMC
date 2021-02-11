@@ -1,6 +1,5 @@
 package noahnok.DBDL.files.game;
 
-import io.netty.util.internal.ThreadLocalRandom;
 import noahnok.DBDL.files.DeadByDaylight;
 import noahnok.DBDL.files.game.generators.Generator;
 import noahnok.DBDL.files.game.levers.DLever;
@@ -16,15 +15,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class DGameManager {
 
 
-    private DeadByDaylight main;
-
+    private final DeadByDaylight main;
+    private final Set<DGame> games = new HashSet<DGame>();
     private int gamesRun = 0;
-    private Set<DGame> games = new HashSet<DGame>();
 
     public DGameManager(DeadByDaylight main) {
         this.main = main;

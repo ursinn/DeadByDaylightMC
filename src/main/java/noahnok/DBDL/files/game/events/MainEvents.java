@@ -29,7 +29,7 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 public class MainEvents implements Listener {
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public MainEvents(DeadByDaylight main) {
         this.main = main;
@@ -123,7 +123,7 @@ public class MainEvents implements Listener {
     @EventHandler
     public void preventGameDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
-            DPlayer player = main.getdPlayerManager().getPlayer(((Player) e.getEntity()).getUniqueId());
+            DPlayer player = main.getdPlayerManager().getPlayer(e.getEntity().getUniqueId());
             if (player != null && player.getCurrentGame() != null && !player.isPlayerASurvivorAndAlive()) {
                 e.setCancelled(true);
 
@@ -201,8 +201,8 @@ public class MainEvents implements Listener {
         }
 
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
-            DPlayer damaged = main.getdPlayerManager().getPlayer(((Player) e.getEntity()).getUniqueId());
-            DPlayer damager = main.getdPlayerManager().getPlayer(((Player) e.getDamager()).getUniqueId());
+            DPlayer damaged = main.getdPlayerManager().getPlayer(e.getEntity().getUniqueId());
+            DPlayer damager = main.getdPlayerManager().getPlayer(e.getDamager().getUniqueId());
 
             if (damaged == null || damager == null) return;
 

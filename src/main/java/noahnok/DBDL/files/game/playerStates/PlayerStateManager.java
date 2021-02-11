@@ -8,7 +8,7 @@ import noahnok.DBDL.files.player.PlayerStatus;
 public class PlayerStateManager {
 
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public PlayerStateManager(DeadByDaylight main) {
         this.main = main;
@@ -140,8 +140,7 @@ public class PlayerStateManager {
     }
 
     public boolean isSurvivorDead(DPlayer survivor) {
-        if (survivor.getPlayerState().getEndGameState() == EndGameStates.DEAD) return true;
-        return false;
+        return survivor.getPlayerState().getEndGameState() == EndGameStates.DEAD;
     }
 
     public boolean isSurvivorHooked(DPlayer survivor) {
@@ -149,13 +148,11 @@ public class PlayerStateManager {
     }
 
     public boolean hasSurvivorEscape(DPlayer survivor) {
-        if (survivor.getPlayerState().getEndGameState() == EndGameStates.ESCAPED) return true;
-        return false;
+        return survivor.getPlayerState().getEndGameState() == EndGameStates.ESCAPED;
     }
 
     public boolean isSurvivorSacrificed(DPlayer survivor) {
-        if (survivor.getPlayerState().getEndGameState() == EndGameStates.SACRIFICED) return true;
-        return false;
+        return survivor.getPlayerState().getEndGameState() == EndGameStates.SACRIFICED;
     }
 
 

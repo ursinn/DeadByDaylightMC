@@ -7,15 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-;
-
 
 public class DPlayerManager {
 
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
-    private List<DPlayer> DPlayers = new ArrayList<DPlayer>();
+    private final List<DPlayer> DPlayers = new ArrayList<DPlayer>();
 
     public DPlayerManager(DeadByDaylight main) {
         this.main = main;

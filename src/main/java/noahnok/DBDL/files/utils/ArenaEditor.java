@@ -19,22 +19,17 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
-;
-
 
 public class ArenaEditor {
 
 
+    private final DeadByDaylight main;
+    private final Map<UUID, ItemStack[]> pInv = new HashMap<UUID, ItemStack[]>();
+    private final Map<UUID, ItemStack[]> pArmour = new HashMap<UUID, ItemStack[]>();
+    private final Map<UUID, BukkitTask> tasks = new HashMap<UUID, BukkitTask>();
+    private final Set<Shulker> shulkers = new HashSet<Shulker>();
     public Map<UUID, DArena> editing = new HashMap<UUID, DArena>();
     public List<EditorItem> editorItems = new ArrayList<EditorItem>();
-    private DeadByDaylight main;
-    private Map<UUID, ItemStack[]> pInv = new HashMap<UUID, ItemStack[]>();
-    private Map<UUID, ItemStack[]> pArmour = new HashMap<UUID, ItemStack[]>();
-    private Map<UUID, BukkitTask> tasks = new HashMap<UUID, BukkitTask>();
-
-    private Set<Shulker> shulkers = new HashSet<Shulker>();
-
-
     private EditorItem generator, hook, chest, cabinet, hunter, hunted, exit, trap, hatch, exitArea;
 
     public ArenaEditor(DeadByDaylight main) {

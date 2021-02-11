@@ -11,17 +11,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-;
-
 public class joinGameCommand implements CommandExecutor {
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
 
-    private InventoryBuilder inventoryBuilder = new InventoryBuilder();
+    private final InventoryBuilder inventoryBuilder = new InventoryBuilder();
 
 
-    private Builders itemBuilder = new Builders();
+    private final Builders itemBuilder = new Builders();
     private CustomHolder joinGameInv;
 
     public joinGameCommand(DeadByDaylight main) {

@@ -12,10 +12,9 @@ import java.util.List;
 
 public class PageItem {
 
+    private final Collection<GeneralClick> clickActions = new ArrayList<>();
     protected ItemStack item;
     protected ItemMeta meta;
-
-    private Collection<GeneralClick> clickActions = new ArrayList<>();
 
 
     public PageItem() {

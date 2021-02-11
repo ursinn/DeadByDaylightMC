@@ -18,12 +18,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-;
-
 public class SignEvents implements Listener {
 
-    private DeadByDaylight main;
-    private String signLine = ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8]");
+    private final DeadByDaylight main;
+    private final String signLine = ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8]");
 
     public SignEvents(DeadByDaylight main) {
         this.main = main;

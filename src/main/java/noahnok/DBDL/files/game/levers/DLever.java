@@ -12,8 +12,8 @@ import org.bukkit.material.Lever;
 
 public class DLever {
 
-    private Location loc;
-    private Block block;
+    private final Location loc;
+    private final Block block;
     private DGame game;
     private ExitGate gate;
 

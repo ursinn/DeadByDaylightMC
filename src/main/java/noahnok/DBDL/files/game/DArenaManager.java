@@ -1,6 +1,5 @@
 package noahnok.DBDL.files.game;
 
-import io.netty.util.internal.ThreadLocalRandom;
 import noahnok.DBDL.files.DeadByDaylight;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -9,15 +8,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class DArenaManager {
 
 
-    private DeadByDaylight main;
-    private Set<DArena> arenas = new HashSet<DArena>();
+    private final DeadByDaylight main;
+    private final Set<DArena> arenas = new HashSet<DArena>();
 
     public DArenaManager(DeadByDaylight main) {
         this.main = main;

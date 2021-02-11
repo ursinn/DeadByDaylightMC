@@ -5,8 +5,6 @@ import noahnok.DBDL.files.signs.DSign;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-;
-
 public class Countdown {
 
 

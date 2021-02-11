@@ -2,12 +2,10 @@ package noahnok.DBDL.files;
 
 import noahnok.DBDL.files.utils.Config;
 
-;
-
 public class readyConfigs {
 
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public readyConfigs(DeadByDaylight main) {
         this.main = main;

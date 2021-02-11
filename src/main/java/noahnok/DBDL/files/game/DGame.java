@@ -1,6 +1,5 @@
 package noahnok.DBDL.files.game;
 
-import io.netty.util.internal.ThreadLocalRandom;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import noahnok.DBDL.files.DeadByDaylight;
@@ -13,37 +12,31 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 
 public class DGame {
 
 
-    private String id;
-
+    private final String id;
+    private final Set<DPlayer> players = new HashSet<>();
+    private final Map<UUID, Boolean> allowMove = new HashMap<UUID, Boolean>();
+    private final List<Generator> generators = new ArrayList<Generator>();
+    private final List<ExitGate> exitGates = new ArrayList<ExitGate>();
     private DeadByDaylight main;
-
     private DArena arena;
     private DGamemode gamemode;
     private STATUS status;
-    private Set<DPlayer> players = new HashSet<>();
-
     private boolean usesLobby;
     private Location lobbyLocation;
     private boolean customGame;
     private boolean showInPool;
-
     private int finishedGens;
     private boolean canOpenGates = false;
     private boolean canEscape = false;
-
-
     private Countdown cd;
     private InGameCountdown igCD;
-
-    private Map<UUID, Boolean> allowMove = new HashMap<UUID, Boolean>();
-    private List<Generator> generators = new ArrayList<Generator>();
-    private List<ExitGate> exitGates = new ArrayList<ExitGate>();
 
     public DGame(DArena arena, DGamemode gamemode, STATUS status, DeadByDaylight main) {
         this.arena = arena;

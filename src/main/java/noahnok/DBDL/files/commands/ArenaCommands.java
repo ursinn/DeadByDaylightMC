@@ -6,12 +6,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-;
-
 public class ArenaCommands implements CommandExecutor {
 
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public ArenaCommands(DeadByDaylight main) {
         this.main = main;

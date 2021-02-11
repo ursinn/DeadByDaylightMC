@@ -9,11 +9,9 @@ import java.util.List;
 public class PagedInventory {
 
 
-    private List<Page> pages = new ArrayList<>();
-
+    private final List<Page> pages = new ArrayList<>();
+    private final String id;
     private PageItem swapItem;
-
-    private String id;
 
 
     public PagedInventory(String id) {
@@ -67,19 +65,11 @@ public class PagedInventory {
     }
 
     public boolean hasNextPage(Page page) {
-        if ((pages.indexOf(page) + 1) != pages.size()) {
-            return true;
-        } else {
-            return false;
-        }
+        return (pages.indexOf(page) + 1) != pages.size();
     }
 
     public boolean hasPreviousPage(Page page) {
-        if (pages.indexOf(page) == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return pages.indexOf(page) != 0;
     }
 
 

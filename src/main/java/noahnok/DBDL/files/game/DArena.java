@@ -9,9 +9,9 @@ import java.util.Set;
 
 public class DArena {
 
-    private String ID;
+    private final String ID;
 
-    private Map<DGamemode, Boolean> usableModes = new HashMap<DGamemode, Boolean>();
+    private final Map<DGamemode, Boolean> usableModes = new HashMap<DGamemode, Boolean>();
 
     private Set<Location> possibleGeneratorLocations = new HashSet<Location>();
     private Set<Location> possibleHatchLocations = new HashSet<Location>();

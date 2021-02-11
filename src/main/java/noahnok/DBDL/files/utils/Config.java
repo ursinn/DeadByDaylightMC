@@ -9,18 +9,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-;
-
 
 public class Config {
 
 
-    private DeadByDaylight plugin;
+    private final DeadByDaylight plugin;
 
 
-    private File config;
-    private FileConfiguration configConf;
-    private String name;
+    private final File config;
+    private final FileConfiguration configConf;
+    private final String name;
 
     public Config(String name, DeadByDaylight main) {
         this.plugin = main;

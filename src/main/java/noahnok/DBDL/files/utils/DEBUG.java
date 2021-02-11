@@ -4,12 +4,10 @@ import noahnok.DBDL.files.DeadByDaylight;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-;
-
 public class DEBUG {
 
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
     public DEBUG(DeadByDaylight main) {
         this.main = main;

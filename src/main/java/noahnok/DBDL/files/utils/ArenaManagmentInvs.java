@@ -9,17 +9,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 
-;
-
 
 public class ArenaManagmentInvs {
+    private final DeadByDaylight main;
+    private final InventoryBuilder invBuilder = new InventoryBuilder();
+    private final Builders itemBuilder = new Builders();
     Icon listArenas, closeMenu, backMenu, deleteItem, cancelAction, gamemodes, generators, hooks, stats, edit;
-
-    private DeadByDaylight main;
-
-    private InventoryBuilder invBuilder = new InventoryBuilder();
-
-    private Builders itemBuilder = new Builders();
 
 
     public ArenaManagmentInvs(DeadByDaylight main) {

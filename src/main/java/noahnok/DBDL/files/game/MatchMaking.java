@@ -11,14 +11,12 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
-;
-
 
 public class MatchMaking {
 
+    private final DeadByDaylight main;
+    private final List<DGame> waitingGames = new ArrayList<DGame>();
     public Map<UUID, BukkitTask> matchMakingLoop = new HashMap<UUID, BukkitTask>();
-    private DeadByDaylight main;
-    private List<DGame> waitingGames = new ArrayList<DGame>();
 
     public MatchMaking(DeadByDaylight main) {
         this.main = main;

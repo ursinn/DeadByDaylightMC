@@ -7,8 +7,8 @@ import org.bukkit.block.Sign;
 
 
 public class DSign {
-    private Block signBlock;
-    private Sign sign;
+    private final Block signBlock;
+    private final Sign sign;
     private DGame game = null;
     private SignStatus status;
 

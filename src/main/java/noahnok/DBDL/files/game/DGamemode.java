@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DGamemode {
-    private String ID;
+    private final String ID;
 
     private int hunters;
     private int hunted;

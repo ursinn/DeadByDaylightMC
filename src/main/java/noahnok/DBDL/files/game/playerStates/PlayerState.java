@@ -5,19 +5,14 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class PlayerState {
 
+    private final DPlayer player;
     // Ingame playable states
     private boolean bleeding, crawling, injured, hooked, carried, beingHealed;
-
-
     // Only applicable for the HUNTER/KILLER
     private boolean carrying, stunned, blind, fatigued;
-
     // Game end states
     private EndGameStates endGameState;
     private HookedStages hookedStage;
-
-    private DPlayer player;
-
     private BukkitTask bleedingRunnable;
 
     public PlayerState(DPlayer player) {

@@ -13,15 +13,11 @@ import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-;
-
 public class Generator {
 
-    private DeadByDaylight main;
-
+    private final DeadByDaylight main;
+    private final Location loc;
     private DGame game;
-    private Location loc;
-
     private double percentDone;
 
     private boolean finished;

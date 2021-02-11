@@ -7,14 +7,12 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashSet;
 import java.util.Set;
 
-;
-
 
 public class DGamemodeManager {
 
 
-    private DeadByDaylight main;
-    private Set<DGamemode> gamemodes = new HashSet<DGamemode>();
+    private final DeadByDaylight main;
+    private final Set<DGamemode> gamemodes = new HashSet<DGamemode>();
 
     public DGamemodeManager(DeadByDaylight main) {
         this.main = main;

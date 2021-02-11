@@ -10,19 +10,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.sql.*;
 import java.util.UUID;
 
-;
-
 public class MySQL_Connect {
 
+    private final DeadByDaylight main;
+    private final DEBUG debug;
     private Connection connection;
     private String host, database, username, password;
     private int port;
-
-
-    private DeadByDaylight main;
-
-
-    private DEBUG debug;
 
 
     public MySQL_Connect(DeadByDaylight main) {

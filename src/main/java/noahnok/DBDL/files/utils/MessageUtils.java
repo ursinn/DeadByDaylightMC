@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class MessageUtils {
 
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
 
-    private Map<String, String> messages = new HashMap<>();
+    private final Map<String, String> messages = new HashMap<>();
 
     public MessageUtils(DeadByDaylight main) {
         this.main = main;

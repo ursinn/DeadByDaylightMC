@@ -9,15 +9,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-;
-
 public class ExitGate {
-    private DeadByDaylight main;
+    private final DeadByDaylight main;
+    private final String facing;
+    private final Location center;
     private List<Location> locs = new ArrayList<Location>();
-    private String facing;
-
-    private Location center;
-
     private DLever lever1;
     private DLever lever2;
 
