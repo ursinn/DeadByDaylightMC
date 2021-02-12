@@ -4,9 +4,9 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import noahnok.dbdl.files.DeadByDaylight;
 import noahnok.dbdl.files.game.DGame;
-import noahnok.dbdl.files.utils.Config;
 import noahnok.dbdl.files.game.playerStates.PlayerState;
 import noahnok.dbdl.files.game.runnables.SpectatingRunnable;
+import noahnok.dbdl.files.utils.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -40,11 +40,29 @@ public class DPlayer {
     private DGame currentGame;
 
     //Config values to be loaded
-    private int bloodPoints = 0, score = 0;
-    private int escapes = 0, deaths = 0, timesSacrificed = 0, generatorsFixed = 0, generatorsMessedup = 0, timesHooked = 0, hookEscapes = 0, hookPulloff = 0, gatesOpened = 0, hooksBroken = 0, heals = 0;
+    private int bloodPoints;
+    private int score;
 
-    private int timesSacrificing = 0, successfulSacrifices = 0, kills = 0, losses = 0, survivorPickups = 0, survivorPickupEscapes = 0, playerEscapes = 0, wins = 0;
+    private int escapes;
+    private int deaths;
+    private int timesSacrificed;
+    private int generatorsFixed;
+    private int generatorsMessedup;
+    private int timesHooked;
+    private int hookEscapes;
+    private int hookPulloff;
+    private int gatesOpened;
+    private int hooksBroken;
+    private int heals;
 
+    private int timesSacrificing;
+    private int successfulSacrifices;
+    private int kills;
+    private int losses;
+    private int survivorPickups;
+    private int survivorPickupEscapes;
+    private int playerEscapes;
+    private int wins;
 
     public DPlayer(UUID id, Config dataFile, DeadByDaylight main) {
         this.id = id;
@@ -54,7 +72,7 @@ public class DPlayer {
     }
 
     public Map<String, Integer> returnGenericData() {
-        Map<String, Integer> values = new HashMap<String, Integer>();
+        Map<String, Integer> values = new HashMap<>();
         values.put("bloodPoints", bloodPoints);
 
 
@@ -65,8 +83,8 @@ public class DPlayer {
         return currentGame;
     }
 
-    public void setCurrentGame(DGame curretnGame) {
-        this.currentGame = curretnGame;
+    public void setCurrentGame(DGame currentGame) {
+        this.currentGame = currentGame;
     }
 
     public BukkitTask getSpectatingRunnable() {
@@ -85,7 +103,6 @@ public class DPlayer {
                 playerState.setBleedingRunnable(null);
             }
         }
-
 
         playerState = new PlayerState(this);
     }
@@ -112,22 +129,25 @@ public class DPlayer {
 
         for (DPlayer dplayer : game.getHunted()) {
             if (dplayer != null && !dplayer.isDead() && !dplayer.isHunter()) {
-
                 player.setSpectatorTarget(dplayer.getPlayer());
                 this.setSpectating(true);
                 spectate = dplayer;
                 this.spectatingRunnable = new SpectatingRunnable(dplayer.getName(), this).runTaskTimer(main, 0, 80);
                 return;
-            } else {
-                continue;
             }
         }
 
     }
 
     public void spectateNext(DPlayer player) {
-        if (this.getPlayer().getGameMode() != GameMode.SPECTATOR) this.getPlayer().setGameMode(GameMode.SPECTATOR);
-        if (!this.isSpectating()) this.setSpectating(true);
+        if (this.getPlayer().getGameMode() != GameMode.SPECTATOR) {
+            this.getPlayer().setGameMode(GameMode.SPECTATOR);
+        }
+
+        if (!this.isSpectating()) {
+            this.setSpectating(true);
+        }
+
         this.getPlayer().setSpectatorTarget(player.getPlayer());
         spectate = player;
         spectatingRunnable.cancel();
@@ -218,7 +238,7 @@ public class DPlayer {
     }
 
     public Map<String, Integer> returnHuntedData() {
-        Map<String, Integer> values = new HashMap<String, Integer>();
+        Map<String, Integer> values = new HashMap<>();
         values.put("escapes", escapes);
         values.put("deaths", deaths);
         values.put("timesSacrificed", timesSacrificed);
@@ -234,7 +254,7 @@ public class DPlayer {
     }
 
     public Map<String, Integer> returnHunterData() {
-        Map<String, Integer> values = new HashMap<String, Integer>();
+        Map<String, Integer> values = new HashMap<>();
         values.put("timesSacrificing", timesSacrificing);
         values.put("successfulSacrifices", successfulSacrifices);
         values.put("kills", kills);
@@ -246,7 +266,6 @@ public class DPlayer {
 
         return values;
     }
-
 
     public int getWins() {
         return wins;
@@ -423,6 +442,7 @@ public class DPlayer {
     //Messaging utils for player
 
     public void sendAB(String message) {
-        this.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', message)));
+        this.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', message)));
     }
 }

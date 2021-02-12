@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SignManager {
-    
+
     private final DeadByDaylight main;
 
     private List<DSign> signs = new ArrayList<>();

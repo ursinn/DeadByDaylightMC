@@ -36,6 +36,7 @@ public class JoinGameCommand implements CommandExecutor {
                 player.sendMessage(main.prefix + "You are already in a game!");
                 return true;
             }
+
             player.openInventory(joinGameInv.getInventory());
             return true;
         }

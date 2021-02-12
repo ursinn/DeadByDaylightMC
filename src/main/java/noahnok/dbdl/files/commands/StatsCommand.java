@@ -20,10 +20,12 @@ public class StatsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (commandSender instanceof Player) {
-            showPlayerStats(((Player) commandSender));
+        if (!(commandSender instanceof Player)) {
+            commandSender.sendMessage(main.prefix + "Only players can use this command!");
             return true;
         }
+
+        showPlayerStats(((Player) commandSender));
         return true;
     }
 

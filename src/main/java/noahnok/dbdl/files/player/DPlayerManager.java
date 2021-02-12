@@ -21,7 +21,6 @@ public class DPlayerManager {
         return DPlayers;
     }
 
-
     public void loadDPlayer(UUID id) {
         main.getSqlManager().checkPlayerDataExists(main.getServer().getPlayer(id));
         main.getSqlManager().loadPlayerData(main.getServer().getPlayer(id));
@@ -29,13 +28,10 @@ public class DPlayerManager {
 
     public void savePlayerData() {
         for (DPlayer player : DPlayers) {
-
             player.kill();
-
         }
         DPlayers.clear();
     }
-
 
     public boolean hasSpectators(DPlayer player) {
         DGame game = player.getCurrentGame();
@@ -59,7 +55,6 @@ public class DPlayerManager {
 
         return spectators;
     }
-
 
     public DPlayer getPlayer(UUID id) {
         for (DPlayer player : DPlayers) {

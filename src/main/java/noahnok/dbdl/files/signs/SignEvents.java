@@ -66,7 +66,7 @@ public class SignEvents implements Listener {
                     if (sign.getLine(0).equals(signLine)) {
                         if (main.getSignManager().getSign(e.getClickedBlock()).getGame() != null) {
                             if (main.getSignManager().getSign(e.getClickedBlock()).getGame().equals(
-                                            main.getGameManager().getGamePlayerIsIn(e.getPlayer()))) {
+                                    main.getGameManager().getGamePlayerIsIn(e.getPlayer()))) {
                                 e.getPlayer().sendMessage("You are already in a game!");
                                 return;
                             }
