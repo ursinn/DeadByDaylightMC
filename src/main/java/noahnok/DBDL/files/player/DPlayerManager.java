@@ -10,10 +10,9 @@ import java.util.UUID;
 
 public class DPlayerManager {
 
-
     private final DeadByDaylight main;
 
-    private final List<DPlayer> DPlayers = new ArrayList<DPlayer>();
+    private final List<DPlayer> DPlayers = new ArrayList<>();
 
     public DPlayerManager(DeadByDaylight main) {
         this.main = main;
@@ -25,22 +24,17 @@ public class DPlayerManager {
 
 
     public void loadDPlayer(UUID id) {
-
         main.getSqlManager().checkPlayerDataExists(main.getServer().getPlayer(id));
         main.getSqlManager().loadPlayerData(main.getServer().getPlayer(id));
-
-
     }
 
     public void savePlayerData() {
         for (DPlayer player : DPlayers) {
 
-
             player.kill();
 
         }
         DPlayers.clear();
-
     }
 
 
@@ -53,7 +47,6 @@ public class DPlayerManager {
         }
 
         return false;
-
     }
 
     public List<DPlayer> getSpectators(DPlayer player) {
@@ -81,9 +74,6 @@ public class DPlayerManager {
     public void savePlayer(UUID id) {
         DPlayer player = getPlayer(id);
 
-
         main.getSqlManager().uploadUserStats(player);
-
-
     }
 }

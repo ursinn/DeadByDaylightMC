@@ -4,7 +4,6 @@ import noahnok.dbdl.files.utils.DEBUG;
 
 public class Toggles {
 
-
     private final DeadByDaylight main;
     private final DEBUG debug;
     public boolean usingSQL;

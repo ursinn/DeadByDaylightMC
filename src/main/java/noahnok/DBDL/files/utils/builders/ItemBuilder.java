@@ -7,7 +7,6 @@ public class ItemBuilder {
 
     private final ItemStack item;
 
-
     public ItemBuilder(Material m) {
         this.item = new ItemStack(m, 1);
     }

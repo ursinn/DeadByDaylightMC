@@ -17,11 +17,8 @@ public class setUpDefaults {
         main.getArenaEditor().setUpItems();
         main.getArenaEditor().setupShulkerTeams();
 
-
         addDebugValues();
         main.getJoinGameCommand().setUpjoinGameInv();
-
-
     }
 
     private void createDefaultGamemode() {
@@ -31,12 +28,10 @@ public class setUpDefaults {
 
     private void addDebugValues() {
 
-
     }
 
     private void setUpInvIcons() {
         main.getArenaInvManager().prepareIcons();
     }
-
 
 }

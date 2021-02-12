@@ -7,13 +7,11 @@ import noahnok.dbdl.files.player.PlayerStatus;
 
 public class PlayerStateManager {
 
-
     private final DeadByDaylight main;
 
     public PlayerStateManager(DeadByDaylight main) {
         this.main = main;
     }
-
 
     public void survivorHit(DPlayer survivor) {
         if (survivor.getPlayerState().isCrawling()) {
@@ -27,8 +25,6 @@ public class PlayerStateManager {
         } else {
             survivorHitToCrawling(survivor);
         }
-
-
     }
 
     private void survivorHitToInjured(DPlayer survivor) {
@@ -39,17 +35,14 @@ public class PlayerStateManager {
     }
 
     private void survivorHitToCrawling(DPlayer survivor) {
-
         setBleeding(survivor);
         survivor.getPlayerState().setInjured(false);
         survivor.getPlayerState().setCrawling(true);
 
         survivor.getPlayer().setSneaking(true);
 
-
         crawlSpeed(survivor);
     }
-
 
     public void survivorPickedUpByHunter(DPlayer survivor) {
         survivor.getPlayerState().setCrawling(false);
@@ -57,8 +50,6 @@ public class PlayerStateManager {
         survivor.getPlayerState().setCarried(true);
 
         noSpeed(survivor);
-
-
     }
 
     // atWill mean the survivor escaped them selves and wasn't dropped by the killer purposely
@@ -66,7 +57,6 @@ public class PlayerStateManager {
         survivor.getPlayerState().setCarried(false);
         if (atWill) {
             survivorHitToInjured(survivor);
-
         } else {
             survivorHitToCrawling(survivor);
         }

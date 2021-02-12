@@ -8,11 +8,9 @@ import java.util.List;
 
 public class PagedInventory {
 
-
     private final List<Page> pages = new ArrayList<>();
     private final String id;
     private PageItem swapItem;
-
 
     public PagedInventory(String id) {
         this.id = id;
@@ -55,13 +53,10 @@ public class PagedInventory {
         return pages.indexOf(page);
     }
 
-
     public Inventory showPage(int index) {
         Page page = pages.get(index);
 
         return page.getInventory();
-
-
     }
 
     public boolean hasNextPage(Page page) {
@@ -72,10 +67,8 @@ public class PagedInventory {
         return pages.indexOf(page) != 0;
     }
 
-
     public void setSwapItem(PageItem swapItem) {
         this.swapItem = swapItem;
     }
-
 
 }

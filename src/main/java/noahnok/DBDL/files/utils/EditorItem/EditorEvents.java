@@ -44,8 +44,6 @@ public class EditorEvents implements Listener {
                     for (ItemExecutor exe : item.getExecutors()) {
                         exe.execute(e.getPlayer(), e.getBlock().getLocation());
                     }
-
-
                 }
             }
         }
@@ -69,8 +67,6 @@ public class EditorEvents implements Listener {
             main.getArenaEditor().removeShulker(e.getBlock().getLocation(), main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()));
             removeArenaBlock(main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()), e.getBlock().getLocation());
             e.getPlayer().sendMessage("Removed ArenaBlock");
-
-
         }
     }
 

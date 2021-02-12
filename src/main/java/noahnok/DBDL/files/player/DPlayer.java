@@ -73,7 +73,6 @@ public class DPlayer {
         return spectatingRunnable;
     }
 
-
     public PlayerState getPlayerState() {
         return playerState;
     }
@@ -133,8 +132,6 @@ public class DPlayer {
         spectate = player;
         spectatingRunnable.cancel();
         this.spectatingRunnable = new SpectatingRunnable(player.getName(), this).runTaskTimer(main, 0, 80);
-
-
     }
 
     public DPlayer getSpectate() {
@@ -422,7 +419,6 @@ public class DPlayer {
     public void setPlayerEscapes(int playerEscapes) {
         this.playerEscapes = playerEscapes;
     }
-
 
     //Messaging utils for player
 

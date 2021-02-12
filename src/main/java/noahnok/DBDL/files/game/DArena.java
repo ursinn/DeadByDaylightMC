@@ -30,7 +30,6 @@ public class DArena {
 
     public DArena(String arenaID) {
         this.ID = arenaID;
-
     }
 
     public boolean isUsable() {

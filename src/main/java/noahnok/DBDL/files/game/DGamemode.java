@@ -14,7 +14,6 @@ public class DGamemode {
     private int maxchests;
     private int maxhooks;
 
-
     private int gameTime; //In seconds
     private boolean allowPerks;
     private boolean allowItems;
@@ -25,10 +24,9 @@ public class DGamemode {
     private boolean instantSacrifice;
     private boolean useTrapdoor;
 
-    private Set<ItemStack> disallowedItems = new HashSet<ItemStack>();
-    private Set<String> disallowedPerks = new HashSet<String>();
-    private Set<String> disallowedSacrifices = new HashSet<String>();
-
+    private Set<ItemStack> disallowedItems = new HashSet<>();
+    private Set<String> disallowedPerks = new HashSet<>();
+    private Set<String> disallowedSacrifices = new HashSet<>();
 
     public DGamemode(String ID, int hunters, int hunted, int maxgenerators, int maxchests, int maxhooks, int gameTime, boolean allowPerks, boolean allowItems, boolean allowSacrifices, boolean allowBleeding, boolean allowStage3, boolean allowStage2, boolean instantSacrifice, boolean useTrapdoor, Set<ItemStack> disallowedItems, Set<String> disallowedPerks, Set<String> disallowedSacrifices) {
         this.ID = ID;
@@ -67,7 +65,6 @@ public class DGamemode {
         this.allowStage2 = allowStage2;
         this.instantSacrifice = instantSacrifice;
         this.useTrapdoor = useTrapdoor;
-
     }
 
     public DGamemode(String ID) {

@@ -28,9 +28,7 @@ public class DeadByDaylight extends JavaPlugin {
 
     public Scoreboard sbrd;
 
-
     public String prefix = ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8] &7");
-
 
     private DArenaManager arenaManager;
 
@@ -41,7 +39,6 @@ public class DeadByDaylight extends JavaPlugin {
     private ArenaManagmentInvs arenaInvManager;
 
     private setUpDefaults defaults;
-
 
     private ArenaEditor arenaEditor;
 
@@ -63,7 +60,6 @@ public class DeadByDaylight extends JavaPlugin {
 
     private Config messagesConfig;
 
-
     private GenericEvents ge;
 
     private MainEvents me;
@@ -74,20 +70,15 @@ public class DeadByDaylight extends JavaPlugin {
 
     private InventoryEvents ie;
 
-
     private readyConfigs readyConfigs;
 
     private MainCommands mainCommands;
 
-
     private ArenaCommands arenaCommands;
-
 
     private joinGameCommand joinGameCommand;
 
-
     private leaveCommand leaveCommand;
-
 
     private Toggles toggles;
 
@@ -105,10 +96,8 @@ public class DeadByDaylight extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         setAccess();
         saveDefaultConfig();
-
 
         this.getCommand("dbdl").setExecutor(mainCommands);
 
@@ -123,11 +112,9 @@ public class DeadByDaylight extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(me, this);
         this.getServer().getPluginManager().registerEvents(ge, this);
 
-
         readyConfigs.createConfigs();
 
         toggles.setUpToggles();
-
 
         sqlManager.initConnection();
 
@@ -136,33 +123,24 @@ public class DeadByDaylight extends JavaPlugin {
         arenaManager.loadArenasFromFile();
         signManager.loadSignsFromFile();
 
-
         for (Player player : this.getServer().getOnlinePlayers()) {
             dPlayerManager.loadDPlayer(player.getUniqueId());
         }
-
 
         this.getServer().getPluginManager().registerEvents(new PageEvent(), this);
 
 
         noJump = new NoJump(this).runTaskTimer(this, 0, (20 * 8));
-
-
     }
 
     @Override
     public void onDisable() {
-
         noJump.cancel();
-
 
         for (UUID id : arenaEditor.editing.keySet()) {
             arenaEditor.stopEditing(getServer().getPlayer(id));
             getServer().getPlayer(id).sendMessage("You were forcefully removed from editing due to a reload!");
-
-
         }
-
 
         // Take players out of running games!
         for (DGame game : gameManager.getGames()) {
@@ -178,10 +156,7 @@ public class DeadByDaylight extends JavaPlugin {
         signManager.saveSignsToFile();
         dPlayerManager.savePlayerData();
 
-
         sqlManager.closeConnection();
-
-
     }
 
     private void setAccess() {

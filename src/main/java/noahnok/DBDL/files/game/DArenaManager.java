@@ -10,27 +10,21 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-
 public class DArenaManager {
 
-
     private final DeadByDaylight main;
-    private final Set<DArena> arenas = new HashSet<DArena>();
+    private final Set<DArena> arenas = new HashSet<>();
 
     public DArenaManager(DeadByDaylight main) {
         this.main = main;
     }
 
-    public boolean createArena(String ID) {
-
-
-        DArena arena = new DArena(ID);
+    public boolean createArena(String id) {
+        DArena arena = new DArena(id);
 
         arena.getUsableModes().put(main.getGamemodeManager().getMode("default"), false);
         arenas.add(arena);
         return true;
-
-
     }
 
     public Set<DArena> getArenas() {
@@ -58,10 +52,10 @@ public class DArenaManager {
         return tempArenaList.get(ThreadLocalRandom.current().nextInt(tempArenaList.size()));
     }
 
-    public boolean removeArena(String ID) {
+    public boolean removeArena(String id) {
         for (DArena arena : arenas) {
 
-            if (arena.getID().equals(ID)) {
+            if (arena.getID().equals(id)) {
                 arenas.remove(arena);
                 return true;
             }
@@ -91,7 +85,6 @@ public class DArenaManager {
 
         a.getUsableModes().put(gamemode, false);
         return "GAMEMODE_ADDED";
-
     }
 
     public void loadArenasFromFile() {
@@ -118,7 +111,6 @@ public class DArenaManager {
                 }
 
                 gamemodes = null;
-
 
                 Set<Location> gens = valid((Set<Location>) config.get(path + "locations.generators"));
                 Set<Location> hatch = valid((Set<Location>) config.get(path + "locations.hatch"));
@@ -161,7 +153,6 @@ public class DArenaManager {
                 arena.setLobbyLocation(lobby);
                 arena.setExitArea(exitArea);
                 arena.setUsable((Boolean) config.get(path + "enabled"));
-
 
                 arenas.add(arena);
                 setUsableGamemodes(arena);

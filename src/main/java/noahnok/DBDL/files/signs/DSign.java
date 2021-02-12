@@ -5,19 +5,16 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
-
 public class DSign {
     private final Block signBlock;
     private final Sign sign;
     private DGame game = null;
     private SignStatus status;
 
-
     public DSign(Block block) {
         this.signBlock = block;
         this.sign = (Sign) block.getState();
         this.status = SignStatus.IDLE;
-
     }
 
     public void removeGame() {
@@ -61,7 +58,6 @@ public class DSign {
     }
 
     public void update() {
-
         if (status == SignStatus.INUSE) {
             sign.setLine(0, ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8]"));
             sign.setLine(1, game.getStatus().text());
@@ -73,7 +69,6 @@ public class DSign {
             sign.setLine(2, "");
             sign.setLine(3, "");
         }
-
 
         sign.update();
     }

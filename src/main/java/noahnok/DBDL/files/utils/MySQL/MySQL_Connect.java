@@ -18,7 +18,6 @@ public class MySQL_Connect {
     private String host, database, username, password;
     private int port;
 
-
     public MySQL_Connect(DeadByDaylight main) {
         this.main = main;
         debug = new DEBUG(main);
@@ -92,7 +91,6 @@ public class MySQL_Connect {
             main.getToggles().usingSQL = false;
             return false;
         }
-
 
     }
 
@@ -174,7 +172,6 @@ public class MySQL_Connect {
         if (!main.getToggles().usingSQL) {
             return;
         }
-
 
         new BukkitRunnable() {
 
@@ -275,6 +272,5 @@ public class MySQL_Connect {
         }
 
     }
-
 
 }

@@ -7,7 +7,6 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class Countdown {
 
-
     protected DeadByDaylight main;
 
     protected BukkitTask task;
@@ -18,14 +17,12 @@ public class Countdown {
     protected DGame ref;
     boolean contAlert;
 
-
     public Countdown(int timeInSeconds, boolean contAlert, int interval, DGame ref, DeadByDaylight main) {
         this.timeInSeconds = timeInSeconds;
         this.contAlert = contAlert;
         this.interval = interval;
         this.ref = ref;
         this.main = main;
-
     }
 
     public void start() {
@@ -58,16 +55,13 @@ public class Countdown {
             final InGameCountdown iGCD = new InGameCountdown(ref.getGamemode().getGameTime(), true, 30, ref, main);
             ref.setIgCD(iGCD);
 
-
             ref.teleportPlayers();
             ref.disallowAllMove();
-
 
             new BukkitRunnable() {
                 int count = 5;
 
                 public void run() {
-
                     ref.gameStartBleep(count);
                     if (count <= 0) {
                         ref.startGameSound();
@@ -87,12 +81,9 @@ public class Countdown {
                 }
             }.runTaskLater(main, 20 * 5);
 
-
         }
 
         task = null;
-
-
     }
 
     public void cancel() {

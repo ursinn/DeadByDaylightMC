@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 
 public class ArenaCommands implements CommandExecutor {
 
-
     private final DeadByDaylight main;
 
     public ArenaCommands(DeadByDaylight main) {
@@ -19,8 +18,8 @@ public class ArenaCommands implements CommandExecutor {
         if (!(commandSender instanceof Player)) {
             commandSender.sendMessage("Only players can use this command!");
             return true;
-
         }
+
         Player player = (Player) commandSender;
         if (args.length == 0) {
             player.sendMessage("Please use /arena <create/delete/edit/manage/list>");
@@ -40,14 +39,12 @@ public class ArenaCommands implements CommandExecutor {
                 player.sendMessage("An arena with that name already exists!");
             }
             return true;
-
         }
 
         if (args[0].equalsIgnoreCase("list")) {
             player.openInventory(main.getArenaInvManager().showArenaList());
             return true;
         }
-
 
         //Arena Delete command
         if (args[0].equalsIgnoreCase("delete")) {
@@ -61,9 +58,9 @@ public class ArenaCommands implements CommandExecutor {
             } else {
                 player.sendMessage("Failed to find/delete an arena with that name(ID)!");
             }
+
             return true;
         }
-
 
         if (args[0].equalsIgnoreCase("edit")) {
             if (args.length == 1) {

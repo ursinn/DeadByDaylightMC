@@ -10,7 +10,6 @@ import java.util.Set;
 
 public class DGamemodeManager {
 
-
     private final DeadByDaylight main;
     private final Set<DGamemode> gamemodes = new HashSet<DGamemode>();
 
@@ -21,7 +20,6 @@ public class DGamemodeManager {
     public Set<DGamemode> getGamemodes() {
         return this.gamemodes;
     }
-
 
     public DGamemode getMode(String mode) {
         for (DGamemode gmode : gamemodes) {
@@ -52,7 +50,6 @@ public class DGamemodeManager {
         return null;
     }
 
-
     public void loadGamemodesFromFile() {
         int count = 0;
 
@@ -77,7 +74,6 @@ public class DGamemodeManager {
                 instantSacrifice = (Boolean) getItem(path + "allow.instantSacrifice");
                 trapdoor = (Boolean) getItem(path + "allow.trapdoor");
 
-
             } catch (NullPointerException e) {
                 main.getLogger().severe("Hmm... seems the gamemode: " + key + " failed to load! Something wasn't set or is broken! Please check you gamemodes.yml");
                 continue;
@@ -87,7 +83,6 @@ public class DGamemodeManager {
             Set<ItemStack> disItems = (Set<ItemStack>) getItem(path + "disallow.items");
             Set<String> disOfferings = (Set<String>) getItem(path + "disallow.offerings");
 
-
             DGamemode newmode = new DGamemode(key, hunters, hunted, generators, chests, hooks, 3600, perks, items, offerings, bleeding, stage3, stage2, instantSacrifice, trapdoor, disItems, disPerks, disOfferings);
 
             main.getGamemodeManager().addGamemode(newmode);
@@ -95,9 +90,7 @@ public class DGamemodeManager {
             count++;
         }
         main.getLogger().info("Found " + count + " custom gamemode(s)!");
-
     }
-
 
     private Object getItem(String path) {
         return main.getGamemodesConfig().getConfig().get(path);

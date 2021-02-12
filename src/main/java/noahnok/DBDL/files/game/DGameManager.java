@@ -17,12 +17,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-
 public class DGameManager {
 
-
     private final DeadByDaylight main;
-    private final Set<DGame> games = new HashSet<DGame>();
+    private final Set<DGame> games = new HashSet<>();
     private int gamesRun = 0;
 
     public DGameManager(DeadByDaylight main) {
@@ -34,11 +32,8 @@ public class DGameManager {
     }
 
     public DGame getGamePlayerIsIn(Player p) {
-
         for (DGame game : games) {
-
             if (game.getPlayers().contains(main.getdPlayerManager().getPlayer(p.getUniqueId()))) {
-
                 return game;
             }
         }
@@ -80,9 +75,7 @@ public class DGameManager {
         dPlayer.resetPlayerState();
         p.getActivePotionEffects().clear();
 
-
         p.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
-
 
         if (game.totalCurrentPlayers() == 0) {
             if (game.getStatus().equals(STATUS.WAITING) || game.getStatus().equals(STATUS.STARTING)) {
@@ -94,7 +87,6 @@ public class DGameManager {
             }
             destroyGame(game);
         }
-
 
     }
 
@@ -115,9 +107,7 @@ public class DGameManager {
         game.announce("The game has ended!");
         game.setStatus(STATUS.ENDING);
 
-
         game.sendPlayersStats();
-
 
         new BukkitRunnable() {
             public void run() {
@@ -148,12 +138,10 @@ public class DGameManager {
     }
 
     public void canGameEnd(DGame game) {
-
         for (DPlayer player : game.getHunted()) {
             if (player.isHunter()) continue;
             if (!player.isDead()) return;
         }
-
 
         for (DPlayer player : game.getPlayers()) {
             Player actual = player.getPlayer();
@@ -164,7 +152,6 @@ public class DGameManager {
             actual.setFoodLevel(20);
             actual.setFlying(true);
             main.getPlayerStateManager().survivorHealed(player, true);
-
         }
 
         endGame(game);
@@ -175,19 +162,16 @@ public class DGameManager {
         if (arena == null) {
             return null;
         }
+
         arena.setInUse(true);
         DGamemode mode = main.getGamemodeManager().getMode("default");
         DGame game = new DGame(arena, mode, STATUS.WAITING, main);
 
-
         return game;
-
     }
 
 
     private Location getRandomLocation(Set<Location> locations) {
-
-
         if (locations.size() == 1) {
             return locations.iterator().next();
         }
@@ -195,7 +179,6 @@ public class DGameManager {
         int i = 0;
         for (Location loc : locations) {
             if (i == rand) {
-
                 return loc;
             }
             i++;
@@ -204,8 +187,7 @@ public class DGameManager {
     }
 
     private void spawnGenerators(DGame game, Set<Location> locs, DGamemode mode) {
-
-        Set<Location> temp = new HashSet<Location>();
+        Set<Location> temp = new HashSet<>();
         temp.addAll(locs);
         for (int i = 0; i < mode.getMaxgenerators(); i++) {
             Location loc = getRandomLocation(temp);
@@ -215,8 +197,6 @@ public class DGameManager {
             gen.spawn();
         }
         temp.clear();
-
-
     }
 
     private void spawnExitGates(DGame game) {
@@ -252,7 +232,6 @@ public class DGameManager {
 
 
     public void prepareMatchBlocks(DGame game) {
-
         DArena arena = game.getArena();
         spawnGenerators(game, arena.getPossibleGeneratorLocations(), game.getGamemode());
         spawnExitGates(game);
@@ -279,7 +258,6 @@ public class DGameManager {
             }
         }
         game.getExitGates().clear();
-
     }
 
 }

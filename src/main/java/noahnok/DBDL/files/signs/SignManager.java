@@ -11,11 +11,9 @@ import java.util.List;
 
 public class SignManager {
 
-
     private final DeadByDaylight main;
 
-
-    private List<DSign> signs = new ArrayList<DSign>();
+    private List<DSign> signs = new ArrayList<>();
 
     public SignManager(DeadByDaylight main) {
         this.main = main;
@@ -36,24 +34,18 @@ public class SignManager {
             main.getSignConfig().getConfig().set(path + "loc", sign.getSignBlock().getLocation());
             count++;
         }
-
-
         main.getSignConfig().saveConfig();
     }
 
     public void loadSignsFromFile() {
         try {
-
-
             for (String key : main.getSignConfig().getConfig().getConfigurationSection("signs").getKeys(false)) {
                 String path = "signs." + key + ".loc";
                 Location loc = (Location) main.getSignConfig().getConfig().get(path);
 
                 DSign newSign = new DSign(loc.getBlock());
                 signs.add(newSign);
-
             }
-
         } catch (NullPointerException e) {
             main.getLogger().warning("No signs were found!");
         }

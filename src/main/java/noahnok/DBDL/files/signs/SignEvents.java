@@ -39,8 +39,6 @@ public class SignEvents implements Listener {
                 main.getSignManager().getSigns().add(sign);
 
                 sign.firstPlace();
-
-
             }
         }
     }
@@ -51,12 +49,10 @@ public class SignEvents implements Listener {
             if (((Sign) e.getBlock().getState()).getLine(0).equals(signLine)) {
                 if (e.getPlayer().hasPermission("dbdl.sign.break")) {
 
-
                 } else {
                     e.getPlayer().sendMessage("You cannot break this sign!");
                     e.setCancelled(true);
                 }
-
             }
         }
     }
@@ -112,6 +108,5 @@ public class SignEvents implements Listener {
         newInv.setIcon(15, hunter);
 
         return newInv.getInventory();
-
     }
 }

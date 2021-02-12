@@ -9,7 +9,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-
 public class GenericEvents implements Listener {
 
     private final DeadByDaylight main;
@@ -27,7 +26,6 @@ public class GenericEvents implements Listener {
     public void onLeave(PlayerQuitEvent e) {
         main.getdPlayerManager().savePlayer(e.getPlayer().getUniqueId());
     }
-
 
     // Not cancelling. Just clearing recipients so it doesn't cause problems with other plugins.
     @EventHandler

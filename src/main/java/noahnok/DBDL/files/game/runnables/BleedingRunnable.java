@@ -47,7 +47,5 @@ public class BleedingRunnable extends BukkitRunnable {
                 }
             }
         }.runTaskTimer(main, 0, 4);
-
-
     }
 }

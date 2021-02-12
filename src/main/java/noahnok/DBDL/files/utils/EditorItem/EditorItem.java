@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditorItem extends ItemStack {
-    public final List<ItemExecutor> executors = new ArrayList<ItemExecutor>();
-    public final List<ItemDeExecutor> deExecutors = new ArrayList<ItemDeExecutor>();
+
+    public final List<ItemExecutor> executors = new ArrayList<>();
+    public final List<ItemDeExecutor> deExecutors = new ArrayList<>();
     public ItemStack item;
 
     public EditorItem(ItemStack i, String name) {
@@ -17,7 +18,7 @@ public class EditorItem extends ItemStack {
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
         List<String> lore = meta.getLore();
         if (lore == null) {
-            lore = new ArrayList<String>();
+            lore = new ArrayList<>();
         }
         lore.add(ChatColor.COLOR_CHAR + "§D§B§D§L§-§E§D§I§T§-§I§T§E§M");
         meta.setLore(lore);

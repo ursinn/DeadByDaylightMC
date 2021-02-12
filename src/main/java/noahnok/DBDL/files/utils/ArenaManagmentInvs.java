@@ -16,7 +16,6 @@ public class ArenaManagmentInvs {
     private final Builders itemBuilder = new Builders();
     Icon listArenas, closeMenu, backMenu, deleteItem, cancelAction, gamemodes, generators, hooks, stats, edit;
 
-
     public ArenaManagmentInvs(DeadByDaylight main) {
         this.main = main;
     }
@@ -37,7 +36,6 @@ public class ArenaManagmentInvs {
             );
             arenaList.setIcon(i, icon);
             i++;
-
         }
         return arenaList.getInventory();
     }
@@ -75,7 +73,6 @@ public class ArenaManagmentInvs {
         arenaInv.setIcon(6, e);
 
         return arenaInv.getInventory();
-
     }
 
     private String color(int object, int value) {
@@ -180,7 +177,6 @@ public class ArenaManagmentInvs {
     }
 
     public void prepareIcons() {
-
         listArenas = invBuilder.createIcon(itemBuilder.getNewBuilder(Material.MAP).build(), "&6Arena List").addClickAction(
                 p -> p.performCommand("arena list")
         );

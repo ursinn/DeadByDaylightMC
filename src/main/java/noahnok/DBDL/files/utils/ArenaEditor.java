@@ -19,9 +19,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
-
 public class ArenaEditor {
-
 
     private final DeadByDaylight main;
     private final Map<UUID, ItemStack[]> pInv = new HashMap<UUID, ItemStack[]>();
@@ -56,8 +54,6 @@ public class ArenaEditor {
     }
 
     public void removeShulker(Location loc, DArena a) {
-
-
         Collection<Entity> entities = loc.clone().add(0.5, 0, 0.5).getWorld().getNearbyEntities(loc, 1, 1, 1);
         Shulker shulker = null;
         for (Entity entity : entities) {
@@ -82,7 +78,6 @@ public class ArenaEditor {
         if (a == null) {
             p.sendMessage("Not a valid arena!");
             return;
-
         }
 
         if (!editing.containsKey(p.getUniqueId())) {
@@ -139,13 +134,9 @@ public class ArenaEditor {
         p.getInventory().setArmorContents(pArmour.get(p.getUniqueId()));
         pInv.remove(p.getUniqueId());
         pArmour.remove(p.getUniqueId());
-
-
     }
 
     private void hideArenaBlocks(final DArena a) {
-
-
         for (Location loc : a.getPossibleGeneratorLocations()) {
             removeShulker(loc, a);
         }
@@ -187,7 +178,6 @@ public class ArenaEditor {
         for (Location loc : a.getTrapLocations()) {
             removeShulker(loc, a);
         }
-
 
         for (World world : main.getServer().getWorlds()) {
             for (Entity entity : world.getEntitiesByClass(Shulker.class)) {
@@ -242,7 +232,6 @@ public class ArenaEditor {
         for (Location loc : a.getTrapLocations()) {
             addShulker(loc, "PINK", Material.PISTON_BASE, a);
         }
-
 
     }
 

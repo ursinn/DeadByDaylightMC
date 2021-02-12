@@ -15,9 +15,7 @@ public class joinGameCommand implements CommandExecutor {
 
     private final DeadByDaylight main;
 
-
     private final InventoryBuilder inventoryBuilder = new InventoryBuilder();
-
 
     private final Builders itemBuilder = new Builders();
     private CustomHolder joinGameInv;
@@ -30,8 +28,8 @@ public class joinGameCommand implements CommandExecutor {
         if (!(commandSender instanceof Player)) {
             commandSender.sendMessage(main.prefix + "Only players can use this command!");
             return true;
-
         }
+
         Player player = (Player) commandSender;
         if (args.length == 0) {
             if (main.getGameManager().getGamePlayerIsIn(player) != null) {
@@ -44,9 +42,7 @@ public class joinGameCommand implements CommandExecutor {
 
         if (args.length == 1) {
             return true;
-
         }
-
 
         return true;
     }
@@ -63,7 +59,6 @@ public class joinGameCommand implements CommandExecutor {
             if (!main.getMatchMaking().addToMatchmaking(p, "HUNTED")) {
                 main.getMatchMaking().addPlayerToMatchMakingLoop(p, "HUNTED");
             }
-
         });
 
         hunter.addClickAction(p -> {
@@ -71,13 +66,10 @@ public class joinGameCommand implements CommandExecutor {
             if (!main.getMatchMaking().addToMatchmaking(p, "HUNTER")) {
                 main.getMatchMaking().addPlayerToMatchMakingLoop(p, "HUNTER");
             }
-
         });
 
         joinGameInv.setIcon(11, hunted);
         joinGameInv.setIcon(15, hunter);
-
     }
-
 
 }

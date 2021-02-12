@@ -6,7 +6,6 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class InGameCountdown {
 
-
     protected DeadByDaylight main;
 
     protected BukkitTask task;
@@ -17,14 +16,12 @@ public class InGameCountdown {
     protected DGame ref;
     boolean contAlert;
 
-
     public InGameCountdown(int timeInSeconds, boolean contAlert, int interval, DGame ref, DeadByDaylight main) {
         this.timeInSeconds = timeInSeconds;
         this.contAlert = contAlert;
         this.interval = interval;
         this.ref = ref;
         this.main = main;
-
     }
 
     public void start() {
@@ -51,14 +48,11 @@ public class InGameCountdown {
     }
 
     public void endCountdown() {
-
         task.cancel();
 
         main.getGameManager().endGame(ref);
         ref = null;
         task = null;
-
-
     }
 
     private String getTimeAsString(int time) {

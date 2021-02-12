@@ -26,7 +26,6 @@ public class MatchMaking {
         waitingGames.remove(game);
     }
 
-
     //Determine here if the player needs to wait for a game or can join to a current one.
     public boolean addToMatchmaking(Player p, String playType) {
 

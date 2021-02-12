@@ -33,8 +33,6 @@ public class leaveCommand implements CommandExecutor {
             }
             player.sendMessage(main.prefix + "You aren't in a game or queue!");
             return true;
-
-
         } else {
             commandSender.sendMessage(main.prefix + "This command can only be executed by a player!");
             return true;

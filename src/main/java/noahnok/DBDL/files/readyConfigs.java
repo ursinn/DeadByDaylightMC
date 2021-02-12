@@ -4,7 +4,6 @@ import noahnok.dbdl.files.utils.Config;
 
 public class readyConfigs {
 
-
     private final DeadByDaylight main;
 
     public readyConfigs(DeadByDaylight main) {

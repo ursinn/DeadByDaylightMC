@@ -21,7 +21,6 @@ public class ExitGate {
         this.facing = facing;
         this.center = center;
         this.main = main;
-
     }
 
     public DLever getLever1() {
@@ -63,8 +62,6 @@ public class ExitGate {
 
             }
         }.runTaskLater(main, 90);
-
-
     }
 
     private List<List<Location>> getRows() {

@@ -20,7 +20,6 @@ public class DLever {
     private int percentDone = 0;
     private boolean finished = false;
 
-
     public DLever(Location loc, DGame game, ExitGate gate) {
         this.game = game;
         this.loc = loc;
@@ -43,8 +42,6 @@ public class DLever {
         }
 
         blockState.update();
-
-
     }
 
     public boolean isFinished() {
@@ -76,9 +73,7 @@ public class DLever {
             return;
         }
         p.addToScore((int) (10 * game.getMultiplier()));
-
     }
-
 
     public int getPercentDone() {
         return percentDone;

@@ -18,12 +18,11 @@ import java.util.stream.Collectors;
 
 public class DGame {
 
-
     private final String id;
     private final Set<DPlayer> players = new HashSet<>();
-    private final Map<UUID, Boolean> allowMove = new HashMap<UUID, Boolean>();
-    private final List<Generator> generators = new ArrayList<Generator>();
-    private final List<ExitGate> exitGates = new ArrayList<ExitGate>();
+    private final Map<UUID, Boolean> allowMove = new HashMap<>();
+    private final List<Generator> generators = new ArrayList<>();
+    private final List<ExitGate> exitGates = new ArrayList<>();
     private DeadByDaylight main;
     private DArena arena;
     private DGamemode gamemode;
@@ -44,7 +43,6 @@ public class DGame {
         this.status = status;
         this.main = main;
         this.id = main.getGameManager().generateGameID(this);
-
     }
 
     public List<ExitGate> getExitGates() {
@@ -222,7 +220,6 @@ public class DGame {
         }
 
         players.clear();
-
     }
 
     public boolean isHunter(UUID id) {
@@ -356,26 +353,18 @@ public class DGame {
                 case NONE:
                     message = "You have displeased the " + ChatColor.BLACK + "Entity";
                     break;
-
-
             }
-
 
             Player player = dplayer.getPlayer();
 
             player.sendMessage(main.prefix + message);
-
 
             player.sendMessage(ChatColor.GRAY + "You have recieved " + ChatColor.DARK_RED + dplayer.getGameScore() + " Bloodpoints");
             dplayer.setBloodPoints(dplayer.getBloodPoints() + dplayer.getGameScore());
             dplayer.addToStaticScore(dplayer.getGameScore());
             main.getSqlManager().uploadUserStats(dplayer);
             dplayer.clearGameScore();
-
-
         }
-
-
     }
 
     public void countDownBleep(int timeLeft) {

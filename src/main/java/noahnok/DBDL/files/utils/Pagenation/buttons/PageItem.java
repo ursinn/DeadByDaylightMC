@@ -16,7 +16,6 @@ public class PageItem {
     protected ItemStack item;
     protected ItemMeta meta;
 
-
     public PageItem() {
         this.item = new ItemStack(Material.BARRIER, 1);
         this.meta = this.item.getItemMeta();
@@ -93,7 +92,6 @@ public class PageItem {
         return new PageItem(this.item);
 
     }
-
 
     public Collection<GeneralClick> getClickActions() {
         return clickActions;

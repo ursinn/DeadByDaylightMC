@@ -12,9 +12,7 @@ import java.io.IOException;
 
 public class Config {
 
-
     private final DeadByDaylight plugin;
-
 
     private final File config;
     private final FileConfiguration configConf;
@@ -22,7 +20,6 @@ public class Config {
 
     public Config(String name, DeadByDaylight main) {
         this.plugin = main;
-
 
         config = new File(plugin.getDataFolder(), name + ".yml");
 
@@ -40,9 +37,7 @@ public class Config {
             e.printStackTrace();
         }
         this.name = name;
-
     }
-
 
     public FileConfiguration getConfig() {
         return configConf;
@@ -62,7 +57,6 @@ public class Config {
             plugin.saveResource(name + ".yml", false);
         }
         try {
-
             configConf.load(config);
         } catch (InvalidConfigurationException e) {
             e.printStackTrace();

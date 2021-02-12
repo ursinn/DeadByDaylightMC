@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class InventoryEvents implements Listener {
 
-
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         //Check if the inventory is custom

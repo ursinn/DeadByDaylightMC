@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class CustomHolder implements InventoryHolder {
 
-    private final Map<Integer, Icon> icons = new HashMap<Integer, Icon>();
+    private final Map<Integer, Icon> icons = new HashMap<>();
 
     private final int size;
     private final String title;
@@ -27,7 +27,6 @@ public class CustomHolder implements InventoryHolder {
         return this.icons.get(position);
     }
 
-
     public Inventory getInventory() {
         Inventory inventory = Bukkit.createInventory(this, this.size, this.title);
 
@@ -38,7 +37,6 @@ public class CustomHolder implements InventoryHolder {
 
         return inventory;
     }
-
 
 }
 

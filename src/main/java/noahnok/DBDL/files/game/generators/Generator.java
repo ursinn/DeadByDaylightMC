@@ -30,7 +30,6 @@ public class Generator {
 
     public void spawn() {
         loc.getBlock().setType(Material.FURNACE);
-
     }
 
     public void increment(DPlayer p) {
@@ -58,10 +57,8 @@ public class Generator {
         fw.setCustomName("DBDL-FIREWORK");
         fw.setCustomNameVisible(false);
 
-
         fw.setFireworkMeta(fwm);
         fw.detonate();
-
 
         new BukkitRunnable() {
             int i = 3;
@@ -102,7 +99,6 @@ public class Generator {
     public void despawn() {
         loc.getBlock().setType(Material.AIR);
     }
-
 
     public Block getBlock() {
         return loc.getBlock();

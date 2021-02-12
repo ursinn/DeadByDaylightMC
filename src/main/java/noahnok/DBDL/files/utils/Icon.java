@@ -10,7 +10,7 @@ import java.util.List;
 public class Icon extends ItemStack {
     public final ItemStack itemStack;
 
-    public final List<ClickAction> clickActions = new ArrayList<ClickAction>();
+    public final List<ClickAction> clickActions = new ArrayList<>();
 
     public Icon(ItemStack itemStack, String name) {
         ItemMeta meta = itemStack.getItemMeta();

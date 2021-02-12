@@ -9,11 +9,9 @@ import java.util.UUID;
 
 public class SkullItem extends PageItem {
 
-
     public SkullItem() {
         super.setMaterial(Material.SKULL_ITEM);
     }
-
 
     public SkullItem setSkull(UUID id) {
         ItemStack item = super.getItem();

@@ -11,10 +11,8 @@ public class NoJump extends BukkitRunnable {
 
     private final DeadByDaylight main;
 
-
     public NoJump(DeadByDaylight main) {
         this.main = main;
-
     }
 
     @Override

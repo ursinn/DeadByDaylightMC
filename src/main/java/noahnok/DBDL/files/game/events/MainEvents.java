@@ -26,7 +26,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
-
 public class MainEvents implements Listener {
 
     private final DeadByDaylight main;
@@ -63,8 +62,6 @@ public class MainEvents implements Listener {
 
 
                         if (game.getStatus() == STATUS.INGAME) dPlayer.startSpectating(game);
-
-
                     }
                 }
 
@@ -98,7 +95,6 @@ public class MainEvents implements Listener {
                     }
                 }
 
-
                 //Lever operation
                 if (e.getClickedBlock().getType().equals(Material.LEVER) && game.isCanOpenGates()) {
                     if (player.getStatus().equals(PlayerStatus.HUNTER)) {
@@ -112,7 +108,6 @@ public class MainEvents implements Listener {
                             e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', "&7Lever is at: &6" + lever.getPercentDone() + "%")));
                         }
                     }
-
 
                 }
             }
@@ -132,11 +127,9 @@ public class MainEvents implements Listener {
         }
     }
 
-
     private void handlePlayerSneak(DPlayer dplayer) {
 
     }
-
 
     @EventHandler
     public void sneakMenu(PlayerToggleSneakEvent e) {
@@ -188,7 +181,6 @@ public class MainEvents implements Listener {
             }
         }
     }
-
 
     //Put dead players into spectator
     @EventHandler
@@ -277,7 +269,6 @@ public class MainEvents implements Listener {
             }
         }
     }
-
 
     //Handle players leaving (disconnecting) during an active game
     @EventHandler

@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 
 public class StatsCommand implements CommandExecutor {
 
-
     private final DeadByDaylight main;
 
     public StatsCommand(DeadByDaylight main) {
@@ -26,9 +25,7 @@ public class StatsCommand implements CommandExecutor {
             return true;
         }
         return true;
-
     }
-
 
     private void showPlayerStats(Player player) {
         DPlayer dplayer = main.getdPlayerManager().getPlayer(player.getUniqueId());
@@ -39,11 +36,9 @@ public class StatsCommand implements CommandExecutor {
         PageItem losses = new PageItem().setMaterial(Material.COAL).setDisplayName("&0&lLosses (Hunter):").addLore("&0" + dplayer.getLosses());
         PageItem generators = new PageItem().setMaterial(Material.FURNACE).setDisplayName("&8&lGenerators").addLore("&7Fixed: " + dplayer.getGeneratorsFixed()).addLore("&7Blown: " + dplayer.getGeneratorsMessedup());
 
-
         statsPage.addPageItem(wins, 11);
         statsPage.addPageItem(losses, 12);
         statsPage.addPageItem(generators, 13);
-
 
         player.openInventory(statsPage.getInventory());
     }
