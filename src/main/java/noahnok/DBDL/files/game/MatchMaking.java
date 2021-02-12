@@ -11,12 +11,11 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
-
 public class MatchMaking {
 
     private final DeadByDaylight main;
-    private final List<DGame> waitingGames = new ArrayList<DGame>();
-    public Map<UUID, BukkitTask> matchMakingLoop = new HashMap<UUID, BukkitTask>();
+    private final List<DGame> waitingGames = new ArrayList<>();
+    public Map<UUID, BukkitTask> matchMakingLoop = new HashMap<>();
 
     public MatchMaking(DeadByDaylight main) {
         this.main = main;
@@ -28,7 +27,6 @@ public class MatchMaking {
 
     //Determine here if the player needs to wait for a game or can join to a current one.
     public boolean addToMatchmaking(Player p, String playType) {
-
         //Check if there are any available games
         if (waitingGames.isEmpty()) {
             //Try and create a new game
@@ -51,25 +49,19 @@ public class MatchMaking {
 
             //A game was found
             for (DGame game : waitingGames) {
-
                 //Check playtype //TODO swap out set values for gamemode value
                 if (playType.equalsIgnoreCase("HUNTER")) {
                     if (game.getHunters().size() < 1) {
-
-
                         main.getGameManager().joinPlayerToGame(p, game, playType);
                         return true;
-                    } else {
-                        continue;
                     }
-                } else {
-                    if (game.getHunted().size() < 4) {
 
-                        main.getGameManager().joinPlayerToGame(p, game, playType);
-                        return true;
-                    } else {
-                        continue;
-                    }
+                    continue;
+                }
+
+                if (game.getHunted().size() < 4) {
+                    main.getGameManager().joinPlayerToGame(p, game, playType);
+                    return true;
                 }
             }
 
@@ -147,7 +139,6 @@ public class MatchMaking {
     public void removePlayerFromMatchMakingLoop(Player p) {
         matchMakingLoop.get(p.getUniqueId()).cancel();
         matchMakingLoop.remove(p.getUniqueId());
-
     }
 
     public void removeGameFromMatchmaking(DGame game) {

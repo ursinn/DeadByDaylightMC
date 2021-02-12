@@ -6,7 +6,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class InventoryBuilder {
 
-
     public CustomHolder createNew(String name, int size) {
         return new CustomHolder(size, name);
     }

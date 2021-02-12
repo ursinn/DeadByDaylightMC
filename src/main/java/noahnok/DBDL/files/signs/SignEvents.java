@@ -76,23 +76,19 @@ public class SignEvents implements Listener {
             }
         }
 
-
     }
 
     private Inventory joinGameInvFromSign(final DGame game) {
-
         CustomHolder newInv = new CustomHolder(27, "Join game: " + game.getArena().getID());
 
         Icon hunted = new Icon(new ItemStack(Material.BONE_BLOCK, 1), "Play as a survivor!");
 
         Icon hunter = new Icon(new ItemStack(Material.COAL_BLOCK, 1), "Play as a hunter!");
 
-
         hunted.addClickAction(new ClickAction() {
             public void execute(Player p) {
                 p.closeInventory();
                 main.getGameManager().joinPlayerToGame(p, game, "HUNTED");
-
             }
         });
 
@@ -100,7 +96,6 @@ public class SignEvents implements Listener {
             public void execute(Player p) {
                 p.closeInventory();
                 main.getGameManager().joinPlayerToGame(p, game, "HUNTER");
-
             }
         });
 

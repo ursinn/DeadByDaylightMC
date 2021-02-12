@@ -11,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 
 
 public class ArenaManagmentInvs {
+
     private final DeadByDaylight main;
     private final InventoryBuilder invBuilder = new InventoryBuilder();
     private final Builders itemBuilder = new Builders();

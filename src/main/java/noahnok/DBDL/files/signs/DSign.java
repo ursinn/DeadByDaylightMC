@@ -6,6 +6,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
 public class DSign {
+
     private final Block signBlock;
     private final Sign sign;
     private DGame game = null;
@@ -63,7 +64,9 @@ public class DSign {
             sign.setLine(1, game.getStatus().text());
             sign.setLine(2, game.getArena().getID());
             sign.setLine(3, game.totalCurrentPlayers() + "/" + game.totalPossiblePlayers() + "");
-        } else if (status == SignStatus.IDLE) {
+        }
+
+        if (status == SignStatus.IDLE) {
             sign.setLine(0, ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8]"));
             sign.setLine(1, ChatColor.RED + "Searching");
             sign.setLine(2, "");

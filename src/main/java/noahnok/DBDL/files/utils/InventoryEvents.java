@@ -22,14 +22,18 @@ public class InventoryEvents implements Listener {
 
                 //Check if the item the player clicked on is valid
                 ItemStack itemStack = event.getCurrentItem();
-                if (itemStack == null || itemStack.getType() == Material.AIR) return;
+                if (itemStack == null || itemStack.getType() == Material.AIR) {
+                    return;
+                }
 
                 //Get our CustomHolder
                 CustomHolder customHolder = (CustomHolder) event.getView().getTopInventory().getHolder();
 
                 //Check if the clicked slot is any icon
                 Icon icon = customHolder.getIcon(event.getRawSlot());
-                if (icon == null) return;
+                if (icon == null) {
+                    return;
+                }
 
                 //Execute all the actions
                 for (ClickAction clickAction : icon.getClickActions()) {

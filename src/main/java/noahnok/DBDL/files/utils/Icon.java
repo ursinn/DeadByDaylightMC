@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Icon extends ItemStack {
+
     public final ItemStack itemStack;
 
     public final List<ClickAction> clickActions = new ArrayList<>();

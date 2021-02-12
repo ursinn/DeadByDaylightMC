@@ -1,6 +1,5 @@
 package noahnok.dbdl.files;
 
-
 import noahnok.dbdl.files.commands.*;
 import noahnok.dbdl.files.game.*;
 import noahnok.dbdl.files.game.events.MainEvents;
@@ -23,7 +22,6 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.UUID;
 
-
 public class DeadByDaylight extends JavaPlugin {
 
     public Scoreboard sbrd;
@@ -38,7 +36,7 @@ public class DeadByDaylight extends JavaPlugin {
 
     private ArenaManagmentInvs arenaInvManager;
 
-    private setUpDefaults defaults;
+    private SetUpDefaults defaults;
 
     private ArenaEditor arenaEditor;
 
@@ -70,7 +68,7 @@ public class DeadByDaylight extends JavaPlugin {
 
     private InventoryEvents ie;
 
-    private readyConfigs readyConfigs;
+    private ReadyConfigs readyConfigs;
 
     private MainCommands mainCommands;
 
@@ -129,7 +127,6 @@ public class DeadByDaylight extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new PageEvent(), this);
 
-
         noJump = new NoJump(this).runTaskTimer(this, 0, (20 * 8));
     }
 
@@ -164,7 +161,7 @@ public class DeadByDaylight extends JavaPlugin {
         gameManager = new DGameManager(this);
         gamemodeManager = new DGamemodeManager(this);
         arenaInvManager = new ArenaManagmentInvs(this);
-        defaults = new setUpDefaults(this);
+        defaults = new SetUpDefaults(this);
         arenaEditor = new ArenaEditor(this);
         matchMaking = new MatchMaking(this);
         signManager = new SignManager(this);
@@ -175,7 +172,7 @@ public class DeadByDaylight extends JavaPlugin {
         se = new SignEvents(this);
         ee = new EditorEvents(this);
         ie = new InventoryEvents();
-        readyConfigs = new readyConfigs(this);
+        readyConfigs = new ReadyConfigs(this);
         mainCommands = new MainCommands(this);
         arenaCommands = new ArenaCommands(this);
         joinGameCommand = new joinGameCommand(this);
@@ -202,7 +199,7 @@ public class DeadByDaylight extends JavaPlugin {
         return arenaInvManager;
     }
 
-    public setUpDefaults getDefaults() {
+    public SetUpDefaults getDefaults() {
         return defaults;
     }
 

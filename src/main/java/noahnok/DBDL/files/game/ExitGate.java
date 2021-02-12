@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExitGate {
+
     private final DeadByDaylight main;
     private final String facing;
     private final Location center;

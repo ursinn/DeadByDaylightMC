@@ -14,13 +14,14 @@ public class Toggles {
     }
 
     public void setUpToggles() {
-        if (main.getConfig().getString("storageMethod") != null && main.getConfig().getString("storageMethod").equalsIgnoreCase("mysql")) {
+        if (main.getConfig().getString("storageMethod") != null &&
+                main.getConfig().getString("storageMethod").equalsIgnoreCase("mysql")) {
             usingSQL = true;
             debug.info("Using MySQL for player storage!");
-
-        } else {
-            usingSQL = false;
-            debug.debug("The storage method set in the config was invalid, using FlatFile (.yml) instead!");
+            return;
         }
+
+        usingSQL = false;
+        debug.debug("The storage method set in the config was invalid, using FlatFile (.yml) instead!");
     }
 }

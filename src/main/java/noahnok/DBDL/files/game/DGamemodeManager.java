@@ -7,7 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashSet;
 import java.util.Set;
 
-
 public class DGamemodeManager {
 
     private final DeadByDaylight main;

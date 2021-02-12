@@ -2,11 +2,11 @@ package noahnok.dbdl.files.game;
 
 import noahnok.dbdl.files.DeadByDaylight;
 
-public class setUpDefaults {
+public class SetUpDefaults {
 
     private final DeadByDaylight main;
 
-    public setUpDefaults(DeadByDaylight main) {
+    public SetUpDefaults(DeadByDaylight main) {
         this.main = main;
     }
 
@@ -22,7 +22,8 @@ public class setUpDefaults {
     }
 
     private void createDefaultGamemode() {
-        DGamemode def = new DGamemode("default", 1, 4, 10, 10, 10, 600, true, true, true, true, true, false, false, true);
+        DGamemode def =
+                new DGamemode("default", 1, 4, 10, 10, 10, 600, true, true, true, true, true, false, false, true);
         main.getGamemodeManager().addGamemode(def);
     }
 
