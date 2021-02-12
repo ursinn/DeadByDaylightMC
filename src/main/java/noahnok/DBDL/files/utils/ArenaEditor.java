@@ -6,7 +6,6 @@ import noahnok.dbdl.files.DeadByDaylight;
 import noahnok.dbdl.files.game.DArena;
 import noahnok.dbdl.files.game.ExitGate;
 import noahnok.dbdl.files.utils.EditorItem.EditorItem;
-import noahnok.dbdl.files.utils.EditorItem.ItemExecutor;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -22,33 +21,42 @@ import java.util.*;
 public class ArenaEditor {
 
     private final DeadByDaylight main;
-    private final Map<UUID, ItemStack[]> pInv = new HashMap<UUID, ItemStack[]>();
-    private final Map<UUID, ItemStack[]> pArmour = new HashMap<UUID, ItemStack[]>();
-    private final Map<UUID, BukkitTask> tasks = new HashMap<UUID, BukkitTask>();
-    private final Set<Shulker> shulkers = new HashSet<Shulker>();
-    public Map<UUID, DArena> editing = new HashMap<UUID, DArena>();
-    public List<EditorItem> editorItems = new ArrayList<EditorItem>();
-    private EditorItem generator, hook, chest, cabinet, hunter, hunted, exit, trap, hatch, exitArea;
+    private final Map<UUID, ItemStack[]> pInv = new HashMap<>();
+    private final Map<UUID, ItemStack[]> pArmour = new HashMap<>();
+    private final Map<UUID, BukkitTask> tasks = new HashMap<>();
+    private final Set<Shulker> shulkers = new HashSet<>();
+    public Map<UUID, DArena> editing = new HashMap<>();
+    public List<EditorItem> editorItems = new ArrayList<>();
+    private EditorItem generator;
+    private EditorItem hook;
+    private EditorItem chest;
+    private EditorItem cabinet;
+    private EditorItem hunter;
+    private EditorItem hunted;
+    private EditorItem exit;
+    private EditorItem trap;
+    private EditorItem hatch;
+    private EditorItem exitArea;
 
     public ArenaEditor(DeadByDaylight main) {
         this.main = main;
     }
 
-    public void addShulker(Location loc, String COLOR, Material m, DArena a) {
+    public void addShulker(Location loc, String color, Material m, DArena a) {
         Shulker shulker = loc.getWorld().spawn(loc, Shulker.class);
         shulker.setAI(false);
         shulker.setCollidable(false);
         shulker.setCustomName("DBDL-SHULKER-" + a.getID());
         shulker.setCustomNameVisible(false);
         shulker.setGravity(false);
-        assignTeam(shulker, COLOR);
+        assignTeam(shulker, color);
         shulker.setGlowing(true);
         shulker.setInvulnerable(true);
         shulker.setSilent(true);
         shulker.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1));
         shulkers.add(shulker);
         loc.getBlock().setType(m);
-        if (COLOR == "BLACK") {
+        if (color == "BLACK") {
             loc.getBlock().setData((byte) 15);
         }
     }
@@ -57,12 +65,15 @@ public class ArenaEditor {
         Collection<Entity> entities = loc.clone().add(0.5, 0, 0.5).getWorld().getNearbyEntities(loc, 1, 1, 1);
         Shulker shulker = null;
         for (Entity entity : entities) {
-            if (entity.getCustomName() != null && entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-" + a.getID())) {
+            if (entity.getCustomName() != null &&
+                    entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-" + a.getID())) {
                 shulker = (Shulker) entity;
                 break;
             }
         }
-        if (shulker == null) return;
+        if (shulker == null) {
+            return;
+        }
 
         unassignTeam(shulker);
         main.getServer().getEntity(shulker.getUniqueId()).remove();
@@ -85,7 +96,8 @@ public class ArenaEditor {
                 if (ar.getID().equals(arena)) {
                     for (UUID key : editing.keySet()) {
                         if (editing.containsKey(key)) {
-                            p.sendMessage(main.getServer().getPlayer(key).getName() + " is currently editing this arena!");
+                            p.sendMessage(main.getServer().getPlayer(key).getName() +
+                                    " is currently editing this arena!");
                             return;
                         }
                     }
@@ -116,7 +128,8 @@ public class ArenaEditor {
         final String msg = "&7You are editing arena: &8" + arena.getID();
         BukkitTask run = new BukkitRunnable() {
             public void run() {
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', msg)));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', msg)));
             }
         }.runTaskTimer(main, 0, 80);
         tasks.put(p.getUniqueId(), run);
@@ -236,120 +249,109 @@ public class ArenaEditor {
     }
 
     public void setUpItems() {
-        generator = new EditorItem(new ItemStack(Material.FURNACE, 1), "&bGenerator").addExecutor(new ItemExecutor() {
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("Generator placed!");
-                editing.get(p.getUniqueId()).getPossibleGeneratorLocations().add(bloc);
-                addShulker(bloc, "BLUE", Material.FURNACE, editing.get(p.getUniqueId()));
-            }
-        });
+        generator = new EditorItem(new ItemStack(Material.FURNACE, 1), "&bGenerator")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("Generator placed!");
+                    editing.get(p.getUniqueId()).getPossibleGeneratorLocations().add(bloc);
+                    addShulker(bloc, "BLUE", Material.FURNACE, editing.get(p.getUniqueId()));
+                });
         editorItems.add(generator);
 
         //Hook item
-        hook = new EditorItem(new ItemStack(Material.IRON_BLOCK, 1), "&4Hook").addExecutor(new ItemExecutor() {
-
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("Hook placed!");
-                editing.get(p.getUniqueId()).getPossibleHookLocations().add(bloc);
-                addShulker(bloc, "RED", Material.IRON_BLOCK, editing.get(p.getUniqueId()));
-            }
-        });
+        hook = new EditorItem(new ItemStack(Material.IRON_BLOCK, 1), "&4Hook")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("Hook placed!");
+                    editing.get(p.getUniqueId()).getPossibleHookLocations().add(bloc);
+                    addShulker(bloc, "RED", Material.IRON_BLOCK, editing.get(p.getUniqueId()));
+                });
 
         editorItems.add(hook);
 
-        chest = new EditorItem(new ItemStack(Material.CHEST, 1), "&1Chest").addExecutor(new ItemExecutor() {
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("Chest placed!");
-                editing.get(p.getUniqueId()).getPossilbeChestSpawns().add(bloc);
-                addShulker(bloc, "D-BLUE", Material.CHEST, editing.get(p.getUniqueId()));
-            }
-        });
+        chest = new EditorItem(new ItemStack(Material.CHEST, 1), "&1Chest")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("Chest placed!");
+                    editing.get(p.getUniqueId()).getPossilbeChestSpawns().add(bloc);
+                    addShulker(bloc, "D-BLUE", Material.CHEST, editing.get(p.getUniqueId()));
+                });
 
         editorItems.add(chest);
 
-        cabinet = new EditorItem(new ItemStack(Material.BOOKSHELF, 1), "&cCabinet").addExecutor(new ItemExecutor() {
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("Cabinet Placed");
-                editing.get(p.getUniqueId()).getCabinetLocations().add(bloc);
-                addShulker(bloc, "L-RED", Material.BOOKSHELF, editing.get(p.getUniqueId()));
-            }
-        });
+        cabinet = new EditorItem(new ItemStack(Material.BOOKSHELF, 1), "&cCabinet")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("Cabinet Placed");
+                    editing.get(p.getUniqueId()).getCabinetLocations().add(bloc);
+                    addShulker(bloc, "L-RED", Material.BOOKSHELF, editing.get(p.getUniqueId()));
+                });
 
         editorItems.add(cabinet);
 
-        hunted = new EditorItem(new ItemStack(Material.WOOL, 1, (short) 0), "&fHunted").addExecutor(new ItemExecutor() {
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("Hunted Spawn Placed");
-                editing.get(p.getUniqueId()).getPossibleHuntedSpawns().add(bloc);
-                addShulker(bloc, "WHITE", Material.WOOL, editing.get(p.getUniqueId()));
-            }
-        });
+        hunted = new EditorItem(new ItemStack(Material.WOOL, 1, (short) 0), "&fHunted")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("Hunted Spawn Placed");
+                    editing.get(p.getUniqueId()).getPossibleHuntedSpawns().add(bloc);
+                    addShulker(bloc, "WHITE", Material.WOOL, editing.get(p.getUniqueId()));
+                });
 
         editorItems.add(hunted);
 
-        hunter = new EditorItem(new ItemStack(Material.WOOL, 1, (short) 15), "&0Hunter").addExecutor(new ItemExecutor() {
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("Hunter Spawn Placed");
-                editing.get(p.getUniqueId()).getPossibleHunterSpawns().add(bloc);
-                addShulker(bloc, "BLACK", Material.WOOL, editing.get(p.getUniqueId()));
-            }
-        });
+        hunter = new EditorItem(new ItemStack(Material.WOOL, 1, (short) 15), "&0Hunter")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("Hunter Spawn Placed");
+                    editing.get(p.getUniqueId()).getPossibleHunterSpawns().add(bloc);
+                    addShulker(bloc, "BLACK", Material.WOOL, editing.get(p.getUniqueId()));
+                });
 
         editorItems.add(hunter);
 
-        exit = new EditorItem(new ItemStack(Material.IRON_FENCE, 1), "&8Exit").addExecutor(new ItemExecutor() {
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("Exit Placed");
-                String dir = "";
+        exit = new EditorItem(new ItemStack(Material.IRON_FENCE, 1), "&8Exit")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("Exit Placed");
+                    String dir = "";
 
 
-                double rotation = (p.getLocation().getYaw() - 90) % 360;
-                if ((rotation > -45 && rotation < 45) || (rotation > 135 && rotation < 180)) {
-                    dir = "EAST";
-                } else {
-                    dir = "NORTH";
-                }
+                    double rotation = (p.getLocation().getYaw() - 90) % 360;
+                    if ((rotation > -45 && rotation < 45) || (rotation > 135 && rotation < 180)) {
+                        dir = "EAST";
+                    } else {
+                        dir = "NORTH";
+                    }
 
-                ExitGate gate = new ExitGate(dir, bloc.clone().add(0, 1, 0), main);
-                gate.setLocs(getExitGateLocation(bloc, dir));
-                editing.get(p.getUniqueId()).getExitGateLocations().add(gate);
-                for (Location loc : gate.getLocs()) {
-                    addShulker(loc, "GRAY", Material.IRON_FENCE, editing.get(p.getUniqueId()));
-                }
+                    ExitGate gate = new ExitGate(dir, bloc.clone().add(0, 1, 0), main);
+                    gate.setLocs(getExitGateLocation(bloc, dir));
+                    editing.get(p.getUniqueId()).getExitGateLocations().add(gate);
+                    for (Location loc : gate.getLocs()) {
+                        addShulker(loc, "GRAY", Material.IRON_FENCE, editing.get(p.getUniqueId()));
+                    }
 
 
-            }
-        });
+                });
 
         editorItems.add(exit);
 
-        hatch = new EditorItem(new ItemStack(Material.TRAP_DOOR, 1), "&5Hatch").addExecutor(new ItemExecutor() {
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("Hatch Location Placed");
-                editing.get(p.getUniqueId()).getPossibleHatchLocations().add(bloc);
-                addShulker(bloc, "PURPLE", Material.TRAP_DOOR, editing.get(p.getUniqueId()));
-            }
-        });
+        hatch = new EditorItem(new ItemStack(Material.TRAP_DOOR, 1), "&5Hatch")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("Hatch Location Placed");
+                    editing.get(p.getUniqueId()).getPossibleHatchLocations().add(bloc);
+                    addShulker(bloc, "PURPLE", Material.TRAP_DOOR, editing.get(p.getUniqueId()));
+                });
 
         editorItems.add(hatch);
 
-        trap = new EditorItem(new ItemStack(Material.PISTON_BASE, 1), "&dTrap").addExecutor(new ItemExecutor() {
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("Trap Location Placed");
-                editing.get(p.getUniqueId()).getTrapLocations().add(bloc);
-                addShulker(bloc, "PINK", Material.PISTON_BASE, editing.get(p.getUniqueId()));
-            }
-        });
+        trap = new EditorItem(new ItemStack(Material.PISTON_BASE, 1), "&dTrap")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("Trap Location Placed");
+                    editing.get(p.getUniqueId()).getTrapLocations().add(bloc);
+                    addShulker(bloc, "PINK", Material.PISTON_BASE, editing.get(p.getUniqueId()));
+                });
 
         editorItems.add(trap);
 
-        exitArea = new EditorItem(new ItemStack(Material.BARRIER, 1), "&8Exit Area").addExecutor(new ItemExecutor() {
-            public void execute(Player p, Location bloc) {
-                p.sendMessage("ExitArea Location Placed");
-                editing.get(p.getUniqueId()).getExitArea().add(bloc);
-                addShulker(bloc, "PINK", Material.BARRIER, editing.get(p.getUniqueId()));
-            }
-        });
+        exitArea = new EditorItem(new ItemStack(Material.BARRIER, 1), "&8Exit Area")
+                .addExecutor((Player p, Location bloc) -> {
+                    p.sendMessage("ExitArea Location Placed");
+                    editing.get(p.getUniqueId()).getExitArea().add(bloc);
+                    addShulker(bloc, "PINK", Material.BARRIER, editing.get(p.getUniqueId()));
+                });
 
         editorItems.add(exitArea);
 
@@ -358,7 +360,7 @@ public class ArenaEditor {
 
     private List<Location> getExitGateLocation(Location loc, String dir) {
 
-        List<Location> locs = new ArrayList<Location>();
+        List<Location> locs = new ArrayList<>();
         if (dir.equalsIgnoreCase("EAST")) {
             for (int i = -1; i < 2; i++) {
                 for (int y = 0; y < 3; y++) {

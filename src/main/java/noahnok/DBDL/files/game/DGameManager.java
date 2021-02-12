@@ -139,8 +139,12 @@ public class DGameManager {
 
     public void canGameEnd(DGame game) {
         for (DPlayer player : game.getHunted()) {
-            if (player.isHunter()) continue;
-            if (!player.isDead()) return;
+            if (player.isHunter()) {
+                continue;
+            }
+            if (!player.isDead()) {
+                return;
+            }
         }
 
         for (DPlayer player : game.getPlayers()) {
@@ -216,7 +220,8 @@ public class DGameManager {
                 leverBackwardLoc = gate.getCenter().clone().subtract(0, 0, 1);
             }
             if (leverFowardLoc == null || leverBackwardLoc == null) {
-                main.getLogger().severe("Woah! Somethings not quite right with your exit gates LEVERS! Their facing tag is wrong! So we haven't spawned them!");
+                main.getLogger().severe("Woah! Somethings not quite right with your exit gates LEVERS!" +
+                        " Their facing tag is wrong! So we haven't spawned them!");
                 continue;
             }
             DLever lever = new DLever(leverFowardLoc, game, gate);
@@ -227,7 +232,6 @@ public class DGameManager {
 
             game.getExitGates().add(gate);
         }
-
     }
 
 

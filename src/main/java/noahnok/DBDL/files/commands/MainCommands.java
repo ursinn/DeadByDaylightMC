@@ -20,12 +20,18 @@ public class MainCommands implements CommandExecutor {
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
             if (args.length == 0) {
-                p.sendMessage(main.prefix + main.getMessageUtils().color("&6DeadByDaylight &7recreated for Minecraft (1.12+)"));
-                p.sendMessage(main.prefix + main.getMessageUtils().color("Subcommands: forcestart,forceend,mysql"));
-                p.sendMessage(main.prefix + main.getMessageUtils().color("&6forcestart &8>&7> Used when you are in a game lobby!"));
-                p.sendMessage(main.prefix + main.getMessageUtils().color("&6forceend &8>&7> Used when you are in a game!"));
-                p.sendMessage(main.prefix + main.getMessageUtils().color("&6mysql [connect] &8>&7> Shows the current MySQL status (Typing 'connect' will allow you to try and reconnect if your MySQL details in the config are invalid!"));
-
+                p.sendMessage(main.prefix + main.getMessageUtils().color(
+                        "&6DeadByDaylight &7recreated for Minecraft (1.12+)"));
+                p.sendMessage(main.prefix + main.getMessageUtils().color(
+                        "Subcommands: forcestart,forceend,mysql"));
+                p.sendMessage(main.prefix + main.getMessageUtils().color(
+                        "&6forcestart &8>&7> Used when you are in a game lobby!"));
+                p.sendMessage(main.prefix + main.getMessageUtils().color(
+                        "&6forceend &8>&7> Used when you are in a game!"));
+                p.sendMessage(main.prefix + main.getMessageUtils().color(
+                        "&6mysql [connect] &8>&7> Shows the current MySQL status " +
+                                "(Typing 'connect' will allow you to try and reconnect if" +
+                                " your MySQL details in the config are invalid!"));
                 return true;
             } else {
 
@@ -49,7 +55,6 @@ public class MainCommands implements CommandExecutor {
                         }
                         break;
 
-
                     case "forceend":
                         DGame gameend = main.getGameManager().getGamePlayerIsIn(p);
                         if (gameend == null || gameend.getStatus().equals(STATUS.WAITING)) {
@@ -59,7 +64,6 @@ public class MainCommands implements CommandExecutor {
                             main.getGameManager().endGame(gameend);
                         }
                         break;
-
 
                     case "mysql":
                         if (args.length > 1) {
@@ -75,7 +79,6 @@ public class MainCommands implements CommandExecutor {
                             p.sendMessage("Arena: " + runningGame.getArena().getID() + " Players: " + runningGame.getPlayers().size() + " GameID: " + runningGame.getId());
                         }
                         break;
-
 
                     default:
                         p.sendMessage("Couldn't find subcommand: " + args[0]);

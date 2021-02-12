@@ -32,7 +32,7 @@ public class DArenaManager {
     }
 
     public DArena getRandomArena() {
-        List<DArena> tempArenaList = new ArrayList<DArena>();
+        List<DArena> tempArenaList = new ArrayList<>();
         for (DArena arena : arenas) {
             boolean hasDefault = false;
             for (DGamemode mode : arena.getUsableModes().keySet()) {
@@ -88,7 +88,9 @@ public class DArenaManager {
     }
 
     public void loadArenasFromFile() {
-        if (main.getArenasConfig().getConfig().get("arenas") == null) return;
+        if (main.getArenasConfig().getConfig().get("arenas") == null) {
+            return;
+        }
         for (String key : main.getArenasConfig().getConfig().getConfigurationSection("arenas").getKeys(false)) {
             try {
                 String path = "arenas." + key + ".";
@@ -96,7 +98,7 @@ public class DArenaManager {
                 FileConfiguration config = main.getArenasConfig().getConfig();
 
                 List<String> gamemodes = config.getStringList(path + "gamemodes");
-                Set<DGamemode> usableModes = new HashSet<DGamemode>();
+                Set<DGamemode> usableModes = new HashSet<>();
                 for (String mode : gamemodes) {
                     String[] data = mode.split("-enabled=");
                     DGamemode usemode = main.getGamemodeManager().getGamemodeFromString(data[0]);
@@ -118,14 +120,18 @@ public class DArenaManager {
                 Set<Location> hunters = valid((Set<Location>) config.get(path + "locations.hunter"));
                 Set<Location> chests = valid((Set<Location>) config.get(path + "locations.chests"));
 
-                Set<ExitGate> gates = new HashSet<ExitGate>();
+                Set<ExitGate> gates = new HashSet<>();
                 try {
                     for (String numb : main.getArenasConfig().getConfig().getConfigurationSection(path + "locations.exitGates").getKeys(false)) {
                         String facing = (String) config.get(path + "locations.exitGates." + numb + ".facing");
-                        if (facing.length() == 0 || facing == null) continue;
+                        if (facing.length() == 0 || facing == null) {
+                            continue;
+                        }
 
                         List<Location> locs = (List<Location>) config.get(path + "locations.exitGates." + numb + ".locs");
-                        if (locs == null) continue;
+                        if (locs == null) {
+                            continue;
+                        }
                         ExitGate newgate = new ExitGate(facing, (Location) config.get(path + "locations.exitGates." + numb + ".center"), main);
                         newgate.setLocs(locs);
                         gates.add(newgate);
@@ -165,7 +171,7 @@ public class DArenaManager {
 
     public Set<Location> valid(Set<Location> set) {
         if (set == null) {
-            return new HashSet<Location>();
+            return new HashSet<>();
         } else {
             return set;
         }
@@ -173,7 +179,7 @@ public class DArenaManager {
 
     public Set<ExitGate> valide(Set<ExitGate> set) {
         if (set == null) {
-            return new HashSet<ExitGate>();
+            return new HashSet<>();
         } else {
             return set;
         }
@@ -183,7 +189,7 @@ public class DArenaManager {
         for (DArena arena : arenas) {
             String path = "arenas." + arena.getID() + ".";
             FileConfiguration config = main.getArenasConfig().getConfig();
-            List<String> gamemodeStrings = new ArrayList<String>();
+            List<String> gamemodeStrings = new ArrayList<>();
             for (DGamemode mode : arena.getUsableModes().keySet()) {
                 boolean enabled = arena.getUsableModes().get(mode);
 

@@ -52,7 +52,8 @@ public class Generator {
         Firework fw = (Firework) this.loc.getWorld().spawnEntity(loc.clone().add(0, 1, 0), EntityType.FIREWORK);
         final FireworkMeta fwm = fw.getFireworkMeta();
 
-        fwm.addEffect(FireworkEffect.builder().flicker(true).trail(true).with(FireworkEffect.Type.BALL_LARGE).withColor(Color.RED).withFade(Color.BLACK).build());
+        fwm.addEffect(FireworkEffect.builder().flicker(true).trail(true)
+                .with(FireworkEffect.Type.BALL_LARGE).withColor(Color.RED).withFade(Color.BLACK).build());
         fwm.setPower(0);
         fw.setCustomName("DBDL-FIREWORK");
         fw.setCustomNameVisible(false);

@@ -84,13 +84,11 @@ public class PageItem {
     public PageItem addClickAction(GeneralClick click) {
         clickActions.add(click);
         return this;
-
     }
 
     public PageItem copy() {
         this.item.setItemMeta(this.meta);
         return new PageItem(this.item);
-
     }
 
     public Collection<GeneralClick> getClickActions() {

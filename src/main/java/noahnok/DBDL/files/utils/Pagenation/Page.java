@@ -12,8 +12,9 @@ public class Page implements InventoryHolder {
 
     private final String pageName;
     private final PagedInventory pagedInventory;
-    Map<Integer, PageItem> pageItems = new HashMap<>();
-    private PageItem swapItemLeft, swapItemRight;
+    private final Map<Integer, PageItem> pageItems = new HashMap<>();
+    private PageItem swapItemLeft;
+    private PageItem swapItemRight;
     private int pageSize = -1;
 
 
@@ -23,8 +24,10 @@ public class Page implements InventoryHolder {
     }
 
     public void setSwapItem(PageItem swapItem) {
-        this.swapItemLeft = swapItem.copy().setDisplayName("&6Previous Page").addClickAction(p -> p.openInventory(pagedInventory.showPage(pagedInventory.getPageIndex(this) - 1)));
-        this.swapItemRight = swapItem.copy().setDisplayName("&6Next Page").addClickAction(p -> p.openInventory(pagedInventory.showPage(pagedInventory.getPageIndex(this) + 1)));
+        this.swapItemLeft = swapItem.copy().setDisplayName("&6Previous Page").addClickAction(p ->
+                p.openInventory(pagedInventory.showPage(pagedInventory.getPageIndex(this) - 1)));
+        this.swapItemRight = swapItem.copy().setDisplayName("&6Next Page").addClickAction(p ->
+                p.openInventory(pagedInventory.showPage(pagedInventory.getPageIndex(this) + 1)));
     }
 
     public void setPageSize(int pageSize) {
@@ -77,8 +80,9 @@ public class Page implements InventoryHolder {
         if (pageSize == -1) {
             int invSize = invSize();
 
-
-            if (pagedInventory != null && pagedInventory.hasNextPage(this) == false && pagedInventory.hasPreviousPage(this) == false) {
+            if (pagedInventory != null &&
+                    !pagedInventory.hasNextPage(this) &&
+                    !pagedInventory.hasPreviousPage(this)) {
                 invSize -= 9;
             }
 
@@ -100,7 +104,6 @@ public class Page implements InventoryHolder {
         for (Map.Entry<Integer, PageItem> entry : this.pageItems.entrySet()) {
             inv.setItem(entry.getKey(), entry.getValue().getItem());
         }
-
 
         return inv;
     }

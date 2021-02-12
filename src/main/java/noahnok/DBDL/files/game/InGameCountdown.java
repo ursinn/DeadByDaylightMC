@@ -33,9 +33,9 @@ public class InGameCountdown {
                         ref.announce("Game ends in " + getTimeAsString(tempTime));
                     }
                 }
+
                 if (tempTime < 11) {
                     ref.announce("Game ends in " + tempTime + "s");
-
                 }
 
                 if (tempTime <= 0) {

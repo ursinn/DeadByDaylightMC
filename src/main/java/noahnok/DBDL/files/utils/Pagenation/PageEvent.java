@@ -21,13 +21,17 @@ public class PageEvent implements Listener {
 
                 ItemStack itemStack = e.getCurrentItem();
 
-                if (itemStack == null || itemStack.getType() == Material.AIR) return;
+                if (itemStack == null || itemStack.getType() == Material.AIR) {
+                    return;
+                }
 
                 Page page = (Page) e.getView().getTopInventory().getHolder();
 
                 PageItem pageItem = page.getPageItem(e.getRawSlot());
 
-                if (pageItem == null) return;
+                if (pageItem == null) {
+                    return;
+                }
 
                 for (GeneralClick click : pageItem.getClickActions()) {
                     click.click(player);

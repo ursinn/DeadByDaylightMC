@@ -11,7 +11,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class joinGameCommand implements CommandExecutor {
+public class JoinGameCommand implements CommandExecutor {
 
     private final DeadByDaylight main;
 
@@ -20,7 +20,7 @@ public class joinGameCommand implements CommandExecutor {
     private final Builders itemBuilder = new Builders();
     private CustomHolder joinGameInv;
 
-    public joinGameCommand(DeadByDaylight main) {
+    public JoinGameCommand(DeadByDaylight main) {
         this.main = main;
     }
 
@@ -49,19 +49,21 @@ public class joinGameCommand implements CommandExecutor {
 
     public void setUpjoinGameInv() {
         joinGameInv = inventoryBuilder.createNew("Join Game", 27);
-        Icon hunted = inventoryBuilder.createIcon(itemBuilder.getNewBuilder(Material.BONE_BLOCK).build(), "Play as a survivor!");
+        Icon hunted = inventoryBuilder.createIcon(
+                itemBuilder.getNewBuilder(Material.BONE_BLOCK).build(), "Play as a survivor!");
         hunted.addLore("May have longer waiting times!");
-        Icon hunter = inventoryBuilder.createIcon(itemBuilder.getNewBuilder(Material.COAL_BLOCK).build(), "Play as a hunter!");
+        Icon hunter = inventoryBuilder.createIcon(
+                itemBuilder.getNewBuilder(Material.COAL_BLOCK).build(), "Play as a hunter!");
         hunter.addLore("Often results in getting into a game quicker!");
 
-        hunted.addClickAction(p -> {
+        hunted.addClickAction((Player p) -> {
             p.closeInventory();
             if (!main.getMatchMaking().addToMatchmaking(p, "HUNTED")) {
                 main.getMatchMaking().addPlayerToMatchMakingLoop(p, "HUNTED");
             }
         });
 
-        hunter.addClickAction(p -> {
+        hunter.addClickAction((Player p) -> {
             p.closeInventory();
             if (!main.getMatchMaking().addToMatchmaking(p, "HUNTER")) {
                 main.getMatchMaking().addPlayerToMatchMakingLoop(p, "HUNTER");

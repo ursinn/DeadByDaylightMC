@@ -11,18 +11,18 @@ public class DArena {
 
     private final String ID;
 
-    private final Map<DGamemode, Boolean> usableModes = new HashMap<DGamemode, Boolean>();
+    private final Map<DGamemode, Boolean> usableModes = new HashMap<>();
 
-    private Set<Location> possibleGeneratorLocations = new HashSet<Location>();
-    private Set<Location> possibleHatchLocations = new HashSet<Location>();
-    private Set<Location> possibleHuntedSpawns = new HashSet<Location>();
-    private Set<Location> possibleHunterSpawns = new HashSet<Location>();
-    private Set<Location> possilbeChestSpawns = new HashSet<Location>();
-    private Set<ExitGate> exitGateLocations = new HashSet<ExitGate>();
-    private Set<Location> possibleHookLocations = new HashSet<Location>();
-    private Set<Location> trapLocations = new HashSet<Location>();
-    private Set<Location> cabinetLocations = new HashSet<Location>();
-    private Set<Location> exitArea = new HashSet<Location>();
+    private Set<Location> possibleGeneratorLocations = new HashSet<>();
+    private Set<Location> possibleHatchLocations = new HashSet<>();
+    private Set<Location> possibleHuntedSpawns = new HashSet<>();
+    private Set<Location> possibleHunterSpawns = new HashSet<>();
+    private Set<Location> possilbeChestSpawns = new HashSet<>();
+    private Set<ExitGate> exitGateLocations = new HashSet<>();
+    private Set<Location> possibleHookLocations = new HashSet<>();
+    private Set<Location> trapLocations = new HashSet<>();
+    private Set<Location> cabinetLocations = new HashSet<>();
+    private Set<Location> exitArea = new HashSet<>();
     private Location lobbyLocation;
 
     private boolean inUse = false;

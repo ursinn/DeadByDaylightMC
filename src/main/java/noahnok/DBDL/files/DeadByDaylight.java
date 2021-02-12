@@ -74,9 +74,9 @@ public class DeadByDaylight extends JavaPlugin {
 
     private ArenaCommands arenaCommands;
 
-    private joinGameCommand joinGameCommand;
+    private JoinGameCommand joinGameCommand;
 
-    private leaveCommand leaveCommand;
+    private LeaveCommand leaveCommand;
 
     private Toggles toggles;
 
@@ -88,7 +88,7 @@ public class DeadByDaylight extends JavaPlugin {
 
     private StatsCommand statsCommand;
 
-    public noahnok.dbdl.files.commands.joinGameCommand getJoinGameCommand() {
+    public JoinGameCommand getJoinGameCommand() {
         return joinGameCommand;
     }
 
@@ -175,8 +175,8 @@ public class DeadByDaylight extends JavaPlugin {
         readyConfigs = new ReadyConfigs(this);
         mainCommands = new MainCommands(this);
         arenaCommands = new ArenaCommands(this);
-        joinGameCommand = new joinGameCommand(this);
-        leaveCommand = new leaveCommand(this);
+        joinGameCommand = new JoinGameCommand(this);
+        leaveCommand = new LeaveCommand(this);
         toggles = new Toggles(this);
         messageUtils = new MessageUtils(this);
         playerStateManager = new PlayerStateManager(this);

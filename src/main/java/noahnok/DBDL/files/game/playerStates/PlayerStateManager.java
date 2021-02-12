@@ -104,12 +104,10 @@ public class PlayerStateManager {
 
     public void survivorHealed(DPlayer survivor, boolean fullHealth) {
         if (fullHealth) {
-
             stopBleeding(survivor);
             survivor.getPlayerState().setInjured(false);
             normalSpeed(survivor);
         } else {
-
             survivor.getPlayerState().setCrawling(false);
             survivor.getPlayerState().setInjured(true);
             injureSpeed(survivor);
@@ -145,13 +143,10 @@ public class PlayerStateManager {
         return survivor.getPlayerState().getEndGameState() == EndGameStates.SACRIFICED;
     }
 
-
     // The following are only available to the HUNTER/KILLER
-
     public void hunterStartCarrying(DPlayer hunter) {
         hunter.getPlayerState().setCarrying(true);
     }
-
 
     // atWill means if the Hunter decided to put the survivor down themselves or if they escaped
     public void hunterStopCarrying(DPlayer hunter, boolean atWill) {
@@ -186,7 +181,6 @@ public class PlayerStateManager {
         hunter.getPlayerState().setFatigued(false);
     }
 
-
     private void crawlSpeed(DPlayer survivor) {
         survivor.getPlayer().setWalkSpeed((float) 0.1);
     }
@@ -205,7 +199,8 @@ public class PlayerStateManager {
 
     private void setBleeding(DPlayer player) {
         if (player.getPlayerState().getBleedingRunnable() == null) {
-            player.getPlayerState().setBleedingRunnable(new BleedingRunnable(player.getPlayer(), main).runTaskTimer(main, 0, 30));
+            player.getPlayerState().setBleedingRunnable(
+                    new BleedingRunnable(player.getPlayer(), main).runTaskTimer(main, 0, 30));
         }
     }
 

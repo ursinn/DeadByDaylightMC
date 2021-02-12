@@ -36,9 +36,11 @@ public class GenericEvents implements Listener {
                 e.setMessage(e.getMessage().substring(1));
                 return;
             }
+
             e.getRecipients().clear();
             player.getCurrentGame().getPlayers().forEach(dplayer -> e.getRecipients().add(dplayer.getPlayer()));
-            e.setFormat(main.prefix + (player.isHunter() ? ChatColor.DARK_RED : ChatColor.GOLD) + player.getName() + ChatColor.translateAlternateColorCodes('&', " &8>&7> &f") + e.getMessage());
+            e.setFormat(main.prefix + (player.isHunter() ? ChatColor.DARK_RED : ChatColor.GOLD) + player.getName() +
+                    ChatColor.translateAlternateColorCodes('&', " &8>&7> &f") + e.getMessage());
         }
     }
 }

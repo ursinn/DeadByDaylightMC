@@ -3,6 +3,7 @@ package noahnok.dbdl.files.game;
 import org.bukkit.ChatColor;
 
 public enum STATUS {
+
     WAITING("&6Waiting"),
     STARTING("&2Starting"),
     INGAME("&aIn-game"),

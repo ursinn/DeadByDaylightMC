@@ -14,7 +14,7 @@ public class ExitGate {
     private final DeadByDaylight main;
     private final String facing;
     private final Location center;
-    private List<Location> locs = new ArrayList<Location>();
+    private List<Location> locs = new ArrayList<>();
     private DLever lever1;
     private DLever lever2;
 
@@ -73,9 +73,9 @@ public class ExitGate {
             }
         }
 
-        List<List<Location>> rows = new ArrayList<List<Location>>();
+        List<List<Location>> rows = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            List<Location> row = new ArrayList<Location>();
+            List<Location> row = new ArrayList<>();
             for (Location loc : this.locs) {
                 if (loc.getY() == (lowestY + i)) {
                     row.add(loc);

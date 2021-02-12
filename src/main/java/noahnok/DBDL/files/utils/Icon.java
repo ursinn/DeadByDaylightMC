@@ -41,7 +41,7 @@ public class Icon extends ItemStack {
         ItemMeta meta = itemStack.getItemMeta();
         List<String> lorelist = meta.getLore();
         if (lorelist == null) {
-            lorelist = new ArrayList<String>();
+            lorelist = new ArrayList<>();
         }
 
         lorelist.add(ChatColor.translateAlternateColorCodes('&', lore));

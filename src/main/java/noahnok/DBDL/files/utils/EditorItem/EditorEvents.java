@@ -24,8 +24,10 @@ public class EditorEvents implements Listener {
 
     @EventHandler
     public void editorBlockPlace(BlockPlaceEvent e) {
+        if (!main.getArenaEditor().editing.containsKey(e.getPlayer().getUniqueId())) {
+            return;
+        }
 
-        if (!main.getArenaEditor().editing.containsKey(e.getPlayer().getUniqueId())) return;
         ItemMeta meta = e.getItemInHand().getItemMeta();
         if (meta != null) {
             if (meta.getLore() != null) {
@@ -39,7 +41,10 @@ public class EditorEvents implements Listener {
                             item = eItem;
                         }
                     }
-                    if (item == null) return;
+
+                    if (item == null) {
+                        return;
+                    }
 
                     for (ItemExecutor exe : item.getExecutors()) {
                         exe.execute(e.getPlayer(), e.getBlock().getLocation());
@@ -52,8 +57,6 @@ public class EditorEvents implements Listener {
     @EventHandler
     public void editorBlockBreak(BlockBreakEvent e) {
         if (!main.getArenaEditor().editing.containsKey(e.getPlayer().getUniqueId())) {
-
-
             for (DArena a : main.getArenaManager().getArenas()) {
                 if (isArenaBlock(a, e.getBlock().getLocation())) {
                     e.setCancelled(true);
@@ -64,8 +67,10 @@ public class EditorEvents implements Listener {
         }
 
         if (isArenaBlock(main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()), e.getBlock().getLocation())) {
-            main.getArenaEditor().removeShulker(e.getBlock().getLocation(), main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()));
-            removeArenaBlock(main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()), e.getBlock().getLocation());
+            main.getArenaEditor().removeShulker(e.getBlock().getLocation(),
+                    main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()));
+            removeArenaBlock(main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()),
+                    e.getBlock().getLocation());
             e.getPlayer().sendMessage("Removed ArenaBlock");
         }
     }
@@ -79,7 +84,9 @@ public class EditorEvents implements Listener {
             } catch (ClassCastException exception) {
                 return;
             }
-            if (shulker == null) return;
+            if (shulker == null) {
+                return;
+            }
             for (DArena a : main.getArenaManager().getArenas()) {
                 if (isArenaBlock(a, shulker.getLocation())) {
                     e.setCancelled(true);
@@ -88,9 +95,13 @@ public class EditorEvents implements Listener {
             }
             return;
         }
-        if (e.getHand() != EquipmentSlot.HAND) return;
+        if (e.getHand() != EquipmentSlot.HAND) {
+            return;
+        }
         Shulker shulker = (Shulker) e.getRightClicked();
-        if (shulker == null) return;
+        if (shulker == null) {
+            return;
+        }
         Location loc = shulker.getLocation();
 
 
@@ -99,11 +110,13 @@ public class EditorEvents implements Listener {
 
         if (loc.getBlock().getType().toString().equalsIgnoreCase("IRON_FENCE")) {
 
-            for (ExitGate gate : main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()).getExitGateLocations()) {
+            for (ExitGate gate :
+                    main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()).getExitGateLocations()) {
                 if (gate.getLocs().contains(newloc)) {
 
                     for (Location eloc : gate.getLocs()) {
-                        main.getArenaEditor().removeShulker(eloc, main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()));
+                        main.getArenaEditor().removeShulker(eloc,
+                                main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()));
                     }
                     main.getArenaEditor().editing.get(e.getPlayer().getUniqueId()).getExitGateLocations().remove(gate);
                     return;
@@ -123,37 +136,75 @@ public class EditorEvents implements Listener {
 
     @EventHandler
     public void preventDrop(PlayerDropItemEvent e) {
-        if (!main.getArenaEditor().editing.containsKey(e.getPlayer().getUniqueId())) return;
+        if (!main.getArenaEditor().editing.containsKey(e.getPlayer().getUniqueId())) {
+            return;
+        }
         e.setCancelled(true);
     }
 
 
     private boolean isArenaBlock(DArena a, Location bloc) {
-        if (a.getPossilbeChestSpawns().contains(bloc)) return true;
-        if (a.getPossibleHunterSpawns().contains(bloc)) return true;
-        if (a.getPossibleHuntedSpawns().contains(bloc)) return true;
-        if (a.getPossibleHatchLocations().contains(bloc)) return true;
-        if (a.getPossibleHookLocations().contains(bloc)) return true;
-        if (a.getPossibleGeneratorLocations().contains(bloc)) return true;
+        if (a.getPossilbeChestSpawns().contains(bloc)) {
+            return true;
+        }
+        if (a.getPossibleHunterSpawns().contains(bloc)) {
+            return true;
+        }
+        if (a.getPossibleHuntedSpawns().contains(bloc)) {
+            return true;
+        }
+        if (a.getPossibleHatchLocations().contains(bloc)) {
+            return true;
+        }
+        if (a.getPossibleHookLocations().contains(bloc)) {
+            return true;
+        }
+        if (a.getPossibleGeneratorLocations().contains(bloc)) {
+            return true;
+        }
 
-        if (a.getCabinetLocations().contains(bloc)) return true;
-        if (a.getExitGateLocations().contains(bloc)) return true;
-        if (a.getTrapLocations().contains(bloc)) return true;
+        if (a.getCabinetLocations().contains(bloc)) {
+            return true;
+        }
+        if (a.getExitGateLocations().contains(bloc)) {
+            return true;
+        }
+        if (a.getTrapLocations().contains(bloc)) {
+            return true;
+        }
         return a.getLobbyLocation() == bloc;
 
     }
 
     private boolean removeArenaBlock(DArena a, Location bloc) {
-        if (a.getPossilbeChestSpawns().remove(bloc)) return true;
-        if (a.getPossibleHunterSpawns().remove(bloc)) return true;
-        if (a.getPossibleHuntedSpawns().remove(bloc)) return true;
-        if (a.getPossibleHatchLocations().remove(bloc)) return true;
-        if (a.getPossibleHookLocations().remove(bloc)) return true;
-        if (a.getPossibleGeneratorLocations().remove(bloc)) return true;
+        if (a.getPossilbeChestSpawns().remove(bloc)) {
+            return true;
+        }
+        if (a.getPossibleHunterSpawns().remove(bloc)) {
+            return true;
+        }
+        if (a.getPossibleHuntedSpawns().remove(bloc)) {
+            return true;
+        }
+        if (a.getPossibleHatchLocations().remove(bloc)) {
+            return true;
+        }
+        if (a.getPossibleHookLocations().remove(bloc)) {
+            return true;
+        }
+        if (a.getPossibleGeneratorLocations().remove(bloc)) {
+            return true;
+        }
 
-        if (a.getCabinetLocations().remove(bloc)) return true;
-        if (a.getExitGateLocations().remove(bloc)) return true;
-        if (a.getTrapLocations().remove(bloc)) return true;
+        if (a.getCabinetLocations().remove(bloc)) {
+            return true;
+        }
+        if (a.getExitGateLocations().remove(bloc)) {
+            return true;
+        }
+        if (a.getTrapLocations().remove(bloc)) {
+            return true;
+        }
         if (a.getLobbyLocation() == bloc) {
             a.setLobbyLocation(null);
             return true;

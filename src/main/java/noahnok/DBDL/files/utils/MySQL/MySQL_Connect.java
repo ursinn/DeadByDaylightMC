@@ -1,6 +1,5 @@
 package noahnok.dbdl.files.utils.MySQL;
 
-
 import noahnok.dbdl.files.DeadByDaylight;
 import noahnok.dbdl.files.player.DPlayer;
 import noahnok.dbdl.files.utils.DEBUG;

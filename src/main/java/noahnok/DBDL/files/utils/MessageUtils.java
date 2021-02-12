@@ -43,7 +43,8 @@ public class MessageUtils {
     }
 
     public void loadMessages() {
-        if (main.getMessagesConfig().getConfig().getConfigurationSection("messages").getKeys(false).size() == 0 || main.getMessagesConfig().getConfig().getConfigurationSection("messages").getKeys(false) == null) {
+        if (main.getMessagesConfig().getConfig().getConfigurationSection("messages").getKeys(false).isEmpty() ||
+                main.getMessagesConfig().getConfig().getConfigurationSection("messages").getKeys(false) == null) {
             main.getMessagesConfig().reloadConfig();
 
         }

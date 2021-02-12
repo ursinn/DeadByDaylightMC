@@ -224,7 +224,8 @@ public class DGame {
     public boolean isHunter(UUID id) {
         for (DPlayer player : players) {
             if (player.getId().equals(id)) {
-                if (player.getStatus().equals(PlayerStatus.HUNTER) || player.getStatus().equals(PlayerStatus.CARRYING)) {
+                if (player.getStatus().equals(PlayerStatus.HUNTER)
+                        || player.getStatus().equals(PlayerStatus.CARRYING)) {
                     return true;
                 }
             }
@@ -272,19 +273,22 @@ public class DGame {
     }
 
     public Set<DPlayer> getHunted() {
-        return players.stream().filter(player -> player.getStatus().equals(PlayerStatus.HUNTED)).collect(Collectors.toCollection(HashSet::new));
+        return players.stream().filter(player -> player.getStatus().equals(PlayerStatus.HUNTED))
+                .collect(Collectors.toCollection(HashSet::new));
     }
 
 
     public Set<DPlayer> getHunters() {
-        return players.stream().filter(player -> player.getStatus().equals(PlayerStatus.HUNTER) || player.getStatus().equals(PlayerStatus.CARRYING)).collect(Collectors.toCollection(HashSet::new));
+        return players.stream().filter(player -> player.getStatus().equals(PlayerStatus.HUNTER) ||
+                player.getStatus().equals(PlayerStatus.CARRYING)).collect(Collectors.toCollection(HashSet::new));
     }
 
 
     public void announceJoin(Player p) {
         for (DPlayer player : players) {
             Player reciever = main.getServer().getPlayer(player.getId());
-            reciever.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GOLD + p.getName() + ChatColor.GRAY + " joined the game!"));
+            reciever.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    TextComponent.fromLegacyText(ChatColor.GOLD + p.getName() + ChatColor.GRAY + " joined the game!"));
             reciever.sendMessage(main.prefix + ChatColor.GOLD + p.getName() + ChatColor.GRAY + " joined the game!");
 
         }
@@ -295,7 +299,8 @@ public class DGame {
     public void announceLeave(Player p) {
         for (DPlayer player : players) {
             Player reciever = main.getServer().getPlayer(player.getId());
-            reciever.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GOLD + p.getName() + ChatColor.GRAY + " left the game!"));
+            reciever.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    TextComponent.fromLegacyText(ChatColor.GOLD + p.getName() + ChatColor.GRAY + " left the game!"));
             reciever.sendMessage(main.prefix + ChatColor.GOLD + p.getName() + ChatColor.GRAY + " left the game!");
 
         }
@@ -312,7 +317,8 @@ public class DGame {
     }
 
     private void sendAB(String message, UUID id) {
-        Bukkit.getServer().getPlayer(id).spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', message)));
+        Bukkit.getServer().getPlayer(id).spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', message)));
     }
 
     public double getMultiplier() {
@@ -358,7 +364,8 @@ public class DGame {
 
             player.sendMessage(main.prefix + message);
 
-            player.sendMessage(ChatColor.GRAY + "You have recieved " + ChatColor.DARK_RED + dplayer.getGameScore() + " Bloodpoints");
+            player.sendMessage(ChatColor.GRAY + "You have recieved " + ChatColor.DARK_RED +
+                    dplayer.getGameScore() + " Bloodpoints");
             dplayer.setBloodPoints(dplayer.getBloodPoints() + dplayer.getGameScore());
             dplayer.addToStaticScore(dplayer.getGameScore());
             main.getSqlManager().uploadUserStats(dplayer);
@@ -369,7 +376,9 @@ public class DGame {
     public void countDownBleep(int timeLeft) {
         for (DPlayer player : players) {
             Player actual = player.getPlayer();
-            actual.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', "&7Summoned in " + timeLeft + "s")));
+            actual.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&',
+                            "&7Summoned in " + timeLeft + "s")));
             actual.setLevel(timeLeft);
             actual.playSound(actual.getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 1.0F);
         }
@@ -378,7 +387,9 @@ public class DGame {
     public void gameStartBleep(int timeLeft) {
         for (DPlayer player : players) {
             Player actual = player.getPlayer();
-            actual.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', "&7Game starts in " + timeLeft + "s")));
+            actual.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&',
+                            "&7Game starts in " + timeLeft + "s")));
             actual.setLevel(timeLeft);
 
             actual.playSound(actual.getLocation(), Sound.BLOCK_NOTE_PLING, 1.0F, 2.0F);

@@ -110,22 +110,26 @@ public class MatchMaking {
                 }
                 new BukkitRunnable() {
                     public void run() {
-                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Searching for game"));
+                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                TextComponent.fromLegacyText("Searching for game"));
                     }
                 }.runTaskLater(main, 0);
                 new BukkitRunnable() {
                     public void run() {
-                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Searching for game."));
+                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                TextComponent.fromLegacyText("Searching for game."));
                     }
                 }.runTaskLater(main, 5);
                 new BukkitRunnable() {
                     public void run() {
-                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Searching for game.."));
+                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                TextComponent.fromLegacyText("Searching for game.."));
                     }
                 }.runTaskLater(main, 10);
                 new BukkitRunnable() {
                     public void run() {
-                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("Searching for game..."));
+                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                TextComponent.fromLegacyText("Searching for game..."));
                     }
                 }.runTaskLater(main, 15);
             }

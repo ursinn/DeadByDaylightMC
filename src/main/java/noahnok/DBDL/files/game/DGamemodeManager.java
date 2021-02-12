@@ -10,7 +10,7 @@ import java.util.Set;
 public class DGamemodeManager {
 
     private final DeadByDaylight main;
-    private final Set<DGamemode> gamemodes = new HashSet<DGamemode>();
+    private final Set<DGamemode> gamemodes = new HashSet<>();
 
     public DGamemodeManager(DeadByDaylight main) {
         this.main = main;
@@ -74,7 +74,8 @@ public class DGamemodeManager {
                 trapdoor = (Boolean) getItem(path + "allow.trapdoor");
 
             } catch (NullPointerException e) {
-                main.getLogger().severe("Hmm... seems the gamemode: " + key + " failed to load! Something wasn't set or is broken! Please check you gamemodes.yml");
+                main.getLogger().severe("Hmm... seems the gamemode: "
+                        + key + " failed to load! Something wasn't set or is broken! Please check you gamemodes.yml");
                 continue;
             }
 

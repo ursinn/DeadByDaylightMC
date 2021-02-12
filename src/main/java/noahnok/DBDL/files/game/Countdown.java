@@ -47,7 +47,9 @@ public class Countdown {
 
     public void endCountdown(boolean toPlay) {
         DSign sign = main.getSignManager().getSign(ref);
-        if (sign != null) sign.removeGame();
+        if (sign != null) {
+            sign.removeGame();
+        }
         task.cancel();
 
         if (toPlay) {

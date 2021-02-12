@@ -7,11 +7,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class leaveCommand implements CommandExecutor {
+public class LeaveCommand implements CommandExecutor {
 
     private final DeadByDaylight main;
 
-    public leaveCommand(DeadByDaylight main) {
+    public LeaveCommand(DeadByDaylight main) {
         this.main = main;
     }
 

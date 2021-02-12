@@ -37,9 +37,13 @@ public class MainEvents implements Listener {
     @EventHandler
     public void canMove(PlayerMoveEvent e) {
         DPlayer dPlayer = main.getdPlayerManager().getPlayer(e.getPlayer().getUniqueId());
-        if (dPlayer == null) return;
+        if (dPlayer == null) {
+            return;
+        }
         DGame game = dPlayer.getCurrentGame();
-        if (game == null) return;
+        if (game == null) {
+            return;
+        }
         if (game != null && (game.getStatus().equals(STATUS.INGAME) || game.getStatus().equals(STATUS.STARTING))) {
 
             if (!game.canPlayerMove(e.getPlayer().getUniqueId())) {
@@ -60,8 +64,9 @@ public class MainEvents implements Listener {
                         dPlayer.addToScore(1000);
                         game.moveToEscaped(e.getPlayer().getUniqueId());
 
-
-                        if (game.getStatus() == STATUS.INGAME) dPlayer.startSpectating(game);
+                        if (game.getStatus() == STATUS.INGAME) {
+                            dPlayer.startSpectating(game);
+                        }
                     }
                 }
 
@@ -75,8 +80,6 @@ public class MainEvents implements Listener {
         DGame game = main.getGameManager().getGamePlayerIsIn(e.getPlayer());
         if (game != null && game.getStatus().equals(STATUS.INGAME)) {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-
-
                 DPlayer player = main.getdPlayerManager().getPlayer(e.getPlayer().getUniqueId());
                 e.setCancelled(true);
 
@@ -91,7 +94,9 @@ public class MainEvents implements Listener {
                         if (!gen.isFinished()) {
                             gen.increment(player);
                         }
-                        e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', "&7Generator is at: &6" + gen.getPercentDone() + "%")));
+                        e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&',
+                                        "&7Generator is at: &6" + gen.getPercentDone() + "%")));
                     }
                 }
 
@@ -100,12 +105,15 @@ public class MainEvents implements Listener {
                     if (player.getStatus().equals(PlayerStatus.HUNTER)) {
                         return;
                     }
+
                     DLever lever = game.getLeverAtBlock(e.getClickedBlock());
                     if (lever != null) {
                         if (!lever.isFinished()) {
                             lever.increment(player);
 
-                            e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', "&7Lever is at: &6" + lever.getPercentDone() + "%")));
+                            e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                    TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&',
+                                            "&7Lever is at: &6" + lever.getPercentDone() + "%")));
                         }
                     }
 
@@ -138,16 +146,22 @@ public class MainEvents implements Listener {
             DGame game = main.getGameManager().getGamePlayerIsIn(e.getPlayer());
             if (game != null && game.getStatus().equals(STATUS.INGAME)) {
                 DPlayer dplayer = game.getPlayer(e.getPlayer().getUniqueId());
-                if (!dplayer.isSpectating()) return;
+                if (!dplayer.isSpectating()) {
+                    return;
+                }
 
                 if (dplayer.isSpectating() && dplayer.getSpectate() != null) {
                     dplayer.spectateNext(dplayer.getSpectate());
                 }
+
                 Page page = new Page("Players", null);
 
                 int index = 0;
                 for (DPlayer player : game.getPlayers()) {
-                    if (player == dplayer) continue;
+                    if (player == dplayer) {
+                        continue;
+                    }
+
                     SkullItem pageItem = new SkullItem();
                     pageItem.setDisplayName(player.getName());
 
@@ -161,7 +175,6 @@ public class MainEvents implements Listener {
                                 dplayer.spectateNext(player);
                             });
                         }
-
                     } else {
                         pageItem.addLore("&f&lKiller");
                     }
@@ -189,25 +202,26 @@ public class MainEvents implements Listener {
             if (e.getDamager().getCustomName().equals("DBDL-FIREWORK")) {
                 e.setCancelled(true);
             }
-
         }
 
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
             DPlayer damaged = main.getdPlayerManager().getPlayer(e.getEntity().getUniqueId());
             DPlayer damager = main.getdPlayerManager().getPlayer(e.getDamager().getUniqueId());
 
-            if (damaged == null || damager == null) return;
+            if (damaged == null || damager == null) {
+                return;
+            }
 
-            if (damaged.getCurrentGame() != null && damager.getCurrentGame() != null && damaged.getCurrentGame().equals(damager.getCurrentGame())) {
-                if (!damaged.getCurrentGame().isHunter(damaged.getId()) && !damager.getCurrentGame().isHunter(damager.getId())) {
+            if (damaged.getCurrentGame() != null && damager.getCurrentGame() != null &&
+                    damaged.getCurrentGame().equals(damager.getCurrentGame())) {
+                if (!damaged.getCurrentGame().isHunter(damaged.getId()) &&
+                        !damager.getCurrentGame().isHunter(damager.getId())) {
                     e.setCancelled(true);
                 }
             }
         }
 
         if (e.getEntity() instanceof Player) {
-
-
             Player player = (Player) e.getEntity();
 
             if (!(e.getFinalDamage() >= player.getHealth())) {
@@ -220,17 +234,13 @@ public class MainEvents implements Listener {
                         main.getPlayerStateManager().survivorHit(dplayer);
                     }
                 }
-
             } else {
-
-
                 DGame game = main.getGameManager().getGamePlayerIsIn(player);
                 if (game != null && game.getStatus().equals(STATUS.INGAME)) {
 
                     e.setCancelled(true);
                     DPlayer dplayer = game.getPlayer(player.getUniqueId());
                     if (dplayer != null) {
-
 
                         // Only applied if the Hunter has a specific perk //TODO Perks for insta kill
                         /*
@@ -263,8 +273,6 @@ public class MainEvents implements Listener {
 
 
                     }
-
-
                 }
             }
         }
