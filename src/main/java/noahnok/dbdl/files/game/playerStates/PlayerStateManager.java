@@ -68,23 +68,24 @@ public class PlayerStateManager {
 
         stopBleeding(survivor);
 
-        switch (survivor.getPlayerState().getHookedStage()) {
-            case HookedStages.NOT_HOOKED:
-                survivor.getPlayerState().setHookedStage(HookedStages.STAGE_1);
-                break;
+        // TODO: Fix
 
-            case HookedStages.STAGE_1:
-                survivor.getPlayerState().setHookedStage(HookedStages.STAGE_2);
-                break;
-
-            case HookedStages.STAGE_2:
-                // Survivor has been taken by the Entity
-                survivor.getPlayerState().setHookedStage(HookedStages.DEAD);
-                survivor.getPlayerState().setEndGameState(EndGameStates.SACRIFICED);
-                survivor.getPlayerState().setBleeding(false);
-
-                break;
-        }
+//        switch (survivor.getPlayerState().getHookedStage()) {
+//            case HookedStages.NOT_HOOKED:
+//                survivor.getPlayerState().setHookedStage(HookedStages.STAGE_1);
+//                break;
+//
+//            case HookedStages.STAGE_1:
+//                survivor.getPlayerState().setHookedStage(HookedStages.STAGE_2);
+//                break;
+//
+//            case HookedStages.STAGE_2:
+//                // Survivor has been taken by the Entity
+//                survivor.getPlayerState().setHookedStage(HookedStages.DEAD);
+//                survivor.getPlayerState().setEndGameState(EndGameStates.SACRIFICED);
+//                survivor.getPlayerState().setBleeding(false);
+//                break;
+//        }
     }
 
     public void survivorUnhooked(DPlayer survivor) {
