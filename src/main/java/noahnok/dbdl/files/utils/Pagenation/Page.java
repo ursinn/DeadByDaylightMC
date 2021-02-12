@@ -17,7 +17,6 @@ public class Page implements InventoryHolder {
     private PageItem swapItemRight;
     private int pageSize = -1;
 
-
     public Page(String pageName, PagedInventory inv) {
         this.pageName = PageUtils.color(pageName);
         this.pagedInventory = inv;
