@@ -2,7 +2,6 @@ package noahnok.dbdl.files.signs;
 
 import noahnok.dbdl.files.DeadByDaylight;
 import noahnok.dbdl.files.game.DGame;
-import noahnok.dbdl.files.utils.ClickAction;
 import noahnok.dbdl.files.utils.CustomHolder;
 import noahnok.dbdl.files.utils.Icon;
 import org.bukkit.ChatColor;

@@ -69,15 +69,15 @@ public class PlayerStateManager {
         stopBleeding(survivor);
 
         switch (survivor.getPlayerState().getHookedStage()) {
-            case NOT_HOOKED:
+            case HookedStages.NOT_HOOKED:
                 survivor.getPlayerState().setHookedStage(HookedStages.STAGE_1);
                 break;
 
-            case STAGE_1:
+            case HookedStages.STAGE_1:
                 survivor.getPlayerState().setHookedStage(HookedStages.STAGE_2);
                 break;
 
-            case STAGE_2:
+            case HookedStages.STAGE_2:
                 // Survivor has been taken by the Entity
                 survivor.getPlayerState().setHookedStage(HookedStages.DEAD);
                 survivor.getPlayerState().setEndGameState(EndGameStates.SACRIFICED);
