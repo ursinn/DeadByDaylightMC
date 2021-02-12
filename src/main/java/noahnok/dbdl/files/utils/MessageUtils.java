@@ -32,7 +32,7 @@ public class MessageUtils {
         }
 
         if (message.contains("%arena_id%")) {
-            message.replace("%arena_id%", p.getCurrentGame().getArena().getID());
+            message.replace("%arena_id%", p.getCurrentGame().getArena().getId());
         }
 
         if (message.contains("%bloodpoints%")) {
@@ -50,9 +50,11 @@ public class MessageUtils {
         }
         for (String key : main.getMessagesConfig().getConfig().getConfigurationSection("messages").getKeys(false)) {
             try {
-                messages.put(key, ChatColor.translateAlternateColorCodes('&', main.getMessagesConfig().getConfig().getString("messages." + key)));
+                messages.put(key, ChatColor.translateAlternateColorCodes(
+                        '&', main.getMessagesConfig().getConfig().getString("messages." + key)));
             } catch (NullPointerException e) {
-                messages.put(key, ChatColor.RED + "Error loading message: " + key + " Please check your lang.yml and then reload the messages!");
+                messages.put(key, ChatColor.RED +
+                        "Error loading message: " + key + " Please check your lang.yml and then reload the messages!");
             }
         }
 

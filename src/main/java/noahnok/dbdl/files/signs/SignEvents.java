@@ -81,7 +81,7 @@ public class SignEvents implements Listener {
     }
 
     private Inventory joinGameInvFromSign(final DGame game) {
-        CustomHolder newInv = new CustomHolder(27, "Join game: " + game.getArena().getID());
+        CustomHolder newInv = new CustomHolder(27, "Join game: " + game.getArena().getId());
 
         Icon hunted = new Icon(new ItemStack(Material.BONE_BLOCK, 1), "Play as a survivor!");
 

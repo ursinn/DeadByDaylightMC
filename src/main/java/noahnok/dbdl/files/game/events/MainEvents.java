@@ -9,8 +9,8 @@ import noahnok.dbdl.files.game.generators.Generator;
 import noahnok.dbdl.files.game.levers.DLever;
 import noahnok.dbdl.files.player.DPlayer;
 import noahnok.dbdl.files.player.PlayerStatus;
-import noahnok.dbdl.files.utils.Pagenation.Page;
-import noahnok.dbdl.files.utils.Pagenation.buttons.SkullItem;
+import noahnok.dbdl.files.utils.pagenation.Page;
+import noahnok.dbdl.files.utils.pagenation.buttons.SkullItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -40,12 +40,13 @@ public class MainEvents implements Listener {
         if (dPlayer == null) {
             return;
         }
+
         DGame game = dPlayer.getCurrentGame();
         if (game == null) {
             return;
         }
-        if (game != null && (game.getStatus().equals(STATUS.INGAME) || game.getStatus().equals(STATUS.STARTING))) {
 
+        if (game.getStatus() == STATUS.INGAME || game.getStatus() == STATUS.STARTING) {
             if (!game.canPlayerMove(e.getPlayer().getUniqueId())) {
                 Location location = e.getFrom();
                 location.setPitch(e.getTo().getPitch());
@@ -53,10 +54,10 @@ public class MainEvents implements Listener {
                 e.setTo(location);
 
             }
+
             if (game.isCanOpenGates() && game.isCanEscape()) {
                 for (Location loc : game.getArena().getExitArea()) {
                     if (e.getPlayer().getLocation().getBlock().equals(loc.getBlock()) && dPlayer.getStatus().equals(PlayerStatus.HUNTED)) {
-
                         game.announce(e.getPlayer().getName() + " has escaped!");
                         main.getPlayerStateManager().survivorEscapes(dPlayer);
 
@@ -78,14 +79,14 @@ public class MainEvents implements Listener {
     public void blockInteract(PlayerInteractEvent e) {
 
         DGame game = main.getGameManager().getGamePlayerIsIn(e.getPlayer());
-        if (game != null && game.getStatus().equals(STATUS.INGAME)) {
-            if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+        if (game != null && game.getStatus() == STATUS.INGAME) {
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_BLOCK) {
                 DPlayer player = main.getdPlayerManager().getPlayer(e.getPlayer().getUniqueId());
                 e.setCancelled(true);
 
                 //Generator operation
-                if (e.getClickedBlock().getType().equals(Material.FURNACE) && !game.isCanOpenGates()) {
-                    if (player.getStatus().equals(PlayerStatus.HUNTER)) {
+                if (e.getClickedBlock().getType() == Material.FURNACE && !game.isCanOpenGates()) {
+                    if (player.getStatus() == PlayerStatus.HUNTER) {
                         return;
                     }
 
@@ -101,8 +102,8 @@ public class MainEvents implements Listener {
                 }
 
                 //Lever operation
-                if (e.getClickedBlock().getType().equals(Material.LEVER) && game.isCanOpenGates()) {
-                    if (player.getStatus().equals(PlayerStatus.HUNTER)) {
+                if (e.getClickedBlock().getType() == Material.LEVER && game.isCanOpenGates()) {
+                    if (player.getStatus() == PlayerStatus.HUNTER) {
                         return;
                     }
 
@@ -166,7 +167,7 @@ public class MainEvents implements Listener {
                     pageItem.setDisplayName(player.getName());
 
 
-                    if (dplayer != null && !player.isHunter()) {
+                    if (!player.isHunter()) {
                         if (player.isDead()) {
                             pageItem.addLore("&4&lDead/Escaped");
                         } else {
@@ -226,7 +227,7 @@ public class MainEvents implements Listener {
 
             if (!(e.getFinalDamage() >= player.getHealth())) {
                 DGame game = main.getGameManager().getGamePlayerIsIn(player);
-                if (game != null && game.getStatus().equals(STATUS.INGAME)) {
+                if (game != null && game.getStatus() == STATUS.INGAME) {
 
                     e.setCancelled(true);
                     DPlayer dplayer = game.getPlayer(player.getUniqueId());
@@ -236,7 +237,7 @@ public class MainEvents implements Listener {
                 }
             } else {
                 DGame game = main.getGameManager().getGamePlayerIsIn(player);
-                if (game != null && game.getStatus().equals(STATUS.INGAME)) {
+                if (game != null && game.getStatus() == STATUS.INGAME) {
 
                     e.setCancelled(true);
                     DPlayer dplayer = game.getPlayer(player.getUniqueId());

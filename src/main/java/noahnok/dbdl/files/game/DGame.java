@@ -215,7 +215,6 @@ public class DGame {
             player.setCurrentGame(null);
 
             player.stopSpectating();
-
         }
 
         players.clear();

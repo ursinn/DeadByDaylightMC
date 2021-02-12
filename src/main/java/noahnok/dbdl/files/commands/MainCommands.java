@@ -80,7 +80,7 @@ public class MainCommands implements CommandExecutor {
 
             case "running":
                 for (DGame runningGame : main.getGameManager().getGames()) {
-                    p.sendMessage("Arena: " + runningGame.getArena().getID() + " Players: " + runningGame.getPlayers().size() + " GameID: " + runningGame.getId());
+                    p.sendMessage("Arena: " + runningGame.getArena().getId() + " Players: " + runningGame.getPlayers().size() + " GameID: " + runningGame.getId());
                 }
                 break;
 

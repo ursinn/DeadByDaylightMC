@@ -22,7 +22,7 @@ public class DGamemodeManager {
 
     public DGamemode getMode(String mode) {
         for (DGamemode gmode : gamemodes) {
-            if (gmode.getID().equalsIgnoreCase(mode)) {
+            if (gmode.getId().equalsIgnoreCase(mode)) {
                 return gmode;
             }
         }
@@ -42,7 +42,7 @@ public class DGamemodeManager {
 
     public DGamemode getGamemodeFromString(String mode) {
         for (DGamemode gamemode : gamemodes) {
-            if (gamemode.getID().equals(mode)) {
+            if (gamemode.getId().equals(mode)) {
                 return gamemode;
             }
         }

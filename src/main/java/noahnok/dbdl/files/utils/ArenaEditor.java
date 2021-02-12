@@ -5,7 +5,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import noahnok.dbdl.files.DeadByDaylight;
 import noahnok.dbdl.files.game.DArena;
 import noahnok.dbdl.files.game.ExitGate;
-import noahnok.dbdl.files.utils.EditorItem.EditorItem;
+import noahnok.dbdl.files.utils.editor.item.EditorItem;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -46,7 +46,7 @@ public class ArenaEditor {
         Shulker shulker = loc.getWorld().spawn(loc, Shulker.class);
         shulker.setAI(false);
         shulker.setCollidable(false);
-        shulker.setCustomName("DBDL-SHULKER-" + a.getID());
+        shulker.setCustomName("DBDL-SHULKER-" + a.getId());
         shulker.setCustomNameVisible(false);
         shulker.setGravity(false);
         assignTeam(shulker, color);
@@ -66,7 +66,7 @@ public class ArenaEditor {
         Shulker shulker = null;
         for (Entity entity : entities) {
             if (entity.getCustomName() != null &&
-                    entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-" + a.getID())) {
+                    entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-" + a.getId())) {
                 shulker = (Shulker) entity;
                 break;
             }
@@ -93,7 +93,7 @@ public class ArenaEditor {
 
         if (!editing.containsKey(p.getUniqueId())) {
             for (DArena ar : editing.values()) {
-                if (ar.getID().equals(arena)) {
+                if (ar.getId().equals(arena)) {
                     for (UUID key : editing.keySet()) {
                         if (editing.containsKey(key)) {
                             p.sendMessage(main.getServer().getPlayer(key).getName() +
@@ -125,7 +125,7 @@ public class ArenaEditor {
         }
 
         p.setGameMode(GameMode.CREATIVE);
-        final String msg = "&7You are editing arena: &8" + arena.getID();
+        final String msg = "&7You are editing arena: &8" + arena.getId();
         BukkitTask run = new BukkitRunnable() {
             public void run() {
                 p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
@@ -158,7 +158,7 @@ public class ArenaEditor {
             removeShulker(loc, a);
         }
 
-        for (Location loc : a.getPossilbeChestSpawns()) {
+        for (Location loc : a.getPossibleChestSpawns()) {
             removeShulker(loc, a);
         }
 
@@ -194,7 +194,7 @@ public class ArenaEditor {
 
         for (World world : main.getServer().getWorlds()) {
             for (Entity entity : world.getEntitiesByClass(Shulker.class)) {
-                if (entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-" + a.getID())) {
+                if (entity.getCustomName().equalsIgnoreCase("DBDL-SHULKER-" + a.getId())) {
                     entity.remove();
                 }
 
@@ -212,7 +212,7 @@ public class ArenaEditor {
             addShulker(loc, "RED", Material.IRON_BLOCK, a);
         }
 
-        for (Location loc : a.getPossilbeChestSpawns()) {
+        for (Location loc : a.getPossibleChestSpawns()) {
             addShulker(loc, "D-BLUE", Material.CHEST, a);
         }
 
@@ -270,7 +270,7 @@ public class ArenaEditor {
         chest = new EditorItem(new ItemStack(Material.CHEST, 1), "&1Chest")
                 .addExecutor((Player p, Location bloc) -> {
                     p.sendMessage("Chest placed!");
-                    editing.get(p.getUniqueId()).getPossilbeChestSpawns().add(bloc);
+                    editing.get(p.getUniqueId()).getPossibleChestSpawns().add(bloc);
                     addShulker(bloc, "D-BLUE", Material.CHEST, editing.get(p.getUniqueId()));
                 });
 

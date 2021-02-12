@@ -68,6 +68,7 @@ public class Generator {
                 if (i == 0) {
                     cancel();
                 }
+
                 Firework fw2 = (Firework) loc.getWorld().spawnEntity(loc.clone().add(0, 1, 0), EntityType.FIREWORK);
                 fw2.setCustomName("DBDL-FIREWORK");
                 fw2.setCustomNameVisible(false);

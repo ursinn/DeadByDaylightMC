@@ -17,8 +17,8 @@ public class DLever {
     private DGame game;
     private ExitGate gate;
 
-    private int percentDone = 0;
-    private boolean finished = false;
+    private int percentDone;
+    private boolean finished;
 
     public DLever(Location loc, DGame game, ExitGate gate) {
         this.game = game;
@@ -34,7 +34,7 @@ public class DLever {
         BlockFace[] blockFaces = {BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST, BlockFace.SOUTH};
         for (BlockFace bf : blockFaces) {
             Block bloc = block.getRelative(bf);
-            if (bloc.getType().equals(Material.IRON_BLOCK)) {
+            if (bloc.getType() == Material.IRON_BLOCK) {
 
                 lever.setFacingDirection(bf.getOppositeFace());
                 break;

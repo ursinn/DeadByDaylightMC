@@ -1,4 +1,4 @@
-package noahnok.dbdl.files.game.playerStates;
+package noahnok.dbdl.files.game.player.states;
 
 import noahnok.dbdl.files.player.DPlayer;
 import org.bukkit.scheduler.BukkitTask;

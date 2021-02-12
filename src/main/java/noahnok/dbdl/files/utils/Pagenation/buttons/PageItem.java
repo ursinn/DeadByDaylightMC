@@ -1,7 +1,7 @@
-package noahnok.dbdl.files.utils.Pagenation.buttons;
+package noahnok.dbdl.files.utils.pagenation.buttons;
 
-import noahnok.dbdl.files.utils.Pagenation.PageUtils;
-import noahnok.dbdl.files.utils.Pagenation.interfaces.GeneralClick;
+import noahnok.dbdl.files.utils.pagenation.PageUtils;
+import noahnok.dbdl.files.utils.pagenation.interfaces.GeneralClick;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;

@@ -43,15 +43,13 @@ public class DGameManager {
 
     public void joinPlayerToGame(Player p, DGame game, String playType) {
         DPlayer dPlayer = main.getdPlayerManager().getPlayer(p.getUniqueId());
+        game.getPlayers().add(dPlayer);
         if (playType.equalsIgnoreCase("HUNTER")) {
-            game.getPlayers().add(dPlayer);
             dPlayer.setStatus(PlayerStatus.HUNTER);
-
         } else {
-            game.getPlayers().add(dPlayer);
             dPlayer.setStatus(PlayerStatus.HUNTED);
-
         }
+
         p.teleport(game.getArena().getLobbyLocation());
         game.announceJoin(p);
         p.setGameMode(GameMode.SURVIVAL);
@@ -62,7 +60,7 @@ public class DGameManager {
 
     public String generateGameID(DGame game) {
         gamesRun++;
-        return game.getArena().getID() + "_" + game.getGamemode().getID() + "_" + gamesRun;
+        return game.getArena().getId() + "_" + game.getGamemode().getId() + "_" + gamesRun;
     }
 
     public void removePlayerFromGame(Player p, DGame game) {
@@ -78,7 +76,7 @@ public class DGameManager {
         p.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
 
         if (game.totalCurrentPlayers() == 0) {
-            if (game.getStatus().equals(STATUS.WAITING) || game.getStatus().equals(STATUS.STARTING)) {
+            if (game.getStatus() == STATUS.WAITING || game.getStatus() == STATUS.STARTING) {
                 DSign sign = main.getSignManager().getSign(game);
                 if (sign != null) {
                     sign.removeGame();
@@ -91,11 +89,9 @@ public class DGameManager {
     }
 
     public void destroyGame(DGame game) {
-
         main.getMatchMaking().removeGame(game);
         game.getArena().setInUse(false);
         game.kill();
-        game = null;
     }
 
     public void forceStartGame(DGame game) {
@@ -169,9 +165,7 @@ public class DGameManager {
 
         arena.setInUse(true);
         DGamemode mode = main.getGamemodeManager().getMode("default");
-        DGame game = new DGame(arena, mode, STATUS.WAITING, main);
-
-        return game;
+        return new DGame(arena, mode, STATUS.WAITING, main);
     }
 
 

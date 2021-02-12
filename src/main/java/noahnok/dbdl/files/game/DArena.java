@@ -2,14 +2,11 @@ package noahnok.dbdl.files.game;
 
 import org.bukkit.Location;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class DArena {
 
-    private final String ID;
+    private final String id;
 
     private final Map<DGamemode, Boolean> usableModes = new HashMap<>();
 
@@ -17,7 +14,7 @@ public class DArena {
     private Set<Location> possibleHatchLocations = new HashSet<>();
     private Set<Location> possibleHuntedSpawns = new HashSet<>();
     private Set<Location> possibleHunterSpawns = new HashSet<>();
-    private Set<Location> possilbeChestSpawns = new HashSet<>();
+    private Set<Location> possibleChestSpawns = new HashSet<>();
     private Set<ExitGate> exitGateLocations = new HashSet<>();
     private Set<Location> possibleHookLocations = new HashSet<>();
     private Set<Location> trapLocations = new HashSet<>();
@@ -25,11 +22,11 @@ public class DArena {
     private Set<Location> exitArea = new HashSet<>();
     private Location lobbyLocation;
 
-    private boolean inUse = false;
-    private boolean usable = false;
+    private boolean inUse;
+    private boolean usable;
 
-    public DArena(String arenaID) {
-        this.ID = arenaID;
+    public DArena(String arenaId) {
+        this.id = arenaId;
     }
 
     public boolean isUsable() {
@@ -48,88 +45,88 @@ public class DArena {
         this.inUse = inUse;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
     public Set<Location> getExitArea() {
-        return exitArea;
+        return Collections.unmodifiableSet(exitArea);
     }
 
     public void setExitArea(Set<Location> exitArea) {
-        this.exitArea = exitArea;
+        this.exitArea = Collections.unmodifiableSet(exitArea);
     }
 
     public Set<Location> getPossibleGeneratorLocations() {
-        return possibleGeneratorLocations;
+        return Collections.unmodifiableSet(possibleGeneratorLocations);
     }
 
     public void setPossibleGeneratorLocations(Set<Location> possibleGeneratorLocations) {
-        this.possibleGeneratorLocations = possibleGeneratorLocations;
+        this.possibleGeneratorLocations = Collections.unmodifiableSet(possibleGeneratorLocations);
     }
 
     public Set<Location> getPossibleHatchLocations() {
-        return possibleHatchLocations;
+        return Collections.unmodifiableSet(possibleHatchLocations);
     }
 
     public void setPossibleHatchLocations(Set<Location> possibleHatchLocations) {
-        this.possibleHatchLocations = possibleHatchLocations;
+        this.possibleHatchLocations = Collections.unmodifiableSet(possibleHatchLocations);
     }
 
     public Set<Location> getPossibleHuntedSpawns() {
-        return possibleHuntedSpawns;
+        return Collections.unmodifiableSet(possibleHuntedSpawns);
     }
 
     public void setPossibleHuntedSpawns(Set<Location> possibleHuntedSpawns) {
-        this.possibleHuntedSpawns = possibleHuntedSpawns;
+        this.possibleHuntedSpawns = Collections.unmodifiableSet(possibleHuntedSpawns);
     }
 
     public Set<Location> getPossibleHunterSpawns() {
-        return possibleHunterSpawns;
+        return Collections.unmodifiableSet(possibleHunterSpawns);
     }
 
     public void setPossibleHunterSpawns(Set<Location> possibleHunterSpawns) {
-        this.possibleHunterSpawns = possibleHunterSpawns;
+        this.possibleHunterSpawns = Collections.unmodifiableSet(possibleHunterSpawns);
     }
 
-    public Set<Location> getPossilbeChestSpawns() {
-        return possilbeChestSpawns;
+    public Set<Location> getPossibleChestSpawns() {
+        return Collections.unmodifiableSet(possibleChestSpawns);
     }
 
-    public void setPossilbeChestSpawns(Set<Location> possilbeChestSpawns) {
-        this.possilbeChestSpawns = possilbeChestSpawns;
+    public void setPossibleChestSpawns(Set<Location> possilbeChestSpawns) {
+        this.possibleChestSpawns = Collections.unmodifiableSet(possilbeChestSpawns);
     }
 
     public Set<ExitGate> getExitGateLocations() {
-        return exitGateLocations;
+        return Collections.unmodifiableSet(exitGateLocations);
     }
 
     public void setExitGateLocations(Set<ExitGate> exitGateLocations) {
-        this.exitGateLocations = exitGateLocations;
+        this.exitGateLocations = Collections.unmodifiableSet(exitGateLocations);
     }
 
     public Set<Location> getPossibleHookLocations() {
-        return possibleHookLocations;
+        return Collections.unmodifiableSet(possibleHookLocations);
     }
 
     public void setPossibleHookLocations(Set<Location> possibleHookLocations) {
-        this.possibleHookLocations = possibleHookLocations;
+        this.possibleHookLocations = Collections.unmodifiableSet(possibleHookLocations);
     }
 
     public Set<Location> getTrapLocations() {
-        return trapLocations;
+        return Collections.unmodifiableSet(trapLocations);
     }
 
     public void setTrapLocations(Set<Location> trapLocations) {
-        this.trapLocations = trapLocations;
+        this.trapLocations = Collections.unmodifiableSet(trapLocations);
     }
 
     public Set<Location> getCabinetLocations() {
-        return cabinetLocations;
+        return Collections.unmodifiableSet(cabinetLocations);
     }
 
     public void setCabinetLocations(Set<Location> cabinetLocations) {
-        this.cabinetLocations = cabinetLocations;
+        this.cabinetLocations = Collections.unmodifiableSet(cabinetLocations);
     }
 
     public Location getLobbyLocation() {

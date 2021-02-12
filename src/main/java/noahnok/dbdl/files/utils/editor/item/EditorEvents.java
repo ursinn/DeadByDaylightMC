@@ -1,4 +1,4 @@
-package noahnok.dbdl.files.utils.EditorItem;
+package noahnok.dbdl.files.utils.editor.item;
 
 import noahnok.dbdl.files.DeadByDaylight;
 import noahnok.dbdl.files.game.DArena;
@@ -35,9 +35,7 @@ public class EditorEvents implements Listener {
                     EditorItem item = null;
 
                     for (EditorItem eItem : main.getArenaEditor().editorItems) {
-
                         if (eItem.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(meta.getDisplayName())) {
-
                             item = eItem;
                         }
                     }
@@ -84,9 +82,11 @@ public class EditorEvents implements Listener {
             } catch (ClassCastException exception) {
                 return;
             }
+
             if (shulker == null) {
                 return;
             }
+
             for (DArena a : main.getArenaManager().getArenas()) {
                 if (isArenaBlock(a, shulker.getLocation())) {
                     e.setCancelled(true);
@@ -102,8 +102,8 @@ public class EditorEvents implements Listener {
         if (shulker == null) {
             return;
         }
-        Location loc = shulker.getLocation();
 
+        Location loc = shulker.getLocation();
 
         Location newloc = loc.clone().subtract(0.5, 0, 0.5);
         newloc.setYaw(0);
@@ -139,26 +139,32 @@ public class EditorEvents implements Listener {
         if (!main.getArenaEditor().editing.containsKey(e.getPlayer().getUniqueId())) {
             return;
         }
+
         e.setCancelled(true);
     }
 
 
     private boolean isArenaBlock(DArena a, Location bloc) {
-        if (a.getPossilbeChestSpawns().contains(bloc)) {
+        if (a.getPossibleChestSpawns().contains(bloc)) {
             return true;
         }
+
         if (a.getPossibleHunterSpawns().contains(bloc)) {
             return true;
         }
+
         if (a.getPossibleHuntedSpawns().contains(bloc)) {
             return true;
         }
+
         if (a.getPossibleHatchLocations().contains(bloc)) {
             return true;
         }
+
         if (a.getPossibleHookLocations().contains(bloc)) {
             return true;
         }
+
         if (a.getPossibleGeneratorLocations().contains(bloc)) {
             return true;
         }
@@ -166,32 +172,40 @@ public class EditorEvents implements Listener {
         if (a.getCabinetLocations().contains(bloc)) {
             return true;
         }
+
         if (a.getExitGateLocations().contains(bloc)) {
             return true;
         }
+
         if (a.getTrapLocations().contains(bloc)) {
             return true;
         }
-        return a.getLobbyLocation() == bloc;
+
+        return a.getLobbyLocation().equals(bloc);
 
     }
 
     private boolean removeArenaBlock(DArena a, Location bloc) {
-        if (a.getPossilbeChestSpawns().remove(bloc)) {
+        if (a.getPossibleChestSpawns().remove(bloc)) {
             return true;
         }
+
         if (a.getPossibleHunterSpawns().remove(bloc)) {
             return true;
         }
+
         if (a.getPossibleHuntedSpawns().remove(bloc)) {
             return true;
         }
+
         if (a.getPossibleHatchLocations().remove(bloc)) {
             return true;
         }
+
         if (a.getPossibleHookLocations().remove(bloc)) {
             return true;
         }
+
         if (a.getPossibleGeneratorLocations().remove(bloc)) {
             return true;
         }
@@ -199,18 +213,20 @@ public class EditorEvents implements Listener {
         if (a.getCabinetLocations().remove(bloc)) {
             return true;
         }
+
         if (a.getExitGateLocations().remove(bloc)) {
             return true;
         }
+
         if (a.getTrapLocations().remove(bloc)) {
             return true;
         }
-        if (a.getLobbyLocation() == bloc) {
+
+        if (a.getLobbyLocation().equals(bloc)) {
             a.setLobbyLocation(null);
             return true;
         }
+
         return false;
-
-
     }
 }

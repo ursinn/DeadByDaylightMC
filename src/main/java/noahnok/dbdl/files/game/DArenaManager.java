@@ -36,17 +36,17 @@ public class DArenaManager {
         for (DArena arena : arenas) {
             boolean hasDefault = false;
             for (DGamemode mode : arena.getUsableModes().keySet()) {
-                if (mode.getID().equalsIgnoreCase("default")) {
+                if (mode.getId().equalsIgnoreCase("default")) {
                     if (arena.getUsableModes().get(mode)) {
                         hasDefault = true;
                     }
                 }
             }
-            if (arena.isInUse() != true && arena.isUsable() && hasDefault) {
+            if (!arena.isInUse() && arena.isUsable() && hasDefault) {
                 tempArenaList.add(arena);
             }
         }
-        if (tempArenaList.size() == 0) {
+        if (tempArenaList.isEmpty()) {
             return null;
         }
         return tempArenaList.get(ThreadLocalRandom.current().nextInt(tempArenaList.size()));
@@ -55,7 +55,7 @@ public class DArenaManager {
     public boolean removeArena(String id) {
         for (DArena arena : arenas) {
 
-            if (arena.getID().equals(id)) {
+            if (arena.getId().equals(id)) {
                 arenas.remove(arena);
                 return true;
             }
@@ -65,13 +65,12 @@ public class DArenaManager {
 
     public DArena isArena(String arena) {
         for (DArena a : arenas) {
-            if (a.getID().equals(arena)) {
+            if (a.getId().equals(arena)) {
                 return a;
             }
         }
         return null;
     }
-
 
     public String addGamemode(String arena, String mode) {
         DArena a = isArena(arena);
@@ -151,7 +150,7 @@ public class DArenaManager {
                 arena.setPossibleHatchLocations(hatch);
                 arena.setPossibleHuntedSpawns(hunted);
                 arena.setPossibleHunterSpawns(hunters);
-                arena.setPossilbeChestSpawns(chests);
+                arena.setPossibleChestSpawns(chests);
                 arena.setExitGateLocations(gates);
                 arena.setPossibleHookLocations(hooks);
                 arena.setTrapLocations(traps);
@@ -187,20 +186,20 @@ public class DArenaManager {
 
     public void saveArenasToFile() {
         for (DArena arena : arenas) {
-            String path = "arenas." + arena.getID() + ".";
+            String path = "arenas." + arena.getId() + ".";
             FileConfiguration config = main.getArenasConfig().getConfig();
             List<String> gamemodeStrings = new ArrayList<>();
             for (DGamemode mode : arena.getUsableModes().keySet()) {
                 boolean enabled = arena.getUsableModes().get(mode);
 
-                gamemodeStrings.add(mode.getID() + "-enabled=" + arena.getUsableModes().get(mode));
+                gamemodeStrings.add(mode.getId() + "-enabled=" + arena.getUsableModes().get(mode));
             }
             config.set(path + "gamemodes", gamemodeStrings);
             config.set(path + "locations.generators", arena.getPossibleGeneratorLocations());
             config.set(path + "locations.hatch", arena.getPossibleHatchLocations());
             config.set(path + "locations.hunted", arena.getPossibleHuntedSpawns());
             config.set(path + "locations.hunter", arena.getPossibleHunterSpawns());
-            config.set(path + "locations.chests", arena.getPossilbeChestSpawns());
+            config.set(path + "locations.chests", arena.getPossibleChestSpawns());
 
             config.set(path + "locations.hooks", arena.getPossibleHookLocations());
             config.set(path + "locations.traps", arena.getTrapLocations());
@@ -233,7 +232,7 @@ public class DArenaManager {
                 a.getUsableModes().put(mode, false);
                 continue;
             }
-            if (a.getPossilbeChestSpawns().size() < mode.getMaxchests()) {
+            if (a.getPossibleChestSpawns().size() < mode.getMaxchests()) {
                 a.getUsableModes().put(mode, false);
                 continue;
             }

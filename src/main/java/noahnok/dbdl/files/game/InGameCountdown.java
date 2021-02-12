@@ -14,7 +14,7 @@ public class InGameCountdown {
     protected int interval;
     protected int tempTime;
     protected DGame ref;
-    boolean contAlert;
+    protected boolean contAlert;
 
     public InGameCountdown(int timeInSeconds, boolean contAlert, int interval, DGame ref, DeadByDaylight main) {
         this.timeInSeconds = timeInSeconds;

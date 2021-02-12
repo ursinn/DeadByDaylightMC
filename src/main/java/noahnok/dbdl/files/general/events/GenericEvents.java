@@ -1,4 +1,4 @@
-package noahnok.dbdl.files.generalEvents;
+package noahnok.dbdl.files.general.events;
 
 import noahnok.dbdl.files.DeadByDaylight;
 import noahnok.dbdl.files.player.DPlayer;

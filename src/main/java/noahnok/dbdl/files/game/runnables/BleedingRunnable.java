@@ -24,7 +24,7 @@ public class BleedingRunnable extends BukkitRunnable {
         new BukkitRunnable() {
 
             private final Location current = player.getLocation().clone();
-            int count = 0;
+            private int count;
 
             private Location randomOffset(Location loc) {
                 int rand = ThreadLocalRandom.current().nextInt(0, 1);

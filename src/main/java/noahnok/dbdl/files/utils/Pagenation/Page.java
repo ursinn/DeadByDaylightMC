@@ -1,6 +1,6 @@
-package noahnok.dbdl.files.utils.Pagenation;
+package noahnok.dbdl.files.utils.pagenation;
 
-import noahnok.dbdl.files.utils.Pagenation.buttons.PageItem;
+import noahnok.dbdl.files.utils.pagenation.buttons.PageItem;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;

@@ -32,7 +32,6 @@ public class Countdown {
 
                 if (tempTime < 11 && tempTime > 0) {
                     ref.countDownBleep(tempTime);
-
                 }
 
                 if (tempTime <= 0) {
@@ -82,9 +81,7 @@ public class Countdown {
                     ref = null;
                 }
             }.runTaskLater(main, 20 * 5);
-
         }
-
         task = null;
     }
 

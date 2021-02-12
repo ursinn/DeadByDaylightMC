@@ -4,7 +4,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import noahnok.dbdl.files.DeadByDaylight;
 import noahnok.dbdl.files.game.DGame;
-import noahnok.dbdl.files.game.playerStates.PlayerState;
+import noahnok.dbdl.files.game.player.states.PlayerState;
 import noahnok.dbdl.files.game.runnables.SpectatingRunnable;
 import noahnok.dbdl.files.utils.Config;
 import org.bukkit.Bukkit;

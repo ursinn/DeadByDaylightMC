@@ -1,4 +1,4 @@
-package noahnok.dbdl.files.utils.EditorItem;
+package noahnok.dbdl.files.utils.editor.item;
 
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;

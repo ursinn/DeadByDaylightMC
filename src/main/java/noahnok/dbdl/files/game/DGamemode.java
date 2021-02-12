@@ -2,11 +2,12 @@ package noahnok.dbdl.files.game;
 
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class DGamemode {
-    private final String ID;
+    private final String id;
 
     private int hunters;
     private int hunted;
@@ -14,7 +15,8 @@ public class DGamemode {
     private int maxchests;
     private int maxhooks;
 
-    private int gameTime; //In seconds
+    // gameTime In seconds
+    private int gameTime;
     private boolean allowPerks;
     private boolean allowItems;
     private boolean allowSacrifices;
@@ -28,8 +30,11 @@ public class DGamemode {
     private Set<String> disallowedPerks = new HashSet<>();
     private Set<String> disallowedSacrifices = new HashSet<>();
 
-    public DGamemode(String ID, int hunters, int hunted, int maxgenerators, int maxchests, int maxhooks, int gameTime, boolean allowPerks, boolean allowItems, boolean allowSacrifices, boolean allowBleeding, boolean allowStage3, boolean allowStage2, boolean instantSacrifice, boolean useTrapdoor, Set<ItemStack> disallowedItems, Set<String> disallowedPerks, Set<String> disallowedSacrifices) {
-        this.ID = ID;
+    public DGamemode(String id, int hunters, int hunted, int maxgenerators, int maxchests, int maxhooks, int gameTime,
+                     boolean allowPerks, boolean allowItems, boolean allowSacrifices, boolean allowBleeding,
+                     boolean allowStage3, boolean allowStage2, boolean instantSacrifice, boolean useTrapdoor,
+                     Set<ItemStack> disallowedItems, Set<String> disallowedPerks, Set<String> disallowedSacrifices) {
+        this.id = id;
         this.hunters = hunters;
         this.hunted = hunted;
         this.maxgenerators = maxgenerators;
@@ -44,13 +49,15 @@ public class DGamemode {
         this.allowStage2 = allowStage2;
         this.instantSacrifice = instantSacrifice;
         this.useTrapdoor = useTrapdoor;
-        this.disallowedItems = disallowedItems;
-        this.disallowedPerks = disallowedPerks;
-        this.disallowedSacrifices = disallowedSacrifices;
+        this.disallowedItems = Collections.unmodifiableSet(disallowedItems);
+        this.disallowedPerks = Collections.unmodifiableSet(disallowedPerks);
+        this.disallowedSacrifices = Collections.unmodifiableSet(disallowedSacrifices);
     }
 
-    public DGamemode(String ID, int hunters, int hunted, int maxgenerators, int maxchests, int maxhooks, int gameTime, boolean allowPerks, boolean allowItems, boolean allowSacrifices, boolean allowBleeding, boolean allowStage3, boolean allowStage2, boolean instantSacrifice, boolean useTrapdoor) {
-        this.ID = ID;
+    public DGamemode(String id, int hunters, int hunted, int maxgenerators, int maxchests, int maxhooks, int gameTime,
+                     boolean allowPerks, boolean allowItems, boolean allowSacrifices, boolean allowBleeding,
+                     boolean allowStage3, boolean allowStage2, boolean instantSacrifice, boolean useTrapdoor) {
+        this.id = id;
         this.hunters = hunters;
         this.hunted = hunted;
         this.maxgenerators = maxgenerators;
@@ -67,12 +74,12 @@ public class DGamemode {
         this.useTrapdoor = useTrapdoor;
     }
 
-    public DGamemode(String ID) {
-        this.ID = ID;
+    public DGamemode(String id) {
+        this.id = id;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
     public int getHunters() {
@@ -132,14 +139,14 @@ public class DGamemode {
     }
 
     public Set<ItemStack> getDisallowedItems() {
-        return disallowedItems;
+        return Collections.unmodifiableSet(disallowedItems);
     }
 
     public Set<String> getDisallowedPerks() {
-        return disallowedPerks;
+        return Collections.unmodifiableSet(disallowedPerks);
     }
 
     public Set<String> getDisallowedSacrifices() {
-        return disallowedSacrifices;
+        return Collections.unmodifiableSet(disallowedSacrifices);
     }
 }

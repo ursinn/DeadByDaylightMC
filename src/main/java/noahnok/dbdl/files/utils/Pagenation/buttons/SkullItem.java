@@ -1,4 +1,4 @@
-package noahnok.dbdl.files.utils.Pagenation.buttons;
+package noahnok.dbdl.files.utils.pagenation.buttons;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

@@ -21,5 +21,4 @@ public class SpectatingRunnable extends BukkitRunnable {
     public void setSpectating(String spectating) {
         this.spectating = spectating;
     }
-
 }

@@ -62,7 +62,7 @@ public class DSign {
         if (status == SignStatus.INUSE) {
             sign.setLine(0, ChatColor.translateAlternateColorCodes('&', "&8[&7DBDL&8]"));
             sign.setLine(1, game.getStatus().text());
-            sign.setLine(2, game.getArena().getID());
+            sign.setLine(2, game.getArena().getId());
             sign.setLine(3, game.totalCurrentPlayers() + "/" + game.totalPossiblePlayers() + "");
         }
 

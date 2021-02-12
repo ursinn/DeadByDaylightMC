@@ -42,7 +42,7 @@ public class ArenaManagmentInvs {
         CustomHolder arenaList = invBuilder.createNew("Arenas:", 45);
         int i = 0;
         for (final DArena arena : main.getArenaManager().getArenas()) {
-            Icon icon = invBuilder.createIcon(itemBuilder.getNewBuilder(Material.EMPTY_MAP).build(), arena.getID())
+            Icon icon = invBuilder.createIcon(itemBuilder.getNewBuilder(Material.EMPTY_MAP).build(), arena.getId())
                     .addClickAction(p -> p.openInventory(showArenaPage(arena)));
             arenaList.setIcon(i, icon);
             i++;
@@ -51,7 +51,7 @@ public class ArenaManagmentInvs {
     }
 
     public Inventory showArenaPage(final DArena arena) {
-        CustomHolder arenaInv = invBuilder.createNew(arena.getID(), 9);
+        CustomHolder arenaInv = invBuilder.createNew(arena.getId(), 9);
         arenaInv.setIcon(8, closeMenu);
         Icon del = deleteItem.getCopy().clearLore();
         arenaInv.setIcon(7, del.addClickAction(p -> p.openInventory(confirmDelete(arena))));
@@ -80,7 +80,7 @@ public class ArenaManagmentInvs {
                 });
         Icon e = edit.getCopy().clearLore().addClickAction(p -> {
             p.closeInventory();
-            p.performCommand("arena edit " + arena.getID());
+            p.performCommand("arena edit " + arena.getId());
         });
 
         arenaInv.setIcon(0, s);
@@ -101,7 +101,7 @@ public class ArenaManagmentInvs {
     }
 
     public Inventory showArenaSettingsPage(final DArena arena) {
-        CustomHolder settingsInv = invBuilder.createNew(arena.getID() + " Settings", 9);
+        CustomHolder settingsInv = invBuilder.createNew(arena.getId() + " Settings", 9);
         Icon enabled = arena.isUsable() ? invBuilder.createIcon(itemBuilder.getNewBuilder(Material.WOOL)
                 .setByte((short) 5).build(), "&2Enabled") :
                 invBuilder.createIcon(itemBuilder.getNewBuilder(Material.WOOL)
@@ -132,7 +132,7 @@ public class ArenaManagmentInvs {
         if (rows > 54) {
             rows = 54;
         }
-        CustomHolder gmInv = invBuilder.createNew(a.getID() + "'s Gamemodes", rows);
+        CustomHolder gmInv = invBuilder.createNew(a.getId() + "'s Gamemodes", rows);
 
         Icon back = backMenu.getCopy().addClickAction(p -> {
             p.closeInventory();
@@ -147,7 +147,7 @@ public class ArenaManagmentInvs {
             Icon i;
             if (a.getUsableModes().get(mode)) {
                 i = invBuilder.createIcon(itemBuilder.getNewBuilder(Material.WOOL)
-                        .setByte((short) 5).build(), ChatColor.GREEN + "✔ " + mode.getID());
+                        .setByte((short) 5).build(), ChatColor.GREEN + "✔ " + mode.getId());
                 i.addLore(ChatColor.translateAlternateColorCodes('&', "&4Click to &4&lDISABLE &4 this mode!"));
                 i.addLore("");
                 i.addClickAction(p -> {
@@ -159,7 +159,7 @@ public class ArenaManagmentInvs {
 
             } else {
                 i = invBuilder.createIcon(itemBuilder.getNewBuilder(Material.WOOL)
-                        .setByte((short) 14).build(), ChatColor.GOLD + "✕ " + mode.getID());
+                        .setByte((short) 14).build(), ChatColor.GOLD + "✕ " + mode.getId());
                 i.addLore(ChatColor.translateAlternateColorCodes('&', "&aClick to &a&lENABLE &a this mode!"));
                 i.addLore("");
                 i.addClickAction(p -> {
@@ -172,8 +172,8 @@ public class ArenaManagmentInvs {
             i.addLore(ChatColor.GREEN + "Required: ");
             i.addLore(color(a.getPossibleGeneratorLocations().size(), mode.getMaxgenerators())
                     + "Generators: " + a.getPossibleGeneratorLocations().size() + "/" + mode.getMaxgenerators());
-            i.addLore(color(a.getPossilbeChestSpawns().size(), mode.getMaxchests())
-                    + "Chests: " + a.getPossilbeChestSpawns().size() + "/" + mode.getMaxchests());
+            i.addLore(color(a.getPossibleChestSpawns().size(), mode.getMaxchests())
+                    + "Chests: " + a.getPossibleChestSpawns().size() + "/" + mode.getMaxchests());
             i.addLore(color(a.getPossibleHookLocations().size(), mode.getMaxhooks())
                     + "Hooks: " + a.getPossibleHookLocations().size() + "/" + mode.getMaxhooks());
             i.addLore(color(a.getPossibleHuntedSpawns().size(), mode.getHunted())
@@ -189,16 +189,15 @@ public class ArenaManagmentInvs {
     }
 
     public Inventory confirmDelete(final DArena arena) {
-        CustomHolder confDelete = invBuilder.createNew("Delete Arena: " + arena.getID(), 9);
+        CustomHolder confDelete = invBuilder.createNew("Delete Arena: " + arena.getId(), 9);
         Icon del = deleteItem.getCopy().clearLore();
-        confDelete.setIcon(8, del.addClickAction(p -> {
-            p.performCommand("arena delete " + arena.getID());
+        confDelete.setIcon(8, del.addClickAction((Player p) -> {
+            p.performCommand("arena delete " + arena.getId());
             p.openInventory(showArenaList());
         }).addLore("&4This will permanently delete this arena and its data!"));
         confDelete.setIcon(0, cancelAction.addClickAction(p -> p.openInventory(showArenaPage(arena))));
 
         return confDelete.getInventory();
-
     }
 
     public void prepareIcons() {
