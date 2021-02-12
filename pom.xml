@@ -9,8 +9,8 @@
     <version>0.0.2</version>
     <packaging>jar</packaging>
 
-    <name>DeadDyDayLight</name>
-    <description>DeadDyDayLight Description</description>
+    <name>DeadDyDaylight</name>
+    <description>DeadDyDaylight Description</description>
     <url>https://github.com/ursinn/DeadByDaylightMC</url>
 
     <properties>
