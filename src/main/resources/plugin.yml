@@ -2,7 +2,7 @@ name: DeadByDaylightMC
 version: 0.0.2
 author: NoahNok
 
-main: noahnok.DBDL.files.DeadByDaylight
+main: noahnok.dbdl.files.DeadByDaylight
 softdepend: [ Multiverse-Core ]
 
 commands:
