@@ -1,9 +1,9 @@
-package noahnok.DBDL.files.game.playerStates;
+package noahnok.dbdl.files.game.playerStates;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.runnables.BleedingRunnable;
-import noahnok.DBDL.files.player.DPlayer;
-import noahnok.DBDL.files.player.PlayerStatus;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.runnables.BleedingRunnable;
+import noahnok.dbdl.files.player.DPlayer;
+import noahnok.dbdl.files.player.PlayerStatus;
 
 public class PlayerStateManager {
 

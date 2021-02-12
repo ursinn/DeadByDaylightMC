@@ -1,9 +1,9 @@
-package noahnok.DBDL.files.utils.MySQL;
+package noahnok.dbdl.files.utils.MySQL;
 
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.player.DPlayer;
-import noahnok.DBDL.files.utils.DEBUG;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.player.DPlayer;
+import noahnok.dbdl.files.utils.DEBUG;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 

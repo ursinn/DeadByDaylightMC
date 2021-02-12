@@ -1,12 +1,12 @@
-package noahnok.DBDL.files.player;
+package noahnok.dbdl.files.player;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.DGame;
-import noahnok.DBDL.files.game.playerStates.PlayerState;
-import noahnok.DBDL.files.game.runnables.SpectatingRunnable;
-import noahnok.DBDL.files.utils.Config;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.DGame;
+import noahnok.dbdl.files.game.playerStates.PlayerState;
+import noahnok.dbdl.files.game.runnables.SpectatingRunnable;
+import noahnok.dbdl.files.utils.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;

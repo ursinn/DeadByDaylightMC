@@ -1,7 +1,7 @@
-package noahnok.DBDL.files.player;
+package noahnok.dbdl.files.player;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.DGame;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.DGame;
 
 import java.util.ArrayList;
 import java.util.List;

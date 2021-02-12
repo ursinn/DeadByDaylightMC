@@ -1,9 +1,9 @@
-package noahnok.DBDL.files.commands;
+package noahnok.dbdl.files.commands;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.player.DPlayer;
-import noahnok.DBDL.files.utils.Pagenation.Page;
-import noahnok.DBDL.files.utils.Pagenation.buttons.PageItem;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.player.DPlayer;
+import noahnok.dbdl.files.utils.Pagenation.Page;
+import noahnok.dbdl.files.utils.Pagenation.buttons.PageItem;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

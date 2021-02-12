@@ -1,6 +1,6 @@
-package noahnok.DBDL.files.game.runnables;
+package noahnok.dbdl.files.game.runnables;
 
-import noahnok.DBDL.files.player.DPlayer;
+import noahnok.dbdl.files.player.DPlayer;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class SpectatingRunnable extends BukkitRunnable {

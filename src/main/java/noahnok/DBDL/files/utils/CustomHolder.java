@@ -1,4 +1,4 @@
-package noahnok.DBDL.files.utils;
+package noahnok.dbdl.files.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;

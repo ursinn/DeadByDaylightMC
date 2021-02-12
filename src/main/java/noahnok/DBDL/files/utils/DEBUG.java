@@ -1,6 +1,6 @@
-package noahnok.DBDL.files.utils;
+package noahnok.dbdl.files.utils;
 
-import noahnok.DBDL.files.DeadByDaylight;
+import noahnok.dbdl.files.DeadByDaylight;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 

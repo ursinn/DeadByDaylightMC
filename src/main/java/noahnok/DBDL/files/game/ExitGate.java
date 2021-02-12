@@ -1,7 +1,7 @@
-package noahnok.DBDL.files.game;
+package noahnok.dbdl.files.game;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.levers.DLever;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.levers.DLever;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;

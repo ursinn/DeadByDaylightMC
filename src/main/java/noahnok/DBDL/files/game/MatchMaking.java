@@ -1,10 +1,10 @@
-package noahnok.DBDL.files.game;
+package noahnok.dbdl.files.game;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.signs.DSign;
-import noahnok.DBDL.files.signs.SignStatus;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.signs.DSign;
+import noahnok.dbdl.files.signs.SignStatus;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;

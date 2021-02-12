@@ -1,4 +1,4 @@
-package noahnok.DBDL.files.signs;
+package noahnok.dbdl.files.signs;
 
 public enum SignStatus {
     INUSE, IDLE

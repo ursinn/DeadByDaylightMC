@@ -1,6 +1,6 @@
-package noahnok.DBDL.files.game;
+package noahnok.dbdl.files.game;
 
-import noahnok.DBDL.files.DeadByDaylight;
+import noahnok.dbdl.files.DeadByDaylight;
 
 public class setUpDefaults {
 

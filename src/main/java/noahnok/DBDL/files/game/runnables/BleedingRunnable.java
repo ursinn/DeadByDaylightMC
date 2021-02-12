@@ -1,6 +1,6 @@
-package noahnok.DBDL.files.game.runnables;
+package noahnok.dbdl.files.game.runnables;
 
-import noahnok.DBDL.files.DeadByDaylight;
+import noahnok.dbdl.files.DeadByDaylight;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;

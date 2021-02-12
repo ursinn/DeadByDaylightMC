@@ -1,7 +1,7 @@
-package noahnok.DBDL.files.commands;
+package noahnok.dbdl.files.commands;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.DGame;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.DGame;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

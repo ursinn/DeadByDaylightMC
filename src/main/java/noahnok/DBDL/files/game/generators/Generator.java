@@ -1,8 +1,8 @@
-package noahnok.DBDL.files.game.generators;
+package noahnok.dbdl.files.game.generators;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.DGame;
-import noahnok.DBDL.files.player.DPlayer;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.DGame;
+import noahnok.dbdl.files.player.DPlayer;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;

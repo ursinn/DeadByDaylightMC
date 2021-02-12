@@ -1,7 +1,7 @@
-package noahnok.DBDL.files.utils;
+package noahnok.dbdl.files.utils;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.player.DPlayer;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.player.DPlayer;
 import org.bukkit.ChatColor;
 
 import java.util.HashMap;

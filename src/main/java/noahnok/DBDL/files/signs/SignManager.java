@@ -1,7 +1,7 @@
-package noahnok.DBDL.files.signs;
+package noahnok.dbdl.files.signs;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.DGame;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.DGame;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 

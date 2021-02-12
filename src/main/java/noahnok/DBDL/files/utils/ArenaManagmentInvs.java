@@ -1,10 +1,10 @@
-package noahnok.DBDL.files.utils;
+package noahnok.dbdl.files.utils;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.DArena;
-import noahnok.DBDL.files.game.DGamemode;
-import noahnok.DBDL.files.utils.builders.Builders;
-import noahnok.DBDL.files.utils.builders.InventoryBuilder;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.DArena;
+import noahnok.dbdl.files.game.DGamemode;
+import noahnok.dbdl.files.utils.builders.Builders;
+import noahnok.dbdl.files.utils.builders.InventoryBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;

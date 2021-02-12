@@ -1,6 +1,6 @@
-package noahnok.DBDL.files.utils;
+package noahnok.dbdl.files.utils;
 
-import noahnok.DBDL.files.DeadByDaylight;
+import noahnok.dbdl.files.DeadByDaylight;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

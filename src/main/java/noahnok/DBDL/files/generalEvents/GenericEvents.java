@@ -1,7 +1,7 @@
-package noahnok.DBDL.files.generalEvents;
+package noahnok.dbdl.files.generalEvents;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.player.DPlayer;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.player.DPlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

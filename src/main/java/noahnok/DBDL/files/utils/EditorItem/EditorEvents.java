@@ -1,8 +1,8 @@
-package noahnok.DBDL.files.utils.EditorItem;
+package noahnok.dbdl.files.utils.EditorItem;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.DArena;
-import noahnok.DBDL.files.game.ExitGate;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.DArena;
+import noahnok.dbdl.files.game.ExitGate;
 import org.bukkit.Location;
 import org.bukkit.entity.Shulker;
 import org.bukkit.event.EventHandler;

@@ -1,7 +1,7 @@
-package noahnok.DBDL.files.game;
+package noahnok.dbdl.files.game;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.signs.DSign;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.signs.DSign;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 

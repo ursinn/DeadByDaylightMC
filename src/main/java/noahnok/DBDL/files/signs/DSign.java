@@ -1,6 +1,6 @@
-package noahnok.DBDL.files.signs;
+package noahnok.dbdl.files.signs;
 
-import noahnok.DBDL.files.game.DGame;
+import noahnok.dbdl.files.game.DGame;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;

@@ -1,20 +1,20 @@
-package noahnok.DBDL.files;
+package noahnok.dbdl.files;
 
 
-import noahnok.DBDL.files.commands.*;
-import noahnok.DBDL.files.game.*;
-import noahnok.DBDL.files.game.events.MainEvents;
-import noahnok.DBDL.files.game.playerStates.PlayerStateManager;
-import noahnok.DBDL.files.game.runnables.NoJump;
-import noahnok.DBDL.files.generalEvents.GenericEvents;
-import noahnok.DBDL.files.player.DPlayer;
-import noahnok.DBDL.files.player.DPlayerManager;
-import noahnok.DBDL.files.signs.SignEvents;
-import noahnok.DBDL.files.signs.SignManager;
-import noahnok.DBDL.files.utils.*;
-import noahnok.DBDL.files.utils.EditorItem.EditorEvents;
-import noahnok.DBDL.files.utils.MySQL.MySQL_Connect;
-import noahnok.DBDL.files.utils.Pagenation.PageEvent;
+import noahnok.dbdl.files.commands.*;
+import noahnok.dbdl.files.game.*;
+import noahnok.dbdl.files.game.events.MainEvents;
+import noahnok.dbdl.files.game.playerStates.PlayerStateManager;
+import noahnok.dbdl.files.game.runnables.NoJump;
+import noahnok.dbdl.files.generalEvents.GenericEvents;
+import noahnok.dbdl.files.player.DPlayer;
+import noahnok.dbdl.files.player.DPlayerManager;
+import noahnok.dbdl.files.signs.SignEvents;
+import noahnok.dbdl.files.signs.SignManager;
+import noahnok.dbdl.files.utils.*;
+import noahnok.dbdl.files.utils.EditorItem.EditorEvents;
+import noahnok.dbdl.files.utils.MySQL.MySQL_Connect;
+import noahnok.dbdl.files.utils.Pagenation.PageEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -99,7 +99,7 @@ public class DeadByDaylight extends JavaPlugin {
 
     private StatsCommand statsCommand;
 
-    public noahnok.DBDL.files.commands.joinGameCommand getJoinGameCommand() {
+    public noahnok.dbdl.files.commands.joinGameCommand getJoinGameCommand() {
         return joinGameCommand;
     }
 

@@ -1,4 +1,4 @@
-package noahnok.DBDL.files.game;
+package noahnok.dbdl.files.game;
 
 import org.bukkit.ChatColor;
 

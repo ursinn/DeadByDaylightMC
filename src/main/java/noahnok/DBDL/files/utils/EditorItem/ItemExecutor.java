@@ -1,4 +1,4 @@
-package noahnok.DBDL.files.utils.EditorItem;
+package noahnok.dbdl.files.utils.EditorItem;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

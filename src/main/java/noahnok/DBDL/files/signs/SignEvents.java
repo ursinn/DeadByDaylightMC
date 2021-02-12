@@ -1,10 +1,10 @@
-package noahnok.DBDL.files.signs;
+package noahnok.dbdl.files.signs;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.DGame;
-import noahnok.DBDL.files.utils.ClickAction;
-import noahnok.DBDL.files.utils.CustomHolder;
-import noahnok.DBDL.files.utils.Icon;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.DGame;
+import noahnok.dbdl.files.utils.ClickAction;
+import noahnok.dbdl.files.utils.CustomHolder;
+import noahnok.dbdl.files.utils.Icon;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;

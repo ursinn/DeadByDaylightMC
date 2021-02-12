@@ -1,4 +1,4 @@
-package noahnok.DBDL.files.utils.Pagenation.interfaces;
+package noahnok.dbdl.files.utils.Pagenation.interfaces;
 
 import org.bukkit.entity.Player;
 

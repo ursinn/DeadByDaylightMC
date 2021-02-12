@@ -1,7 +1,6 @@
-package noahnok.DBDL.files;
+package noahnok.dbdl.files;
 
-
-import noahnok.DBDL.files.utils.DEBUG;
+import noahnok.dbdl.files.utils.DEBUG;
 
 public class Toggles {
 

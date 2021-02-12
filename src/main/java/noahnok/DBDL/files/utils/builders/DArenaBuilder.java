@@ -1,6 +1,6 @@
-package noahnok.DBDL.files.utils.builders;
+package noahnok.dbdl.files.utils.builders;
 
-import noahnok.DBDL.files.game.DArena;
+import noahnok.dbdl.files.game.DArena;
 
 public class DArenaBuilder {
 

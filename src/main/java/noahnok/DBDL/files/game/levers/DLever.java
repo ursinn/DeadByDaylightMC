@@ -1,8 +1,8 @@
-package noahnok.DBDL.files.game.levers;
+package noahnok.dbdl.files.game.levers;
 
-import noahnok.DBDL.files.game.DGame;
-import noahnok.DBDL.files.game.ExitGate;
-import noahnok.DBDL.files.player.DPlayer;
+import noahnok.dbdl.files.game.DGame;
+import noahnok.dbdl.files.game.ExitGate;
+import noahnok.dbdl.files.player.DPlayer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

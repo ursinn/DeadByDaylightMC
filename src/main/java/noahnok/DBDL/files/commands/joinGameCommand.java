@@ -1,10 +1,10 @@
-package noahnok.DBDL.files.commands;
+package noahnok.dbdl.files.commands;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.utils.CustomHolder;
-import noahnok.DBDL.files.utils.Icon;
-import noahnok.DBDL.files.utils.builders.Builders;
-import noahnok.DBDL.files.utils.builders.InventoryBuilder;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.utils.CustomHolder;
+import noahnok.dbdl.files.utils.Icon;
+import noahnok.dbdl.files.utils.builders.Builders;
+import noahnok.dbdl.files.utils.builders.InventoryBuilder;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

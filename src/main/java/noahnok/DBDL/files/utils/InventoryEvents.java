@@ -1,4 +1,4 @@
-package noahnok.DBDL.files.utils;
+package noahnok.dbdl.files.utils;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

@@ -1,8 +1,8 @@
-package noahnok.DBDL.files.utils.builders;
+package noahnok.dbdl.files.utils.builders;
 
-import noahnok.DBDL.files.game.DGame;
-import noahnok.DBDL.files.game.ExitGate;
-import noahnok.DBDL.files.game.levers.DLever;
+import noahnok.dbdl.files.game.DGame;
+import noahnok.dbdl.files.game.ExitGate;
+import noahnok.dbdl.files.game.levers.DLever;
 import org.bukkit.Location;
 
 public class DLeverBuilder {

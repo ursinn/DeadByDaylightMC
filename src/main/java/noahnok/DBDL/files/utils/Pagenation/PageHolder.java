@@ -1,4 +1,4 @@
-package noahnok.DBDL.files.utils.Pagenation;
+package noahnok.dbdl.files.utils.Pagenation;
 
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;

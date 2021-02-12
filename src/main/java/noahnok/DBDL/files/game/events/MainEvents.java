@@ -1,16 +1,16 @@
-package noahnok.DBDL.files.game.events;
+package noahnok.dbdl.files.game.events;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.DGame;
-import noahnok.DBDL.files.game.STATUS;
-import noahnok.DBDL.files.game.generators.Generator;
-import noahnok.DBDL.files.game.levers.DLever;
-import noahnok.DBDL.files.player.DPlayer;
-import noahnok.DBDL.files.player.PlayerStatus;
-import noahnok.DBDL.files.utils.Pagenation.Page;
-import noahnok.DBDL.files.utils.Pagenation.buttons.SkullItem;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.DGame;
+import noahnok.dbdl.files.game.STATUS;
+import noahnok.dbdl.files.game.generators.Generator;
+import noahnok.dbdl.files.game.levers.DLever;
+import noahnok.dbdl.files.player.DPlayer;
+import noahnok.dbdl.files.player.PlayerStatus;
+import noahnok.dbdl.files.utils.Pagenation.Page;
+import noahnok.dbdl.files.utils.Pagenation.buttons.SkullItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

@@ -1,6 +1,6 @@
-package noahnok.DBDL.files.game.playerStates;
+package noahnok.dbdl.files.game.playerStates;
 
-import noahnok.DBDL.files.player.DPlayer;
+import noahnok.dbdl.files.player.DPlayer;
 import org.bukkit.scheduler.BukkitTask;
 
 public class PlayerState {

@@ -1,11 +1,11 @@
-package noahnok.DBDL.files.game;
+package noahnok.dbdl.files.game;
 
-import noahnok.DBDL.files.DeadByDaylight;
-import noahnok.DBDL.files.game.generators.Generator;
-import noahnok.DBDL.files.game.levers.DLever;
-import noahnok.DBDL.files.player.DPlayer;
-import noahnok.DBDL.files.player.PlayerStatus;
-import noahnok.DBDL.files.signs.DSign;
+import noahnok.dbdl.files.DeadByDaylight;
+import noahnok.dbdl.files.game.generators.Generator;
+import noahnok.dbdl.files.game.levers.DLever;
+import noahnok.dbdl.files.player.DPlayer;
+import noahnok.dbdl.files.player.PlayerStatus;
+import noahnok.dbdl.files.signs.DSign;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;

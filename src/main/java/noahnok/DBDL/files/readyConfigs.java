@@ -1,6 +1,6 @@
-package noahnok.DBDL.files;
+package noahnok.dbdl.files;
 
-import noahnok.DBDL.files.utils.Config;
+import noahnok.dbdl.files.utils.Config;
 
 public class readyConfigs {
 
