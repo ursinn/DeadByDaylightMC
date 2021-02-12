@@ -204,8 +204,8 @@ public class DGame {
             actual.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
             player.setSpectating(false);
             actual.setGameMode(GameMode.SURVIVAL);
-            actual.setHealth(20);
-            actual.setSaturation(20);
+            actual.setHealth(20D);
+            actual.setSaturation(20F);
             actual.setFoodLevel(20);
 
             actual.setFlying(false);
@@ -223,8 +223,8 @@ public class DGame {
     public boolean isHunter(UUID id) {
         for (DPlayer player : players) {
             if (player.getId().equals(id)) {
-                if (player.getStatus().equals(PlayerStatus.HUNTER)
-                        || player.getStatus().equals(PlayerStatus.CARRYING)) {
+                if (player.getStatus() == PlayerStatus.HUNTER
+                        || player.getStatus() == PlayerStatus.CARRYING) {
                     return true;
                 }
             }
@@ -272,14 +272,14 @@ public class DGame {
     }
 
     public Set<DPlayer> getHunted() {
-        return players.stream().filter(player -> player.getStatus().equals(PlayerStatus.HUNTED))
+        return players.stream().filter(player -> player.getStatus() == PlayerStatus.HUNTED)
                 .collect(Collectors.toCollection(HashSet::new));
     }
 
 
     public Set<DPlayer> getHunters() {
-        return players.stream().filter(player -> player.getStatus().equals(PlayerStatus.HUNTER) ||
-                player.getStatus().equals(PlayerStatus.CARRYING)).collect(Collectors.toCollection(HashSet::new));
+        return players.stream().filter(player -> player.getStatus() == PlayerStatus.HUNTER ||
+                player.getStatus() == PlayerStatus.CARRYING).collect(Collectors.toCollection(HashSet::new));
     }
 
 

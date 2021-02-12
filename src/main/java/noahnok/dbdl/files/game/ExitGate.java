@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ExitGate {
@@ -92,11 +93,11 @@ public class ExitGate {
     }
 
     public List<Location> getLocs() {
-        return locs;
+        return Collections.unmodifiableList(locs);
     }
 
     public void setLocs(List<Location> locs) {
-        this.locs = locs;
+        this.locs = Collections.unmodifiableList(locs);
     }
 
     public Location getCenter() {

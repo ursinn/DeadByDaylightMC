@@ -29,7 +29,6 @@ public class Countdown {
         tempTime = timeInSeconds;
         this.task = new BukkitRunnable() {
             public void run() {
-
                 if (tempTime < 11 && tempTime > 0) {
                     ref.countDownBleep(tempTime);
                 }
@@ -39,7 +38,6 @@ public class Countdown {
                     endCountdown(true);
                 }
                 tempTime--;
-
             }
         }.runTaskTimer(main, 0, 20);
     }

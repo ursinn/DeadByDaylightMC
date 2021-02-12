@@ -71,6 +71,7 @@ public class ArenaEditor {
                 break;
             }
         }
+
         if (shulker == null) {
             return;
         }
@@ -134,8 +135,6 @@ public class ArenaEditor {
         }.runTaskTimer(main, 0, 80);
         tasks.put(p.getUniqueId(), run);
         showArenaBlocks(arena);
-
-
     }
 
     public void stopEditing(Player p) {
@@ -308,7 +307,6 @@ public class ArenaEditor {
                     p.sendMessage("Exit Placed");
                     String dir = "";
 
-
                     double rotation = (p.getLocation().getYaw() - 90) % 360;
                     if ((rotation > -45 && rotation < 45) || (rotation > 135 && rotation < 180)) {
                         dir = "EAST";
@@ -322,8 +320,6 @@ public class ArenaEditor {
                     for (Location loc : gate.getLocs()) {
                         addShulker(loc, "GRAY", Material.IRON_FENCE, editing.get(p.getUniqueId()));
                     }
-
-
                 });
 
         editorItems.add(exit);
@@ -354,12 +350,9 @@ public class ArenaEditor {
                 });
 
         editorItems.add(exitArea);
-
-
     }
 
     private List<Location> getExitGateLocation(Location loc, String dir) {
-
         List<Location> locs = new ArrayList<>();
         if (dir.equalsIgnoreCase("EAST")) {
             for (int i = -1; i < 2; i++) {
@@ -376,7 +369,6 @@ public class ArenaEditor {
         }
 
         return locs;
-
     }
 
     public void setupShulkerTeams() {
@@ -393,6 +385,7 @@ public class ArenaEditor {
         } catch (NullPointerException e) {
             main.getLogger().info("Didn't need to unregister teams (Due to restart) <- This is not an error!");
         }
+
         registerTeam("BLUE", ChatColor.AQUA);
         registerTeam("RED", ChatColor.DARK_RED);
         registerTeam("D-BLUE", ChatColor.DARK_BLUE);
@@ -407,7 +400,6 @@ public class ArenaEditor {
     private void registerTeam(String color, ChatColor col) {
         main.sbrd.registerNewTeam("DBDL-SH-" + color);
         main.sbrd.getTeam("DBDL-SH-" + color).setPrefix(col + "");
-
     }
 
     private void unregisterTeam(String color) {
@@ -428,6 +420,5 @@ public class ArenaEditor {
 
         }
     }
-
 
 }

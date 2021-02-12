@@ -31,20 +31,12 @@ public class JoinGameCommand implements CommandExecutor {
         }
 
         Player player = (Player) commandSender;
-        if (args.length == 0) {
-            if (main.getGameManager().getGamePlayerIsIn(player) != null) {
-                player.sendMessage(main.prefix + "You are already in a game!");
-                return true;
-            }
-
-            player.openInventory(joinGameInv.getInventory());
+        if (main.getGameManager().getGamePlayerIsIn(player) != null) {
+            player.sendMessage(main.prefix + "You are already in a game!");
             return true;
         }
 
-        if (args.length == 1) {
-            return true;
-        }
-
+        player.openInventory(joinGameInv.getInventory());
         return true;
     }
 

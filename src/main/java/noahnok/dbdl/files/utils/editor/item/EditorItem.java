@@ -11,7 +11,7 @@ public class EditorItem extends ItemStack {
 
     public final List<ItemExecutor> executors = new ArrayList<>();
     public final List<ItemDeExecutor> deExecutors = new ArrayList<>();
-    public ItemStack item;
+    public final ItemStack item;
 
     public EditorItem(ItemStack i, String name) {
         ItemMeta meta = i.getItemMeta();

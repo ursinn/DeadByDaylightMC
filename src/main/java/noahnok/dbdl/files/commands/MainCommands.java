@@ -42,45 +42,46 @@ public class MainCommands implements CommandExecutor {
         switch (args[0]) {
             case "forcestart":
                 DGame game = main.getGameManager().getGamePlayerIsIn(p);
-                if (game == null || !game.getStatus().equals(STATUS.WAITING)) {
+                if (game == null || game.getStatus() != STATUS.WAITING) {
                     p.sendMessage("You must be in a game to do this!");
-
-                } else {
-                    if (game.getHunted().size() == 0) {
-                        p.sendMessage("Your game must have at least one survivor to start!");
-                        return true;
-                    }
-
-                    if (game.getHunters().size() == 0) {
-                        p.sendMessage("Your game must have at least one hunter to start!");
-                        return true;
-                    }
-                    main.getGameManager().forceStartGame(game);
+                    break;
                 }
+
+                if (game.getHunted().isEmpty()) {
+                    p.sendMessage("Your game must have at least one survivor to start!");
+                    break;
+                }
+
+                if (game.getHunters().isEmpty()) {
+                    p.sendMessage("Your game must have at least one hunter to start!");
+                    break;
+                }
+                main.getGameManager().forceStartGame(game);
                 break;
 
             case "forceend":
                 DGame gameend = main.getGameManager().getGamePlayerIsIn(p);
-                if (gameend == null || gameend.getStatus().equals(STATUS.WAITING)) {
+                if (gameend == null || gameend.getStatus() == STATUS.WAITING) {
                     p.sendMessage("You must be in a game to do this!");
-
-                } else {
-                    main.getGameManager().endGame(gameend);
+                    break;
                 }
+
+                main.getGameManager().endGame(gameend);
                 break;
 
             case "mysql":
                 if (args.length > 1) {
                     mySQLSwitch(p, args[1]);
-
-                } else {
-                    mySQLSwitch(p, "");
+                    break;
                 }
+
+                mySQLSwitch(p, "");
                 break;
 
             case "running":
                 for (DGame runningGame : main.getGameManager().getGames()) {
-                    p.sendMessage("Arena: " + runningGame.getArena().getId() + " Players: " + runningGame.getPlayers().size() + " GameID: " + runningGame.getId());
+                    p.sendMessage("Arena: " + runningGame.getArena().getId() + " Players: "
+                            + runningGame.getPlayers().size() + " GameID: " + runningGame.getId());
                 }
                 break;
 
@@ -90,20 +91,21 @@ public class MainCommands implements CommandExecutor {
         return true;
     }
 
-    public void mySQLSwitch(Player p, String arg) {
+    public void mySQLSwitch(CommandSender sender, String arg) {
         switch (arg) {
             case "connect":
-                p.sendMessage("Checking connection to MySQL!");
+                sender.sendMessage("Checking connection to MySQL!");
                 if (main.getSqlManager().reInitConnection()) {
-                    p.sendMessage("Connected to MySQL");
-                } else {
-                    p.sendMessage("Failed to connect! Check console!");
+                    sender.sendMessage("Connected to MySQL");
+                    break;
                 }
+
+                sender.sendMessage("Failed to connect! Check console!");
                 break;
 
             default:
-                p.sendMessage("Connected to MySQL Server: " + main.getToggles().usingSQL);
-                p.sendMessage("Subcommands: connect");
+                sender.sendMessage("Connected to MySQL Server: " + main.getToggles().usingSQL);
+                sender.sendMessage("Subcommands: connect");
                 break;
         }
 

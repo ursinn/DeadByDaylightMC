@@ -75,7 +75,6 @@ public class DPlayer {
         Map<String, Integer> values = new HashMap<>();
         values.put("bloodPoints", bloodPoints);
 
-
         return values;
     }
 
@@ -250,6 +249,7 @@ public class DPlayer {
         values.put("gatesOpened", gatesOpened);
         values.put("hooksBroken", hooksBroken);
         values.put("heals", heals);
+
         return values;
     }
 
@@ -262,7 +262,6 @@ public class DPlayer {
         values.put("survivorPickups", survivorPickups);
         values.put("survivorPickupEscapes", survivorPickupEscapes);
         values.put("playerEscapes", playerEscapes);
-
 
         return values;
     }

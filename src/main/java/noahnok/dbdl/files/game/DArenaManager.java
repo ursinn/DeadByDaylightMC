@@ -111,8 +111,6 @@ public class DArenaManager {
                     }
                 }
 
-                gamemodes = null;
-
                 Set<Location> gens = valid((Set<Location>) config.get(path + "locations.generators"));
                 Set<Location> hatch = valid((Set<Location>) config.get(path + "locations.hatch"));
                 Set<Location> hunted = valid((Set<Location>) config.get(path + "locations.hunted"));
@@ -121,7 +119,8 @@ public class DArenaManager {
 
                 Set<ExitGate> gates = new HashSet<>();
                 try {
-                    for (String numb : main.getArenasConfig().getConfig().getConfigurationSection(path + "locations.exitGates").getKeys(false)) {
+                    for (String numb : main.getArenasConfig().getConfig()
+                            .getConfigurationSection(path + "locations.exitGates").getKeys(false)) {
                         String facing = (String) config.get(path + "locations.exitGates." + numb + ".facing");
                         if (facing.length() == 0 || facing == null) {
                             continue;
@@ -131,7 +130,8 @@ public class DArenaManager {
                         if (locs == null) {
                             continue;
                         }
-                        ExitGate newgate = new ExitGate(facing, (Location) config.get(path + "locations.exitGates." + numb + ".center"), main);
+                        ExitGate newgate = new ExitGate(facing, (Location)
+                                config.get(path + "locations.exitGates." + numb + ".center"), main);
                         newgate.setLocs(locs);
                         gates.add(newgate);
                     }
@@ -162,7 +162,8 @@ public class DArenaManager {
                 arenas.add(arena);
                 setUsableGamemodes(arena);
             } catch (NullPointerException e) {
-                main.getLogger().severe("Failed to load arena: " + key + " either see whats wrong or delete it from the arenas.yml!");
+                main.getLogger().severe("Failed to load arena: "
+                        + key + " either see whats wrong or delete it from the arenas.yml!");
             }
         }
 
@@ -190,8 +191,6 @@ public class DArenaManager {
             FileConfiguration config = main.getArenasConfig().getConfig();
             List<String> gamemodeStrings = new ArrayList<>();
             for (DGamemode mode : arena.getUsableModes().keySet()) {
-                boolean enabled = arena.getUsableModes().get(mode);
-
                 gamemodeStrings.add(mode.getId() + "-enabled=" + arena.getUsableModes().get(mode));
             }
             config.set(path + "gamemodes", gamemodeStrings);

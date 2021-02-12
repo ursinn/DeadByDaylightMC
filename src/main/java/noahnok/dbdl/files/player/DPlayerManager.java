@@ -4,6 +4,7 @@ import noahnok.dbdl.files.DeadByDaylight;
 import noahnok.dbdl.files.game.DGame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,14 +12,14 @@ public class DPlayerManager {
 
     private final DeadByDaylight main;
 
-    private final List<DPlayer> DPlayers = new ArrayList<>();
+    private final List<DPlayer> dPlayers = new ArrayList<>();
 
     public DPlayerManager(DeadByDaylight main) {
         this.main = main;
     }
 
     public List<DPlayer> getDPlayers() {
-        return DPlayers;
+        return Collections.unmodifiableList(dPlayers);
     }
 
     public void loadDPlayer(UUID id) {
@@ -27,10 +28,11 @@ public class DPlayerManager {
     }
 
     public void savePlayerData() {
-        for (DPlayer player : DPlayers) {
+        for (DPlayer player : dPlayers) {
             player.kill();
         }
-        DPlayers.clear();
+
+        dPlayers.clear();
     }
 
     public boolean hasSpectators(DPlayer player) {
@@ -57,7 +59,7 @@ public class DPlayerManager {
     }
 
     public DPlayer getPlayer(UUID id) {
-        for (DPlayer player : DPlayers) {
+        for (DPlayer player : dPlayers) {
             if (player.getId().equals(id)) {
                 return player;
             }

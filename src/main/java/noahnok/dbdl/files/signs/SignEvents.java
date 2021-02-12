@@ -47,11 +47,11 @@ public class SignEvents implements Listener {
         if (e.getBlock().getType().equals(Material.SIGN) || e.getBlock().getType().equals(Material.WALL_SIGN)) {
             if (((Sign) e.getBlock().getState()).getLine(0).equals(signLine)) {
                 if (e.getPlayer().hasPermission("dbdl.sign.break")) {
-
-                } else {
-                    e.getPlayer().sendMessage("You cannot break this sign!");
-                    e.setCancelled(true);
+                    return;
                 }
+
+                e.getPlayer().sendMessage("You cannot break this sign!");
+                e.setCancelled(true);
             }
         }
     }
@@ -70,6 +70,7 @@ public class SignEvents implements Listener {
                                 e.getPlayer().sendMessage("You are already in a game!");
                                 return;
                             }
+
                             e.getPlayer().openInventory(joinGameInvFromSign(
                                     main.getSignManager().getSign(e.getClickedBlock()).getGame()));
                         }

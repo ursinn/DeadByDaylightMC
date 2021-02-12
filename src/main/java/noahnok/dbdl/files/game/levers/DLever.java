@@ -35,7 +35,6 @@ public class DLever {
         for (BlockFace bf : blockFaces) {
             Block bloc = block.getRelative(bf);
             if (bloc.getType() == Material.IRON_BLOCK) {
-
                 lever.setFacingDirection(bf.getOppositeFace());
                 break;
             }
@@ -69,7 +68,6 @@ public class DLever {
             game.announce("A gate has been opened!");
             game.setCanEscape(true);
             p.setGatesOpened(p.getGatesOpened() + 1);
-
             return;
         }
         p.addToScore((int) (10 * game.getMultiplier()));

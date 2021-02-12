@@ -68,8 +68,6 @@ public class MatchMaking {
             //No game could be joined. Try and make a new game to prevent players from waiting
             DGame game = main.getGameManager().createNewGame();
             if (game != null) {
-
-
                 //Join player
                 main.getGameManager().joinPlayerToGame(p, game, playType);
 
@@ -77,9 +75,9 @@ public class MatchMaking {
                 transferGame(game);
                 waitingGames.add(game);
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         }
 
     }
@@ -95,6 +93,7 @@ public class MatchMaking {
                 break;
             }
         }
+
         if (signn != null) {
             signn.setGame(game);
             signn.update();
@@ -136,7 +135,6 @@ public class MatchMaking {
         }.runTaskTimer(main, 0, 20);
 
         matchMakingLoop.put(p.getUniqueId(), tryMatchMake);
-
     }
 
     //Remove player. They either left or queued for too long.

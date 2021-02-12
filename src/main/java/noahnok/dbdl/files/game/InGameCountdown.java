@@ -42,7 +42,6 @@ public class InGameCountdown {
                     endCountdown();
                 }
                 tempTime--;
-
             }
         }.runTaskTimer(main, 0, 20);
     }

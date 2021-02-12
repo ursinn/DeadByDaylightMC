@@ -73,7 +73,6 @@ public class SignManager {
             if (sign.getSignBlock().equals(b)) {
                 sign.setGame(null);
                 signs.remove(sign);
-                sign = null;
             }
         }
     }

@@ -54,9 +54,19 @@ public class DGamemodeManager {
 
         for (String key : main.getGamemodesConfig().getConfig().getConfigurationSection("gamemodes").getKeys(false)) {
             String path = "gamemodes." + key + ".";
-            int hunters, hunted, generators, chests, hooks = 0;
-            boolean perks, items, offerings, bleeding, stage2, stage3, trapdoor = true;
-            boolean instantSacrifice = false;
+            int hunters;
+            int hunted;
+            int generators;
+            int chests;
+            int hooks;
+            boolean perks;
+            boolean items;
+            boolean offerings;
+            boolean bleeding;
+            boolean stage2;
+            boolean stage3;
+            boolean trapdoor;
+            boolean instantSacrifice;
             try {
                 hunters = (Integer) getItem(path + "hunters");
                 hunted = (Integer) getItem(path + "hunted");
@@ -72,7 +82,6 @@ public class DGamemodeManager {
                 stage3 = (Boolean) getItem(path + "allow.stage3");
                 instantSacrifice = (Boolean) getItem(path + "allow.instantSacrifice");
                 trapdoor = (Boolean) getItem(path + "allow.trapdoor");
-
             } catch (NullPointerException e) {
                 main.getLogger().severe("Hmm... seems the gamemode: "
                         + key + " failed to load! Something wasn't set or is broken! Please check you gamemodes.yml");
@@ -83,7 +92,8 @@ public class DGamemodeManager {
             Set<ItemStack> disItems = (Set<ItemStack>) getItem(path + "disallow.items");
             Set<String> disOfferings = (Set<String>) getItem(path + "disallow.offerings");
 
-            DGamemode newmode = new DGamemode(key, hunters, hunted, generators, chests, hooks, 3600, perks, items, offerings, bleeding, stage3, stage2, instantSacrifice, trapdoor, disItems, disPerks, disOfferings);
+            DGamemode newmode = new DGamemode(key, hunters, hunted, generators, chests, hooks, 3600, perks, items,
+                    offerings, bleeding, stage3, stage2, instantSacrifice, trapdoor, disItems, disPerks, disOfferings);
 
             main.getGamemodeManager().addGamemode(newmode);
 

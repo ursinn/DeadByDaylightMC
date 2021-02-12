@@ -9,7 +9,7 @@ public class DSign {
 
     private final Block signBlock;
     private final Sign sign;
-    private DGame game = null;
+    private DGame game;
     private SignStatus status;
 
     public DSign(Block block) {

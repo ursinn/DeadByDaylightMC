@@ -20,15 +20,15 @@ public class PlayerStateManager {
             main.getGameManager().canGameEnd(survivor.getCurrentGame());
             return;
         }
+
         if (!survivor.getPlayerState().isInjured()) {
             survivorHitToInjured(survivor);
-        } else {
-            survivorHitToCrawling(survivor);
+            return;
         }
+        survivorHitToCrawling(survivor);
     }
 
     private void survivorHitToInjured(DPlayer survivor) {
-
         setBleeding(survivor);
         survivor.getPlayerState().setInjured(true);
         injureSpeed(survivor);
@@ -108,12 +108,11 @@ public class PlayerStateManager {
             stopBleeding(survivor);
             survivor.getPlayerState().setInjured(false);
             normalSpeed(survivor);
-        } else {
-            survivor.getPlayerState().setCrawling(false);
-            survivor.getPlayerState().setInjured(true);
-            injureSpeed(survivor);
+            return;
         }
-
+        survivor.getPlayerState().setCrawling(false);
+        survivor.getPlayerState().setInjured(true);
+        injureSpeed(survivor);
     }
 
     public void survivorKilledByHuntersHand(DPlayer survivor) {
@@ -125,7 +124,6 @@ public class PlayerStateManager {
     public void survivorEscapes(DPlayer survivor) {
         survivor.getPlayerState().setEndGameState(EndGameStates.ESCAPED);
         stopBleeding(survivor);
-
     }
 
     public boolean isSurvivorDead(DPlayer survivor) {

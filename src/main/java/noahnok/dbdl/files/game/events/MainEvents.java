@@ -57,7 +57,8 @@ public class MainEvents implements Listener {
 
             if (game.isCanOpenGates() && game.isCanEscape()) {
                 for (Location loc : game.getArena().getExitArea()) {
-                    if (e.getPlayer().getLocation().getBlock().equals(loc.getBlock()) && dPlayer.getStatus().equals(PlayerStatus.HUNTED)) {
+                    if (e.getPlayer().getLocation().getBlock().equals(loc.getBlock()) &&
+                            dPlayer.getStatus() == PlayerStatus.HUNTED) {
                         game.announce(e.getPlayer().getName() + " has escaped!");
                         main.getPlayerStateManager().survivorEscapes(dPlayer);
 
@@ -136,16 +137,12 @@ public class MainEvents implements Listener {
         }
     }
 
-    private void handlePlayerSneak(DPlayer dplayer) {
-
-    }
-
     @EventHandler
     public void sneakMenu(PlayerToggleSneakEvent e) {
 
         if (!e.isSneaking()) {
             DGame game = main.getGameManager().getGamePlayerIsIn(e.getPlayer());
-            if (game != null && game.getStatus().equals(STATUS.INGAME)) {
+            if (game != null && game.getStatus() == STATUS.INGAME) {
                 DPlayer dplayer = game.getPlayer(e.getPlayer().getUniqueId());
                 if (!dplayer.isSpectating()) {
                     return;
@@ -285,7 +282,6 @@ public class MainEvents implements Listener {
         DPlayer player = main.getdPlayerManager().getPlayer(e.getPlayer().getUniqueId());
         if (player != null && player.getCurrentGame() != null) {
             main.getGameManager().removePlayerFromGame(player.getPlayer(), player.getCurrentGame());
-
         }
     }
 }

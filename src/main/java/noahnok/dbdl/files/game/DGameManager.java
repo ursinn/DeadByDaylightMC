@@ -138,6 +138,7 @@ public class DGameManager {
             if (player.isHunter()) {
                 continue;
             }
+
             if (!player.isDead()) {
                 return;
             }
@@ -148,7 +149,7 @@ public class DGameManager {
             player.stopSpectating();
             actual.setGameMode(GameMode.CREATIVE);
             actual.getInventory().clear();
-            actual.setHealth(20);
+            actual.setHealth(20D);
             actual.setFoodLevel(20);
             actual.setFlying(true);
             main.getPlayerStateManager().survivorHealed(player, true);

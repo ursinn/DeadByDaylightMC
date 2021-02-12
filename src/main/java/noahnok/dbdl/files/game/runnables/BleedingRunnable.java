@@ -22,14 +22,12 @@ public class BleedingRunnable extends BukkitRunnable {
     public void run() {
         //Red particle
         new BukkitRunnable() {
-
             private final Location current = player.getLocation().clone();
             private int count;
 
             private Location randomOffset(Location loc) {
                 int rand = ThreadLocalRandom.current().nextInt(0, 1);
-                Location newloc = loc.clone().add(rand, 0.2, rand);
-                return newloc;
+                return loc.clone().add(rand, 0.2, rand);
             }
 
             @Override

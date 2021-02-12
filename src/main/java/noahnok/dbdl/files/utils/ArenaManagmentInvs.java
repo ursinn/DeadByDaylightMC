@@ -112,6 +112,7 @@ public class ArenaManagmentInvs {
                 p.openInventory(showArenaSettingsPage(arena));
             }
         });
+
         if (arena.getLobbyLocation() == null) {
             enabled.addLore(ChatColor.RED + "You must set a lobby location first!");
         }
@@ -127,8 +128,8 @@ public class ArenaManagmentInvs {
 
         if (a.getUsableModes().size() == rows) {
             rows += 9;
-
         }
+
         if (rows > 54) {
             rows = 54;
         }
@@ -143,7 +144,6 @@ public class ArenaManagmentInvs {
 
         int pos = 0;
         for (final DGamemode mode : a.getUsableModes().keySet()) {
-
             Icon i;
             if (a.getUsableModes().get(mode)) {
                 i = invBuilder.createIcon(itemBuilder.getNewBuilder(Material.WOOL)
@@ -156,7 +156,6 @@ public class ArenaManagmentInvs {
 
                     p.openInventory(showGamemodesPage(a));
                 });
-
             } else {
                 i = invBuilder.createIcon(itemBuilder.getNewBuilder(Material.WOOL)
                         .setByte((short) 14).build(), ChatColor.GOLD + "✕ " + mode.getId());

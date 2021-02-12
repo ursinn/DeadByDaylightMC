@@ -35,6 +35,7 @@ public class Config {
         } catch (InvalidConfigurationException e) {
             e.printStackTrace();
         }
+
         this.name = name;
     }
 
