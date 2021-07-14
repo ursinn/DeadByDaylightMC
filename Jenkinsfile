@@ -8,20 +8,41 @@ pipeline {
     }
 
     stages {
-        stage("Initialization") {
+        stage("Checkout") {
             steps {
-                buildName "#${BUILD_NUMBER} ${POM_VERSION}"
                 scmSkip(deleteBuild: true, skipPattern:'.*\\[ci skip\\].*')
+                buildName "#${BUILD_NUMBER} ${POM_VERSION}"
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn -B -U -DskipTests -P jenkins clean install'
+                echo 'Building'
+                withMaven {
+                    sh "mvn -DskipTests clean install"
+                }
             }
             post {
                 success {
                     archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing'
+                withMaven {
+                    sh "mvn -B test"
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying'
+                withMaven {
+                    sh 'mvn -B deploy'
                 }
             }
         }
